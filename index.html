@@ -11,7 +11,8 @@
 <link href="./css/style.css" rel="stylesheet"/>
 <link href="./css/reference-v2.css" rel="stylesheet"/>
 <link href="./css/language.css" rel="stylesheet"/>
-<link href="./css/hero-motion.css" rel="stylesheet"/></head>
+<link href="./css/hero-motion.css" rel="stylesheet"/>
+<link href="./css/hero-grid-nine.css" rel="stylesheet"/></head>
 <body class="shop-body pro-v2">
 <div aria-hidden="true" class="ambient ambient-one"></div><div aria-hidden="true" class="ambient ambient-two"></div>
 <header class="site-header" id="home">
@@ -30,7 +31,7 @@
 <div class="nav-actions"><div aria-label="Language / اللغة" class="language-switch" data-i18n-aria="lang.switch" role="group"><button aria-pressed="false" class="lang-option" data-lang="ar" title="العربية" type="button">AR</button><button aria-pressed="false" class="lang-option" data-lang="en" title="English" type="button">EN</button></div>
 <button aria-label="البحث عن منتج" class="header-search" data-i18n-aria="nav.searchAria" id="openSearch"><span data-i18n="nav.search">ابحث عن منتج...</span><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="10.6" cy="10.6" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></button>
 <button aria-label="سلة الطلبات" class="icon-button cart-icon" data-i18n-aria="cart.title" data-i18n-title="cart.title" id="openCart" title="سلة الطلبات"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 4h2l2 12h11l3-9H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><small id="cartCount">0</small></button>
-<a class="admin-mini" data-i18n="nav.admin" href="./admin.html">♙ دخول الإدارة</a>
+
 <button aria-expanded="false" aria-label="القائمة" class="icon-button hamburger" data-i18n-aria="nav.menu" id="mobileMenu">☰</button>
 </div>
 </div>
@@ -50,6 +51,8 @@
   <span class="product-float float-iptv" style="--delay:-4.8s;--duration:6.9s;--tilt:6deg"><img src="./assets/tile-iptv.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
   <span class="product-float float-games" style="--delay:-2.9s;--duration:7.8s;--tilt:-4deg"><img src="./assets/tile-games.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
   <span class="product-float float-ai" style="--delay:-0.9s;--duration:6.4s;--tilt:4deg"><img src="./assets/tile-ai.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+  <span class="product-float float-all-products" style="--delay:-3.1s;--duration:7.3s;--tilt:4deg"><img src="./assets/tile-all-products.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+  <span class="product-float float-social-media" style="--delay:-1.2s;--duration:6.8s;--tilt:-5deg"><img src="./assets/tile-social-media.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
 </div>
 <div class="hero-center">
 <span class="hero-letters">D I D G S T O R E</span>
@@ -104,7 +107,7 @@
 <section class="section container" id="faq"><div class="section-heading"><div><span class="section-kicker">SUPPORT &amp; FAQ</span><h2><span data-i18n="faq.titleStart">الأسئلة</span> <span data-i18n="faq.titleEnd">الشائعة</span></h2></div></div><div class="faq-list"><details><summary data-i18n="faq.q1">كيفاش نطلب منتج؟</summary><p data-i18n="faq.a1">اختار المنتج واضغط «اطلب الآن». غادي يتحل WhatsApp برسالة فيها اسم المنتج والثمن.</p></details><details><summary data-i18n="faq.q2">واش نقدر نخلص فالموقع؟</summary><p data-i18n="faq.a2">لا. DidgStore حالياً كتالوج، والتنسيق على الأداء كيكون عبر WhatsApp.</p></details><details><summary data-i18n="faq.q3">واش الأثمنة والتوفر نهائيين؟</summary><p data-i18n="faq.a3">المنتجات التجريبية والثمن والتوفر النهائيين خاصك تأكدهم مع المتجر قبل الأداء.</p></details><details><summary data-i18n="faq.q4">واش نقدر نطلب أكثر من منتج؟</summary><p data-i18n="faq.a4">نعم. استعمل سلة الطلبات لإرسال رسالة واحدة فيها المنتجات والكمية.</p></details></div></section>
 <section class="container final-cta" id="contact"><div><span class="section-kicker">DIDGSTORE • CONTACT</span><h2 data-i18n="contact.title">بغيتي تستفسر على شي منتج؟</h2><p data-i18n="contact.desc">تواصل مع المتجر مباشرة عبر WhatsApp.</p></div><button class="btn btn-primary" data-i18n="contact.button" id="footerContact">تواصل عبر WhatsApp ↗</button></section>
 </main>
-<footer class="site-footer"><div class="container footer-grid"><div><div class="brand footer-brand"><img alt="" src="./assets/didgstore-emblem.webp"/><span class="brand-text">Didg<span>Store</span></span></div><p data-i18n="footer.desc">كتالوج لعرض وطلب المنتجات الرقمية عبر WhatsApp.</p></div><div><h4 data-i18n="footer.links">الروابط</h4><a data-i18n="nav.homePlain" href="#home">الرئيسية</a><a data-i18n="nav.products" href="#products">المنتجات</a><a data-i18n="nav.offers" href="#offers">العروض</a></div><div><h4 data-i18n="footer.help">المساعدة</h4><a data-i18n="nav.faq" href="#faq">الأسئلة الشائعة</a><a data-i18n="nav.adminPlain" href="./admin.html">دخول الإدارة</a></div><div><h4 data-i18n="footer.brand">DidgStore</h4><span>Premium Digital Experience</span><span data-i18n="footer.country">المغرب • MAD</span></div></div><div class="container footer-bottom"><span>© <span id="year"></span> DidgStore. <span data-i18n="footer.rights">جميع الحقوق محفوظة.</span></span><span>BUILT FOR DIGITAL COMMERCE ✦</span></div></footer>
+<footer class="site-footer"><div class="container footer-grid"><div><div class="brand footer-brand"><img alt="" src="./assets/didgstore-emblem.webp"/><span class="brand-text">Didg<span>Store</span></span></div><p data-i18n="footer.desc">كتالوج لعرض وطلب المنتجات الرقمية عبر WhatsApp.</p></div><div><h4 data-i18n="footer.links">الروابط</h4><a data-i18n="nav.homePlain" href="#home">الرئيسية</a><a data-i18n="nav.products" href="#products">المنتجات</a><a data-i18n="nav.offers" href="#offers">العروض</a></div><div><h4 data-i18n="footer.help">المساعدة</h4><a data-i18n="nav.faq" href="#faq">الأسئلة الشائعة</a></div><div><h4 data-i18n="footer.brand">DidgStore</h4><span>Premium Digital Experience</span><span data-i18n="footer.country">المغرب • MAD</span></div></div><div class="container footer-bottom"><span>© <span id="year"></span> DidgStore. <span data-i18n="footer.rights">جميع الحقوق محفوظة.</span></span><span>BUILT FOR DIGITAL COMMERCE ✦</span></div></footer>
 <div class="modal-backdrop" hidden="" id="productModal"><div aria-labelledby="detailTitle" aria-modal="true" class="product-modal dialog" role="dialog"><button aria-label="إغلاق" class="modal-close" data-close="productModal" data-i18n-aria="common.close">×</button><div id="productDetail"></div></div></div>
 <div class="modal-backdrop" hidden="" id="cartModal"><div aria-labelledby="cartHeading" aria-modal="true" class="cart-modal dialog" role="dialog"><div class="modal-head"><h2 data-i18n="cart.title" id="cartHeading">سلة الطلبات</h2><button aria-label="إغلاق" class="modal-close" data-close="cartModal" data-i18n-aria="common.close">×</button></div><div id="cartItems"></div><div id="cartFooter"></div></div></div>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
