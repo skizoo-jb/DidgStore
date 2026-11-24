@@ -1,0 +1,62 @@
+/* DidgStore — no-crop logo V3.  The full D mark (including the orbit) must be visible. */
+body .site-header .brand {
+  display: flex !important; align-items: center !important;
+  flex-direction: row !important; direction: ltr !important;
+  gap: 9px !important; overflow: visible !important;
+}
+body .site-header .brand-mark,
+body.pro-v2 .site-header .brand-mark {
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  width: 89px !important; height: 62px !important;
+  min-width: 89px !important; flex: 0 0 89px !important;
+  overflow: visible !important; transform: none !important;
+}
+body .site-header .brand-mark img,
+body.pro-v2 .site-header .brand-mark img {
+  display: block !important; width: 100% !important; height: 100% !important;
+  max-width: none !important; object-fit: contain !important;
+  object-position: center !important; mix-blend-mode: normal !important;
+  transform: none !important; animation: none !important;
+  filter: drop-shadow(0 0 3px rgba(113,255,71,.13)) !important;
+}
+body .site-header .brand-text {
+  flex: 0 0 auto !important; white-space: nowrap !important;
+  margin: 0 !important; line-height: 1.1 !important;
+}
+body .footer-brand img {
+  display: block !important; width: 82px !important; height: 58px !important;
+  object-fit: contain !important; mix-blend-mode: normal !important;
+  transform: none !important; animation: none !important;
+}
+body .auth-brand img, body .sidebar-brand img {
+  display: block !important; width: 94px !important; height: 64px !important;
+  max-width: none !important; object-fit: contain !important;
+  mix-blend-mode: normal !important; transform: none !important;
+  animation: none !important;
+}
+body .auth-brand, body .sidebar-brand {
+  gap: 8px !important; direction: ltr !important;
+}
+@media (max-width: 1100px) {
+  body .site-header .brand-mark, body.pro-v2 .site-header .brand-mark {
+    width: 70px !important; height: 51px !important;
+    min-width: 70px !important; flex-basis: 70px !important;
+  }
+  body .site-header .brand {gap: 5px !important;}
+}
+@media (max-width: 760px) {
+  body .site-header .brand-mark, body.pro-v2 .site-header .brand-mark {
+    width: 62px !important; height: 45px !important;
+    min-width: 62px !important; flex-basis: 62px !important;
+  }
+  body .site-header .brand-text {font-size: 19px !important;}
+  body .sidebar-brand img {width: 80px !important; height: 56px !important;}
+  body .auth-brand img {width: 86px !important; height: 58px !important;}
+}
+@media (max-width: 420px) {
+  body .site-header .brand-mark, body.pro-v2 .site-header .brand-mark {
+    width: 54px !important; height: 40px !important;
+    min-width: 54px !important; flex-basis: 54px !important;
+  }
+  body .site-header .brand-text {font-size: 17px !important;}
+}
