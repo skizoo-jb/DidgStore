@@ -78,6 +78,91 @@ body .auth-brand, body .sidebar-brand {
 }
 
 </style>
+
+<style id="didgstore-featured-promo-v4">
+/* DidgStore Featured Promo V4 — image and copy in separate grid cells.
+   Inline to avoid accidental stale CSS file uploads. */
+body.pro-v2 .hot-deals .deals-layout .deal-promo.deal-promo-v4 {
+  direction: rtl;
+  display:grid !important;
+  grid-template-columns:minmax(0,1.13fr) minmax(0,.87fr) !important;
+  gap: 12px !important;
+  align-items:stretch !important;
+  height:222px !important;
+  padding:16px 17px !important;
+  overflow:hidden !important;
+  background:radial-gradient(ellipse at 70% 50%,rgba(65,172,38,.23),transparent 68%),linear-gradient(120deg,#071c11,#020906) !important;
+  isolation:isolate !important;
+}
+html[lang="en"] body.pro-v2 .deal-promo.deal-promo-v4 {direction:ltr !important;}
+body.pro-v2 .deal-promo.deal-promo-v4::after {z-index:0 !important; opacity:.24 !important;}
+body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 {
+  grid-column:1; position:relative; z-index:2 !important;
+  display:flex !important; flex-direction:column !important;
+  align-items:flex-start !important; justify-content:center !important;
+  min-width:0; max-width:100%; gap:8px;
+}
+body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 .promo-pill {
+  align-self:flex-start; max-width:100%; font-size:9px;
+}
+body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 h3 {
+  position:relative !important;z-index:2 !important;
+  max-width:100% !important; width:100% !important;
+  font-size:clamp(17px,1.36vw,24px) !important;
+  line-height:1.22 !important; margin:0 !important;
+  overflow-wrap:anywhere;
+}
+body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 p {
+  position:relative !important;z-index:2 !important;
+  max-width:100% !important; width:100% !important;
+  font-size:11px !important;line-height:1.55 !important;
+  margin:0 !important;
+}
+body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 .promo-link {
+  position:relative !important;z-index:2 !important;
+  margin:3px 0 0 !important;
+  max-width:100%;padding:7px 13px !important;
+  white-space:normal; font-size:10px !important;
+}
+body.pro-v2 .deal-promo.deal-promo-v4 .promo-art-v4 {
+  grid-column:2; position:relative; z-index:1;
+  width:100%;height:100%;min-width:0;min-height:0;
+  display:grid;place-items:center;overflow:hidden;
+  border-radius:10px;
+  background:radial-gradient(ellipse at 50% 66%,rgba(101,251,49,.16),transparent 69%);
+}
+body.pro-v2 .deal-promo.deal-promo-v4 .promo-art-v4 img {
+  position:relative !important;inset:auto !important;
+  display:block !important;width:100% !important;height:100% !important;
+  min-width:0 !important;min-height:0 !important;
+  max-width:100% !important;max-height:100% !important;
+  object-fit:contain !important; object-position:center !important;
+  mix-blend-mode:normal !important;
+  filter:drop-shadow(0 0 14px rgba(95,235,45,.18)) !important;
+  animation:promo-float 6s ease-in-out infinite !important;
+  transform-origin:center !important;
+  z-index:1 !important;
+}
+@media(max-width:1100px) {
+ body.pro-v2 .hot-deals .deals-layout .deal-promo.deal-promo-v4 {height:204px !important;}
+}
+@media(max-width:760px) {
+ body.pro-v2 .hot-deals .deals-layout .deal-promo.deal-promo-v4 {
+   height:196px !important;grid-template-columns:minmax(0,1.13fr) minmax(0,.87fr) !important;
+   padding:11px 12px !important;gap:7px !important;
+ }
+ body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 {gap:5px !important;}
+ body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 h3 {font-size:clamp(14px,4vw,20px) !important;}
+ body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 p {font-size:10px !important;line-height:1.35 !important;}
+ body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 .promo-link {padding:6px 9px !important;font-size:9px !important;}
+}
+@media(max-width:380px){
+ body.pro-v2 .hot-deals .deals-layout .deal-promo.deal-promo-v4 {height:192px !important;gap:4px !important;padding:10px !important;}
+ body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 h3 {font-size:14px !important;}
+ body.pro-v2 .deal-promo.deal-promo-v4 .promo-copy-v4 p {font-size:9px !important;}
+}
+@media(prefers-reduced-motion:reduce){body.pro-v2 .deal-promo.deal-promo-v4 .promo-art-v4 img{animation:none !important;}}
+</style>
 </head>
 <body class="shop-body pro-v2">
 <div aria-hidden="true" class="ambient ambient-one"></div><div aria-hidden="true" class="ambient ambient-two"></div>
@@ -144,12 +229,16 @@ body .auth-brand, body .sidebar-brand {
 <div class="deals-heading"><span>🔥</span><h2 id="offersTitle"><span data-i18n="offers.latest">أحدث</span> <em data-i18n="offers.deals">العروض</em></h2><small data-i18n="offers.selected">منتجات مختارة من الكتالوج</small></div>
 <div class="deals-layout">
 <div aria-live="polite" class="deals-grid" id="featuredGrid"></div>
-<aside class="deal-promo">
-<span class="promo-pill">✦ DIDGSTORE PICKS</span>
-<h3><span data-i18n="offers.digital">منتجات رقمية</span> <span data-i18n="offers.featured">مميزة</span></h3>
-<p data-i18n="offers.promoDesc">اختار اللي بغيتي، وشوف الثمن والتفاصيل قبل الطلب.</p>
-<a class="promo-link" data-i18n="offers.explore" href="#products">استكشف المنتجات ←</a>
-<img alt="" loading="lazy" src="./assets/sale-sculpture.webp"/>
+<aside class="deal-promo deal-promo-v4" data-promo-fix="v4">
+  <div class="promo-copy-v4">
+    <span class="promo-pill">✦ DIDGSTORE PICKS</span>
+    <h3><span data-i18n="offers.digital">منتجات رقمية</span> <span data-i18n="offers.featured">مميزة</span></h3>
+    <p data-i18n="offers.promoDesc">اختار اللي بغيتي، وشوف الثمن والتفاصيل قبل الطلب.</p>
+    <a class="promo-link" data-i18n="offers.explore" href="#products">استكشف المنتجات ←</a>
+  </div>
+  <div class="promo-art-v4" aria-hidden="true">
+    <img alt="" loading="lazy" src="./assets/sale-sculpture.webp"/>
+  </div>
 </aside>
 </div>
 </section>
