@@ -1,0 +1,55 @@
+/* DidgStore storefront AR/EN switch – keeps the original neon design. */
+.pro-v2 .language-switch{
+  display:inline-flex;align-items:center;gap:3px;direction:ltr;flex:0 0 auto;
+  padding:3px;background:linear-gradient(180deg,#10261b,#06110d);
+  border:1px solid #3d7440;border-radius:99px;
+  box-shadow:0 0 16px #76ff3814;
+}
+.pro-v2 .lang-option{
+  cursor:pointer;border:0;border-radius:99px;background:transparent;color:#afc8b5;
+  font:800 11px/1 'Inter',Arial,sans-serif;letter-spacing:.6px;
+  min-width:37px;min-height:29px;padding:7px 9px;transition:background .2s,color .2s,box-shadow .2s;
+}
+.pro-v2 .lang-option:hover{color:#fff;background:#24542c}
+.pro-v2 .lang-option.selected{
+  background:#8fff14;color:#041006;box-shadow:0 0 14px #78fc3e55;
+}
+.pro-v2 .lang-option:focus-visible{outline:2px solid #d5ffaf;outline-offset:3px}
+/* Arabic and English keep the same graphic positions; text flows naturally. */
+html[dir="ltr"] .pro-v2 .main-nav,
+html[dir="ltr"] .pro-v2 .nav-actions,
+html[dir="ltr"] .pro-v2 .categories,
+html[dir="ltr"] .pro-v2 .deals-layout,
+html[dir="ltr"] .pro-v2 .deals-grid {direction:ltr}
+html[dir="ltr"] .pro-v2 .ribbon-heading {text-align:left}
+html[dir="ltr"] .pro-v2 .deals-heading small {margin-inline-start:auto}
+html[dir="ltr"] .pro-v2 .product-card,html[dir="ltr"] .pro-v2 .detail-info {text-align:left}
+html[dir="ltr"] .pro-v2 .cart-modal,html[dir="ltr"] .pro-v2 .product-modal {direction:ltr}
+html[dir="ltr"] .pro-v2 .footer-grid,html[dir="ltr"] .pro-v2 .faq-list{text-align:left}
+html[dir="ltr"] .pro-v2 .brand {direction:ltr}
+/* Keep a visible switch on small screens, without squeezing the header. */
+@media(max-width:1180px){
+  .pro-v2 .nav-wrap{gap:10px}
+  .pro-v2 .main-nav{gap:5px}
+  .pro-v2 .brand{min-width:190px}
+  .pro-v2 .header-search{min-width:145px}
+}
+@media(max-width:960px){
+  .pro-v2 .header-search{display:none}
+  .pro-v2 .language-switch{margin-inline:3px}
+}
+@media(max-width:760px){
+  .pro-v2 .brand{min-width:0;gap:1px}
+  .pro-v2 .brand-text{font-size:20px}
+  .pro-v2 .nav-actions{gap:6px}
+  .pro-v2 .language-switch{gap:0;padding:2px}
+  .pro-v2 .lang-option{min-width:32px;min-height:29px;font-size:10px;padding:6px}
+  .pro-v2 .nav-wrap{gap:6px}
+  .pro-v2 .main-nav{direction:inherit}
+}
+@media(max-width:370px){
+  .pro-v2 .brand-text{font-size:16px}
+  .pro-v2 .lang-option{min-width:28px}
+}
+/* Decorative ambient glows extend outside the page; prevent horizontal scroll. */
+html,body.shop-body.pro-v2{overflow-x:clip}

@@ -1,0 +1,96 @@
+/* DIDGSTORE • HERO MOTION v1
+   Isolated to the hero. No database, auth, shopping-cart or language logic modified.
+   Uses transform/opacity for smooth, low-cost motion. */
+.pro-v2 .hero-wide{isolation:isolate}
+.pro-v2 .scene-left{transform:translateZ(0)}
+.pro-v2 .scene-left::after{
+  content:"";position:absolute;inset:10% 0 3% 8%;pointer-events:none;
+  background:linear-gradient(108deg,transparent 30%,rgba(160,255,105,.08) 48%,transparent 61%);
+  background-size:230% 100%;mix-blend-mode:screen;
+  animation:didg-laptop-sweep 10s ease-in-out infinite;
+}
+/* Independent 3D-looking product tiles are real transparent brand-service artwork. */
+.pro-v2 .pro-product-stage{
+  overflow:visible;pointer-events:none;isolation:isolate;
+  transform:translateZ(0);perspective:800px;
+}
+.pro-v2 .pro-product-stage .product-float{
+  position:absolute;display:block;z-index:3;width:24%;height:25%;
+  filter:drop-shadow(0 15px 18px rgba(0,0,0,.55));
+  transform-origin:50% 55%;
+  will-change:transform;
+  animation:didg-product-float var(--duration,7s) ease-in-out var(--delay,0s) infinite;
+}
+.pro-v2 .pro-product-stage .product-float img{
+  display:block;width:100%;height:100%;max-width:none;
+  object-fit:contain;filter:none;animation:none;
+  transform:translateZ(0);user-select:none;pointer-events:none;
+}
+.pro-v2 .pro-product-stage .float-netflix{left:13%;top:11%;width:27%;height:28%;z-index:6}
+.pro-v2 .pro-product-stage .float-spotify{left:46%;top:11%;width:27%;height:28%;z-index:5}
+.pro-v2 .pro-product-stage .float-discord{left:5%;top:38%;width:30%;height:29%;z-index:5}
+.pro-v2 .pro-product-stage .float-canva{left:37%;top:37%;width:29%;height:29%;z-index:7}
+.pro-v2 .pro-product-stage .float-iptv{left:69%;top:36%;width:26%;height:28%;z-index:6}
+.pro-v2 .pro-product-stage .float-games{left:25%;top:61%;width:31%;height:30%;z-index:5}
+.pro-v2 .pro-product-stage .float-ai{left:57%;top:61%;width:29%;height:29%;z-index:4}
+.pro-v2 .pro-product-stage .product-stage-glow{
+  position:absolute;left:10%;right:4%;bottom:5%;height:42%;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(56,238,19,.33) 0%,rgba(21,126,43,.16) 40%,transparent 72%);
+  filter:blur(25px);pointer-events:none;z-index:0;
+  animation:didg-halo 7s ease-in-out infinite;
+}
+.pro-v2 .pro-product-stage .product-stage-platform{
+  position:absolute;left:7%;width:88%;height:19%;bottom:0%;
+  background:radial-gradient(ellipse at 50% 36%,rgba(44,195,29,.27),rgba(0,0,0,.16) 66%,transparent 78%);
+  border-radius:50%;border-top:3px solid rgba(148,255,60,.83);
+  box-shadow:0 -5px 26px rgba(80,255,31,.34),0 17px 20px rgba(0,0,0,.5),inset 0 8px 14px rgba(110,255,29,.09);
+  transform:perspective(400px) rotateX(52deg);z-index:1;
+}
+.pro-v2 .pro-product-stage .orbit{
+  position:absolute;display:block;pointer-events:none;border-radius:50%;
+  border:2px solid rgba(137,255,81,.6);width:105%;height:34%;left:-2%;top:48%;
+  box-shadow:0 0 11px rgba(95,255,51,.47),inset 0 0 8px rgba(95,255,51,.29);
+  transform:rotate(-17deg);z-index:2;
+}
+.pro-v2 .pro-product-stage .orbit-back{opacity:.45;top:42%;transform:rotate(-18deg) scale(.97);animation:didg-orbit-a 10s ease-in-out infinite}
+.pro-v2 .pro-product-stage .orbit-front{width:106%;left:-5%;top:53%;opacity:.55;transform:rotate(-21deg);border-right-color:transparent;border-top-color:transparent;animation:didg-orbit-b 12s ease-in-out infinite}
+.pro-v2 .pro-product-stage .product-particle{position:absolute;border-radius:50%;z-index:4;pointer-events:none;background:#baff71;box-shadow:0 0 9px #91ff35;width:4px;height:4px;animation:didg-particle 6s ease-in-out infinite}
+.pro-v2 .pro-product-stage .particle-a{top:19%;left:10%;animation-delay:-2s}
+.pro-v2 .pro-product-stage .particle-b{top:24%;left:88%;animation-delay:-4s;width:3px;height:3px}
+.pro-v2 .pro-product-stage .particle-c{top:76%;left:13%;animation-delay:-1s;width:3px;height:3px}
+/* One gentle beat for the primary action, not a flashing glow. */
+.pro-v2 .hero-whatsapp{position:relative;isolation:isolate;overflow:hidden;animation:didg-cta-breathe 5.5s ease-in-out infinite}
+.pro-v2 .hero-whatsapp:after{content:"";position:absolute;inset:-50% auto -50% -65%;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-25deg);animation:didg-cta-sweep 8s ease-in-out infinite;pointer-events:none;z-index:1}
+.pro-v2 .hero-whatsapp > *{position:relative;z-index:2}
+@keyframes didg-product-float{
+  0%,100%{transform:translate3d(0,0,0) rotate(var(--tilt,0deg))}
+  50%{transform:translate3d(0,-10px,0) rotate(calc(var(--tilt,0deg) + 2deg))}
+}
+@keyframes didg-halo{0%,100%{opacity:.66;transform:scale(.98)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes didg-orbit-a{0%,100%{opacity:.35;transform:rotate(-18deg) scale(.97)}50%{opacity:.7;transform:rotate(-14deg) scale(1.01)}}
+@keyframes didg-orbit-b{0%,100%{opacity:.42;transform:rotate(-21deg)}50%{opacity:.72;transform:rotate(-17deg)}}
+@keyframes didg-particle{0%,100%{opacity:.22;transform:translate3d(0,5px,0)}50%{opacity:.95;transform:translate3d(9px,-9px,0)}}
+@keyframes didg-laptop-sweep{0%,20%{background-position:160% 0;opacity:0}45%{opacity:.8}65%,100%{background-position:-140% 0;opacity:0}}
+@keyframes didg-cta-breathe{0%,100%{box-shadow:0 0 22px #74ff2036,inset 0 0 0 1px #d8ff8f}50%{box-shadow:0 0 33px #74ff2055,inset 0 0 0 1px #d8ff8f}}
+@keyframes didg-cta-sweep{0%,45%{left:-65%;opacity:0}53%{opacity:.8}70%,100%{left:135%;opacity:0}}
+@media (max-width:1100px){
+  .pro-v2 .pro-product-stage .product-float{filter:drop-shadow(0 8px 9px rgba(0,0,0,.5))}
+  .pro-v2 .pro-product-stage .orbit{border-width:1.5px}
+}
+@media (max-width:760px){
+  .pro-v2 .pro-product-stage{overflow:visible}
+  .pro-v2 .pro-product-stage .product-float{filter:drop-shadow(0 4px 7px rgba(0,0,0,.55))}
+  .pro-v2 .pro-product-stage .float-netflix{top:10%}
+  .pro-v2 .pro-product-stage .float-discord{top:40%}
+  .pro-v2 .pro-product-stage .float-games{top:64%}
+  .pro-v2 .pro-product-stage .float-ai{top:64%}
+  .pro-v2 .pro-product-stage .product-stage-platform{bottom:-2%}
+  .pro-v2 .hero-whatsapp{animation-duration:7s}
+}
+@media(prefers-reduced-motion:reduce){
+  .pro-v2 .scene-left::after,.pro-v2 .pro-product-stage .product-float,
+  .pro-v2 .pro-product-stage .product-stage-glow,.pro-v2 .pro-product-stage .orbit,
+  .pro-v2 .pro-product-stage .product-particle,.pro-v2 .hero-whatsapp,
+  .pro-v2 .hero-whatsapp:after{animation:none!important;transition:none!important}
+  .pro-v2 .pro-product-stage .product-float{transform:rotate(var(--tilt,0deg));will-change:auto}
+}

@@ -1,105 +1,113 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#020807"/>
-  <meta name="description" content="DidgStore — كتالوج رقمي عصري مع طلب مباشر عبر واتساب."/>
-  <title>DidgStore | متجرك الرقمي المتكامل</title>
-  <link rel="icon" type="image/webp" href="./assets/didgstore-emblem.webp"/>
-  <link rel="stylesheet" href="./css/style.css"/>
-  <link rel="stylesheet" href="./css/reference-v2.css"/>
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#020807" name="theme-color"/>
+<meta content="DidgStore — كتالوج رقمي عصري مع طلب مباشر عبر واتساب." name="description"/>
+<title>DidgStore | متجرك الرقمي المتكامل</title>
+<link href="./assets/didgstore-emblem.webp" rel="icon" type="image/webp"/>
+<link href="./css/style.css" rel="stylesheet"/>
+<link href="./css/reference-v2.css" rel="stylesheet"/>
+<link href="./css/language.css" rel="stylesheet"/>
+<link href="./css/hero-motion.css" rel="stylesheet"/></head>
 <body class="shop-body pro-v2">
-  <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
-  <header class="site-header" id="home">
-    <div class="container nav-wrap">
-      <a href="#home" class="brand" aria-label="DidgStore الرئيسية">
-        <span class="brand-mark"><img src="./assets/didgstore-emblem.webp" alt=""/></span>
-        <span class="brand-text">Didg<span>Store</span></span>
-      </a>
-      <nav class="main-nav" id="mainNav" aria-label="التنقل الرئيسي">
-        <a class="active" href="#home">⌂ الرئيسية</a>
-        <a href="#products">المنتجات</a>
-        <a href="#offers">العروض</a>
-        <a href="#faq">الأسئلة الشائعة</a>
-        <a href="#contact">تواصل معنا</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="header-search" id="openSearch" aria-label="البحث عن منتج"><span>ابحث عن منتج...</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.6" cy="10.6" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></button>
-        <button class="icon-button cart-icon" id="openCart" aria-label="سلة الطلبات" title="سلة الطلبات"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 4h2l2 12h11l3-9H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><small id="cartCount">0</small></button>
-        <a class="admin-mini" href="./admin.html">♙ دخول الإدارة</a>
-        <button id="mobileMenu" class="icon-button hamburger" aria-label="القائمة" aria-expanded="false">☰</button>
-      </div>
-    </div>
-  </header>
-  <main>
-    <section class="hero-wide" aria-labelledby="mainTitle">
-      <div class="hero-sheen" aria-hidden="true"></div>
-      <div class="scene scene-left" aria-hidden="true"><img src="./assets/scene-laptop.webp" alt=""/></div>
-      <div class="scene scene-right" aria-hidden="true"><img src="./assets/scene-services.webp" alt=""/></div>
-      <div class="hero-center">
-        <span class="hero-letters">D I D G S T O R E</span>
-        <h1 id="mainTitle"><span>متجرك الرقمي</span> <em>المتكامل</em></h1>
-        <p class="hero-desc" id="heroSub">اشتراكات رقمية • مفاتيح ألعاب • أدوات إبداعية • والمزيد...</p>
-        <div class="hero-benefits">
-          <div><span class="feature-glyph">ϟ</span><strong>طلب سهل</strong><small>بخطوات واضحة</small></div>
-          <div><span class="feature-glyph">♢</span><strong>تفاصيل واضحة</strong><small>قبل تأكيد الطلب</small></div>
-          <div><span class="feature-glyph">♧</span><strong>تواصل مباشر</strong><small>عبر واتساب</small></div>
-        </div>
-        <button class="btn btn-primary hero-whatsapp" id="heroWhatsapp">
-          <span class="wa-dot">◉</span> اطلب الآن عبر WhatsApp <span class="arrow-ltr">❯</span>
-        </button>
-        <div class="hero-caption"><span class="online-dot"></span> اختر المنتج المناسب وراسِلنا لتأكيد التوفر والثمن</div>
-      </div>
-      <div class="scene-bottom-glow" aria-hidden="true"></div>
-    </section>
-
-    <section class="category-ribbon container" aria-labelledby="categoryRibbonTitle">
-      <div class="ribbon-heading" id="categoryRibbonTitle">تصفح الأقسام</div>
-      <div class="categories" id="categories"></div>
-    </section>
-
-    <section class="hot-deals container" id="offers" aria-labelledby="offersTitle">
-      <div class="deals-heading"><span>🔥</span><h2 id="offersTitle">أحدث <em>العروض</em></h2><small>منتجات مختارة من الكتالوج</small></div>
-      <div class="deals-layout">
-        <div class="deals-grid" id="featuredGrid" aria-live="polite"></div>
-        <aside class="deal-promo">
-          <span class="promo-pill">✦ DIDGSTORE PICKS</span>
-          <h3>منتجات رقمية <span>مميزة</span></h3>
-          <p>اختار اللي بغيتي، وشوف الثمن والتفاصيل قبل الطلب.</p>
-          <a href="#products" class="promo-link">استكشف المنتجات ←</a>
-          <img src="./assets/sale-sculpture.webp" alt="" loading="lazy"/>
-        </aside>
-      </div>
-    </section>
-
-    <section class="trust-strip container" id="why-us" aria-label="كيفاش كاتخدم الطلبات">
-      <div><div class="trust-icon">ϟ</div><p><strong>طلب مباشر</strong><small>عبر واتساب</small></p></div>
-      <div><div class="trust-icon">♢</div><p><strong>اختيار منظم</strong><small>تفاصيل كل منتج</small></p></div>
-      <div><div class="trust-icon">♧</div><p><strong>تواصل مع المتجر</strong><small>للتأكيد والمتابعة</small></p></div>
-      <div><div class="trust-icon">▣</div><p><strong>طرق الأداء</strong><small>تُحدّد بعد التواصل</small></p></div>
-    </section>
-
-    <section class="section container full-catalog" id="products">
-      <div class="section-heading"><div><span class="section-kicker">EXPLORE THE STORE</span><h2>جميع <span>المنتجات</span></h2><p class="section-sub">تصفح المنتجات، قارن التفاصيل، وطلب مباشرة عبر WhatsApp.</p></div><div class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="قلب على منتج..." aria-label="البحث عن المنتجات"/></div></div>
-      <div class="filter-row" id="filterRow"></div>
-      <div id="productGrid" class="product-grid"></div>
-      <div id="emptyProducts" class="empty-state" hidden>ما لقيناش منتجات بهاد البحث. جرب اسم آخر أو تبديل التصنيف.</div>
-      <div class="center"><button id="showMore" class="btn btn-outline" hidden>عرض المزيد ↓</button></div>
-    </section>
-
-    <section class="section container how-section">
-      <div class="section-heading centered"><div><span class="section-kicker">HOW IT WORKS</span><h2>الطلب عندنا <span>بسيط</span></h2></div></div>
-      <div class="steps"><article><span class="step-number">01</span><div class="step-icon">▦</div><h3>اختار المنتج</h3><p>تصفح الكتالوج وشوف المدة والتفاصيل والثمن.</p></article><article><span class="step-number">02</span><div class="step-icon">◉</div><h3>ضغط طلب</h3><p>غادي تتحضر ليك رسالة فيها معلومات المنتج.</p></article><article><span class="step-number">03</span><div class="step-icon">↗</div><h3>كمل على WhatsApp</h3><p>كتأكد مع المتجر التوفر وطريقة الأداء والتسليم.</p></article></div>
-    </section>
-    <section class="section container" id="faq"><div class="section-heading"><div><span class="section-kicker">SUPPORT & FAQ</span><h2>الأسئلة <span>الشائعة</span></h2></div></div><div class="faq-list"><details><summary>كيفاش نطلب منتج؟</summary><p>اختار المنتج واضغط «اطلب الآن». غادي يتحل WhatsApp برسالة فيها اسم المنتج والثمن.</p></details><details><summary>واش نقدر نخلص فالموقع؟</summary><p>لا. DidgStore حالياً كتالوج، والتنسيق على الأداء كيكون عبر WhatsApp.</p></details><details><summary>واش الأثمنة والتوفر نهائيين؟</summary><p>المنتجات التجريبية والثمن والتوفر النهائيين خاصك تأكدهم مع المتجر قبل الأداء.</p></details><details><summary>واش نقدر نطلب أكثر من منتج؟</summary><p>نعم. استعمل سلة الطلبات لإرسال رسالة واحدة فيها المنتجات والكمية.</p></details></div></section>
-    <section class="container final-cta" id="contact"><div><span class="section-kicker">DIDGSTORE • CONTACT</span><h2>بغيتي تستفسر على شي منتج؟</h2><p>تواصل مع المتجر مباشرة عبر WhatsApp.</p></div><button class="btn btn-primary" id="footerContact">تواصل عبر WhatsApp ↗</button></section>
-  </main>
-  <footer class="site-footer"><div class="container footer-grid"><div><div class="brand footer-brand"><img src="./assets/didgstore-emblem.webp" alt=""/><span class="brand-text">Didg<span>Store</span></span></div><p>كتالوج لعرض وطلب المنتجات الرقمية عبر WhatsApp.</p></div><div><h4>الروابط</h4><a href="#home">الرئيسية</a><a href="#products">المنتجات</a><a href="#offers">العروض</a></div><div><h4>المساعدة</h4><a href="#faq">الأسئلة الشائعة</a><a href="./admin.html">دخول الإدارة</a></div><div><h4>DidgStore</h4><span>Premium Digital Experience</span><span>المغرب • MAD</span></div></div><div class="container footer-bottom"><span>© <span id="year"></span> DidgStore. جميع الحقوق محفوظة.</span><span>BUILT FOR DIGITAL COMMERCE ✦</span></div></footer>
-  <div class="modal-backdrop" id="productModal" hidden><div class="product-modal dialog" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="modal-close" data-close="productModal" aria-label="إغلاق">×</button><div id="productDetail"></div></div></div>
-  <div class="modal-backdrop" id="cartModal" hidden><div class="cart-modal dialog" role="dialog" aria-modal="true" aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading">سلة الطلبات</h2><button class="modal-close" data-close="cartModal" aria-label="إغلاق">×</button></div><div id="cartItems"></div><div id="cartFooter"></div></div></div>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="./js/site.js"></script>
+<div aria-hidden="true" class="ambient ambient-one"></div><div aria-hidden="true" class="ambient ambient-two"></div>
+<header class="site-header" id="home">
+<div class="container nav-wrap">
+<a aria-label="DidgStore الرئيسية" class="brand" href="#home">
+<span class="brand-mark"><img alt="" src="./assets/didgstore-emblem.webp"/></span>
+<span class="brand-text">Didg<span>Store</span></span>
+</a>
+<nav aria-label="التنقل الرئيسي" class="main-nav" id="mainNav">
+<a class="active" data-i18n="nav.home" href="#home">⌂ الرئيسية</a>
+<a data-i18n="nav.products" href="#products">المنتجات</a>
+<a data-i18n="nav.offers" href="#offers">العروض</a>
+<a data-i18n="nav.faq" href="#faq">الأسئلة الشائعة</a>
+<a data-i18n="nav.contact" href="#contact">تواصل معنا</a>
+</nav>
+<div class="nav-actions"><div aria-label="Language / اللغة" class="language-switch" data-i18n-aria="lang.switch" role="group"><button aria-pressed="false" class="lang-option" data-lang="ar" title="العربية" type="button">AR</button><button aria-pressed="false" class="lang-option" data-lang="en" title="English" type="button">EN</button></div>
+<button aria-label="البحث عن منتج" class="header-search" data-i18n-aria="nav.searchAria" id="openSearch"><span data-i18n="nav.search">ابحث عن منتج...</span><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="10.6" cy="10.6" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></button>
+<button aria-label="سلة الطلبات" class="icon-button cart-icon" data-i18n-aria="cart.title" data-i18n-title="cart.title" id="openCart" title="سلة الطلبات"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M3 4h2l2 12h11l3-9H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><small id="cartCount">0</small></button>
+<a class="admin-mini" data-i18n="nav.admin" href="./admin.html">♙ دخول الإدارة</a>
+<button aria-expanded="false" aria-label="القائمة" class="icon-button hamburger" data-i18n-aria="nav.menu" id="mobileMenu">☰</button>
+</div>
+</div>
+</header>
+<main>
+<section aria-labelledby="mainTitle" class="hero-wide">
+<div aria-hidden="true" class="hero-sheen"></div>
+<div aria-hidden="true" class="scene scene-left"><img alt="" src="./assets/scene-laptop.webp"/></div>
+<div aria-hidden="true" class="scene scene-right pro-product-stage">
+  <span class="orbit orbit-back"></span><span class="orbit orbit-front"></span>
+  <span class="product-stage-glow"></span><span class="product-stage-platform"></span>
+  <span class="product-particle particle-a"></span><span class="product-particle particle-b"></span><span class="product-particle particle-c"></span>
+  <span class="product-float float-netflix" style="--delay:-0.2s;--duration:6.7s;--tilt:-6deg"><img src="./assets/tile-netflix.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+  <span class="product-float float-spotify" style="--delay:-2.3s;--duration:7.2s;--tilt:5deg"><img src="./assets/tile-spotify.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+  <span class="product-float float-discord" style="--delay:-3.8s;--duration:6.2s;--tilt:3deg"><img src="./assets/tile-discord.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+  <span class="product-float float-canva" style="--delay:-1.6s;--duration:7.5s;--tilt:-4deg"><img src="./assets/tile-canva.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+  <span class="product-float float-iptv" style="--delay:-4.8s;--duration:6.9s;--tilt:6deg"><img src="./assets/tile-iptv.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+  <span class="product-float float-games" style="--delay:-2.9s;--duration:7.8s;--tilt:-4deg"><img src="./assets/tile-games.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+  <span class="product-float float-ai" style="--delay:-0.9s;--duration:6.4s;--tilt:4deg"><img src="./assets/tile-ai.webp" alt="" loading="eager" decoding="async" width="120" height="120"/></span>
+</div>
+<div class="hero-center">
+<span class="hero-letters">D I D G S T O R E</span>
+<h1 id="mainTitle"><span data-i18n="hero.titleStart">متجرك الرقمي</span> <em data-i18n="hero.titleEnd">المتكامل</em></h1>
+<p class="hero-desc" data-i18n="hero.subtitle" id="heroSub">اشتراكات رقمية • مفاتيح ألعاب • أدوات إبداعية • والمزيد...</p>
+<div class="hero-benefits">
+<div><span class="feature-glyph">ϟ</span><strong data-i18n="hero.easy">طلب سهل</strong><small data-i18n="hero.easySub">بخطوات واضحة</small></div>
+<div><span class="feature-glyph">♢</span><strong data-i18n="hero.clear">تفاصيل واضحة</strong><small data-i18n="hero.clearSub">قبل تأكيد الطلب</small></div>
+<div><span class="feature-glyph">♧</span><strong data-i18n="hero.direct">تواصل مباشر</strong><small data-i18n="hero.directSub">عبر واتساب</small></div>
+</div>
+<button class="btn btn-primary hero-whatsapp" id="heroWhatsapp">
+<span class="wa-dot">◉</span> <span data-i18n="hero.order">اطلب الآن عبر WhatsApp</span> <span class="arrow-ltr">❯</span>
+</button>
+<div class="hero-caption"><span class="online-dot"></span><span data-i18n="hero.caption">اختر المنتج المناسب وراسِلنا لتأكيد التوفر والثمن</span></div>
+</div>
+<div aria-hidden="true" class="scene-bottom-glow"></div>
+</section>
+<section aria-labelledby="categoryRibbonTitle" class="category-ribbon container">
+<div class="ribbon-heading" data-i18n="categories.browse" id="categoryRibbonTitle">تصفح الأقسام</div>
+<div class="categories" id="categories"></div>
+</section>
+<section aria-labelledby="offersTitle" class="hot-deals container" id="offers">
+<div class="deals-heading"><span>🔥</span><h2 id="offersTitle"><span data-i18n="offers.latest">أحدث</span> <em data-i18n="offers.deals">العروض</em></h2><small data-i18n="offers.selected">منتجات مختارة من الكتالوج</small></div>
+<div class="deals-layout">
+<div aria-live="polite" class="deals-grid" id="featuredGrid"></div>
+<aside class="deal-promo">
+<span class="promo-pill">✦ DIDGSTORE PICKS</span>
+<h3><span data-i18n="offers.digital">منتجات رقمية</span> <span data-i18n="offers.featured">مميزة</span></h3>
+<p data-i18n="offers.promoDesc">اختار اللي بغيتي، وشوف الثمن والتفاصيل قبل الطلب.</p>
+<a class="promo-link" data-i18n="offers.explore" href="#products">استكشف المنتجات ←</a>
+<img alt="" loading="lazy" src="./assets/sale-sculpture.webp"/>
+</aside>
+</div>
+</section>
+<section aria-label="كيفاش كاتخدم الطلبات" class="trust-strip container" id="why-us">
+<div><div class="trust-icon">ϟ</div><p><strong data-i18n="trust.order">طلب مباشر</strong><small data-i18n="trust.whatsapp">عبر واتساب</small></p></div>
+<div><div class="trust-icon">♢</div><p><strong data-i18n="trust.selection">اختيار منظم</strong><small data-i18n="trust.details">تفاصيل كل منتج</small></p></div>
+<div><div class="trust-icon">♧</div><p><strong data-i18n="trust.contact">تواصل مع المتجر</strong><small data-i18n="trust.follow">للتأكيد والمتابعة</small></p></div>
+<div><div class="trust-icon">▣</div><p><strong data-i18n="trust.payment">طرق الأداء</strong><small data-i18n="trust.afterContact">تُحدّد بعد التواصل</small></p></div>
+</section>
+<section class="section container full-catalog" id="products">
+<div class="section-heading"><div><span class="section-kicker">EXPLORE THE STORE</span><h2><span data-i18n="products.all">جميع</span> <span data-i18n="products.items">المنتجات</span></h2><p class="section-sub" data-i18n="products.sub">تصفح المنتجات، قارن التفاصيل، وطلب مباشرة عبر WhatsApp.</p></div><div class="search-box"><span>⌕</span><input aria-label="البحث عن المنتجات" data-i18n-aria="products.searchAria" data-i18n-placeholder="products.placeholder" id="searchInput" placeholder="قلب على منتج..." type="search"/></div></div>
+<div class="filter-row" id="filterRow"></div>
+<div class="product-grid" id="productGrid"></div>
+<div class="empty-state" data-i18n="products.empty" hidden="" id="emptyProducts">ما لقيناش منتجات بهاد البحث. جرب اسم آخر أو تبديل التصنيف.</div>
+<div class="center"><button class="btn btn-outline" data-i18n="products.more" hidden="" id="showMore">عرض المزيد ↓</button></div>
+</section>
+<section class="section container how-section">
+<div class="section-heading centered"><div><span class="section-kicker">HOW IT WORKS</span><h2><span data-i18n="steps.titleStart">الطلب عندنا</span> <span data-i18n="steps.titleEnd">بسيط</span></h2></div></div>
+<div class="steps"><article><span class="step-number">01</span><div class="step-icon">▦</div><h3 data-i18n="steps.one">اختار المنتج</h3><p data-i18n="steps.oneDesc">تصفح الكتالوج وشوف المدة والتفاصيل والثمن.</p></article><article><span class="step-number">02</span><div class="step-icon">◉</div><h3 data-i18n="steps.two">ضغط طلب</h3><p data-i18n="steps.twoDesc">غادي تتحضر ليك رسالة فيها معلومات المنتج.</p></article><article><span class="step-number">03</span><div class="step-icon">↗</div><h3 data-i18n="steps.three">كمل على WhatsApp</h3><p data-i18n="steps.threeDesc">كتأكد مع المتجر التوفر وطريقة الأداء والتسليم.</p></article></div>
+</section>
+<section class="section container" id="faq"><div class="section-heading"><div><span class="section-kicker">SUPPORT &amp; FAQ</span><h2><span data-i18n="faq.titleStart">الأسئلة</span> <span data-i18n="faq.titleEnd">الشائعة</span></h2></div></div><div class="faq-list"><details><summary data-i18n="faq.q1">كيفاش نطلب منتج؟</summary><p data-i18n="faq.a1">اختار المنتج واضغط «اطلب الآن». غادي يتحل WhatsApp برسالة فيها اسم المنتج والثمن.</p></details><details><summary data-i18n="faq.q2">واش نقدر نخلص فالموقع؟</summary><p data-i18n="faq.a2">لا. DidgStore حالياً كتالوج، والتنسيق على الأداء كيكون عبر WhatsApp.</p></details><details><summary data-i18n="faq.q3">واش الأثمنة والتوفر نهائيين؟</summary><p data-i18n="faq.a3">المنتجات التجريبية والثمن والتوفر النهائيين خاصك تأكدهم مع المتجر قبل الأداء.</p></details><details><summary data-i18n="faq.q4">واش نقدر نطلب أكثر من منتج؟</summary><p data-i18n="faq.a4">نعم. استعمل سلة الطلبات لإرسال رسالة واحدة فيها المنتجات والكمية.</p></details></div></section>
+<section class="container final-cta" id="contact"><div><span class="section-kicker">DIDGSTORE • CONTACT</span><h2 data-i18n="contact.title">بغيتي تستفسر على شي منتج؟</h2><p data-i18n="contact.desc">تواصل مع المتجر مباشرة عبر WhatsApp.</p></div><button class="btn btn-primary" data-i18n="contact.button" id="footerContact">تواصل عبر WhatsApp ↗</button></section>
+</main>
+<footer class="site-footer"><div class="container footer-grid"><div><div class="brand footer-brand"><img alt="" src="./assets/didgstore-emblem.webp"/><span class="brand-text">Didg<span>Store</span></span></div><p data-i18n="footer.desc">كتالوج لعرض وطلب المنتجات الرقمية عبر WhatsApp.</p></div><div><h4 data-i18n="footer.links">الروابط</h4><a data-i18n="nav.homePlain" href="#home">الرئيسية</a><a data-i18n="nav.products" href="#products">المنتجات</a><a data-i18n="nav.offers" href="#offers">العروض</a></div><div><h4 data-i18n="footer.help">المساعدة</h4><a data-i18n="nav.faq" href="#faq">الأسئلة الشائعة</a><a data-i18n="nav.adminPlain" href="./admin.html">دخول الإدارة</a></div><div><h4 data-i18n="footer.brand">DidgStore</h4><span>Premium Digital Experience</span><span data-i18n="footer.country">المغرب • MAD</span></div></div><div class="container footer-bottom"><span>© <span id="year"></span> DidgStore. <span data-i18n="footer.rights">جميع الحقوق محفوظة.</span></span><span>BUILT FOR DIGITAL COMMERCE ✦</span></div></footer>
+<div class="modal-backdrop" hidden="" id="productModal"><div aria-labelledby="detailTitle" aria-modal="true" class="product-modal dialog" role="dialog"><button aria-label="إغلاق" class="modal-close" data-close="productModal" data-i18n-aria="common.close">×</button><div id="productDetail"></div></div></div>
+<div class="modal-backdrop" hidden="" id="cartModal"><div aria-labelledby="cartHeading" aria-modal="true" class="cart-modal dialog" role="dialog"><div class="modal-head"><h2 data-i18n="cart.title" id="cartHeading">سلة الطلبات</h2><button aria-label="إغلاق" class="modal-close" data-close="cartModal" data-i18n-aria="common.close">×</button></div><div id="cartItems"></div><div id="cartFooter"></div></div></div>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script src="./js/site.js" type="module"></script>
 </body>
 </html>
