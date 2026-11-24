@@ -1,23 +1,31 @@
-/* DidgStore PRO — 9 separately floating glossy 3D category tiles.
-   Optional appearance-only extension. Does not touch Supabase, Admin or orders.
-   Organized 3 x 3 for clear legibility and no overlapping icon edges. */
-.pro-v2 .pro-product-stage .product-float{width:27%;height:28%;filter:drop-shadow(0 10px 15px rgba(0,0,0,.50));animation-name:didg-float-nine}
-.pro-v2 .pro-product-stage .float-netflix{left:3%;top:4%;width:27%;height:28%;z-index:6}
-.pro-v2 .pro-product-stage .float-spotify{left:35%;top:4%;width:27%;height:28%;z-index:5}
-.pro-v2 .pro-product-stage .float-all-products{left:67%;top:4%;width:27%;height:28%;z-index:6}
-.pro-v2 .pro-product-stage .float-discord{left:3%;top:36%;width:27%;height:28%;z-index:5}
-.pro-v2 .pro-product-stage .float-canva{left:35%;top:36%;width:27%;height:28%;z-index:7}
-.pro-v2 .pro-product-stage .float-iptv{left:67%;top:36%;width:27%;height:28%;z-index:6}
-.pro-v2 .pro-product-stage .float-games{left:3%;top:68%;width:27%;height:28%;z-index:5}
-.pro-v2 .pro-product-stage .float-ai{left:35%;top:68%;width:27%;height:28%;z-index:4}
-.pro-v2 .pro-product-stage .float-social-media{left:67%;top:68%;width:27%;height:28%;z-index:6}
-/* Keep their individual animations from hero-motion.css, and let existing
-   prefers-reduced-motion settings turn motion off when requested. */
+/* DidgStore — scattered floating hero tiles fix.
+   Restores the more natural scattered composition while keeping the new
+   ALL PRODUCTS and SOCIAL MEDIA icons visible and animated. */
+.pro-v2 .pro-product-stage .product-float{
+  filter:drop-shadow(0 10px 15px rgba(0,0,0,.50));
+  animation-name:didg-float-nine;
+}
+.pro-v2 .pro-product-stage .float-netflix{left:4%;top:7%;width:25%;height:27%;z-index:6}
+.pro-v2 .pro-product-stage .float-spotify{left:47%;top:8%;width:24%;height:26%;z-index:5}
+.pro-v2 .pro-product-stage .float-all-products{left:75%;top:4%;width:21%;height:24%;z-index:7}
+.pro-v2 .pro-product-stage .float-discord{left:2%;top:39%;width:25%;height:27%;z-index:5}
+.pro-v2 .pro-product-stage .float-canva{left:33%;top:35%;width:29%;height:30%;z-index:8}
+.pro-v2 .pro-product-stage .float-iptv{left:76%;top:38%;width:22%;height:25%;z-index:6}
+.pro-v2 .pro-product-stage .float-games{left:22%;top:66%;width:24%;height:26%;z-index:5}
+.pro-v2 .pro-product-stage .float-ai{left:50%;top:68%;width:23%;height:25%;z-index:4}
+.pro-v2 .pro-product-stage .float-social-media{left:78%;top:69%;width:20%;height:23%;z-index:6}
+
 @media(max-width:760px){
  .pro-v2 .pro-product-stage .product-float{filter:drop-shadow(0 4px 8px rgba(0,0,0,.48))}
- .pro-v2 .pro-product-stage .float-netflix,.pro-v2 .pro-product-stage .float-spotify,.pro-v2 .pro-product-stage .float-all-products{top:4%}
- .pro-v2 .pro-product-stage .float-discord,.pro-v2 .pro-product-stage .float-canva,.pro-v2 .pro-product-stage .float-iptv{top:36%}
- .pro-v2 .pro-product-stage .float-games,.pro-v2 .pro-product-stage .float-ai,.pro-v2 .pro-product-stage .float-social-media{top:68%}
+ .pro-v2 .pro-product-stage .float-netflix{left:4%;top:8%;width:27%;height:28%}
+ .pro-v2 .pro-product-stage .float-spotify{left:45%;top:8%;width:26%;height:27%}
+ .pro-v2 .pro-product-stage .float-all-products{left:75%;top:5%;width:22%;height:24%}
+ .pro-v2 .pro-product-stage .float-discord{left:1%;top:40%;width:27%;height:28%}
+ .pro-v2 .pro-product-stage .float-canva{left:33%;top:37%;width:30%;height:31%}
+ .pro-v2 .pro-product-stage .float-iptv{left:76%;top:39%;width:23%;height:25%}
+ .pro-v2 .pro-product-stage .float-games{left:20%;top:68%;width:26%;height:28%}
+ .pro-v2 .pro-product-stage .float-ai{left:49%;top:69%;width:24%;height:26%}
+ .pro-v2 .pro-product-stage .float-social-media{left:78%;top:71%;width:21%;height:24%}
 }
 
 @keyframes didg-float-nine {

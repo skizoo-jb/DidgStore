@@ -30,7 +30,7 @@ function persistCart(){
 }
 function categoryIcon(c){
   const icons={all:'▦',subscriptions:'◉',design:'✦',gaming:'✣',ai:'✧',social:'↗',iptv:'▣'};
-  const imgs={design:'canva',gaming:'games',ai:'ai',subscriptions:'spotify',iptv:'iptv'};
+  const imgs={all:'all-products',design:'canva',gaming:'games',ai:'ai',subscriptions:'spotify',iptv:'iptv',social:'social-media'};
   return imgs[c.slug]?`<img src="./assets/tile-${imgs[c.slug]}.webp" alt=""/>`:esc(c.icon||icons[c.slug]||'▦');
 }
 function categoryBtn(c,tile=false){
