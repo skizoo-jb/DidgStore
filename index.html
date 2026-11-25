@@ -168,6 +168,54 @@ body.pro-v2 .deal-promo.deal-promo-v4 .promo-art-v4 img {
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/didgstore-original-favicon-192.png?v=8"/>
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico?v=8"/>
 <link rel="stylesheet" href="./css/didgstore-original-logo.css?v=8"/>
+<style id="didgstore-hero-icons-v1">
+/* Clear, crisp semantic SVG icons; no emoji/font-glyph rendering artifacts. */
+body.pro-v2 .hero-benefits .feature-glyph {
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:34px !important;
+  height:34px !important;
+  margin:0 auto 5px !important;
+  line-height:1 !important;
+  color:#94ff26 !important;
+  filter:drop-shadow(0 0 6px rgba(120,255,44,.36));
+}
+body.pro-v2 .hero-benefits .feature-glyph .didg-feature-svg,
+body.pro-v2 .hero-benefits .feature-glyph .didg-whatsapp-svg {
+  display:block !important;
+  width:29px !important;
+  height:29px !important;
+  max-width:100%;
+  flex-shrink:0;
+}
+body.pro-v2 .hero-benefits .feature-glyph svg {overflow:visible}
+body.pro-v2 .hero-whatsapp .wa-dot {
+  display:inline-grid !important;
+  place-items:center !important;
+  width:33px !important;
+  height:33px !important;
+  margin:0 4px !important;
+  border-radius:50%;
+  border:1px solid rgba(4,32,9,.38) !important;
+  background:rgba(0,25,7,.08) !important;
+  color:#08260d !important;
+  flex-shrink:0;
+  box-shadow:none !important;
+}
+body.pro-v2 .hero-whatsapp .wa-dot .didg-whatsapp-svg {
+  display:block !important;
+  width:25px !important;
+  height:25px !important;
+}
+@media (max-width:760px) {
+  body.pro-v2 .hero-benefits .feature-glyph {width:30px !important;height:30px !important;margin-bottom:3px !important}
+  body.pro-v2 .hero-benefits .feature-glyph .didg-feature-svg,
+  body.pro-v2 .hero-benefits .feature-glyph .didg-whatsapp-svg {width:25px !important;height:25px !important}
+  body.pro-v2 .hero-whatsapp .wa-dot {width:28px !important;height:28px !important}
+  body.pro-v2 .hero-whatsapp .wa-dot .didg-whatsapp-svg {width:23px !important;height:23px !important}
+}
+</style>
 </head>
 <body class="shop-body pro-v2">
 <div aria-hidden="true" class="ambient ambient-one"></div><div aria-hidden="true" class="ambient ambient-two"></div>
@@ -212,12 +260,12 @@ body.pro-v2 .deal-promo.deal-promo-v4 .promo-art-v4 img {
 <h1 id="mainTitle"><span data-i18n="hero.titleStart">متجرك الرقمي</span> <em data-i18n="hero.titleEnd">المتكامل</em></h1>
 <p class="hero-desc" data-i18n="hero.subtitle" id="heroSub">اشتراكات رقمية • مفاتيح ألعاب • أدوات إبداعية • والمزيد...</p>
 <div class="hero-benefits">
-<div><span class="feature-glyph">ϟ</span><strong data-i18n="hero.easy">طلب سهل</strong><small data-i18n="hero.easySub">بخطوات واضحة</small></div>
-<div><span class="feature-glyph">♢</span><strong data-i18n="hero.clear">تفاصيل واضحة</strong><small data-i18n="hero.clearSub">قبل تأكيد الطلب</small></div>
-<div><span class="feature-glyph">♧</span><strong data-i18n="hero.direct">تواصل مباشر</strong><small data-i18n="hero.directSub">عبر واتساب</small></div>
+<div><span class="feature-glyph"><svg class="didg-feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M13.5 2 4.8 13h6.5L10.5 22 19.2 11h-6.5L13.5 2Z"/></svg></span><strong data-i18n="hero.easy">طلب سهل</strong><small data-i18n="hero.easySub">بخطوات واضحة</small></div>
+<div><span class="feature-glyph"><svg class="didg-feature-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="17" rx="2"/><rect x="9" y="2" width="6" height="5" rx="1.2" fill="#08150c"/><path d="m8.4 13.2 2.1 2.1 4.9-5.1"/><path d="M8.5 18h7"/></svg></span><strong data-i18n="hero.clear">تفاصيل واضحة</strong><small data-i18n="hero.clearSub">قبل تأكيد الطلب</small></div>
+<div><span class="feature-glyph"><svg class="didg-whatsapp-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 3.4C9.1 3.4 3.5 8.9 3.5 15.8c0 2.2.6 4.3 1.6 6.1L3.6 28.6l6.7-1.7c1.7.9 3.7 1.4 5.7 1.4 6.9 0 12.5-5.6 12.5-12.5S22.9 3.4 16 3.4Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M11.2 10.1c-.5-.1-1 0-1.4.4-.8.8-1.2 1.8-1.1 2.9.2 2.5 3.1 6.5 7.6 8.4 1.6.7 3 .8 4.2.4.8-.3 2.1-1.5 2.3-2.5.1-.5-.1-.8-.5-1L19 17.3c-.4-.2-.8-.1-1.1.2l-1.3 1.3c-2.1-1-3.6-2.6-4.6-4.5l1.1-1.2c.3-.4.4-.7.2-1.1l-1.4-3.1" fill="currentColor"/><path d="M11.2 10.1c-.5-.1-1 0-1.4.4-.8.8-1.2 1.8-1.1 2.9.2 2.5 3.1 6.5 7.6 8.4 1.6.7 3 .8 4.2.4.8-.3 2.1-1.5 2.3-2.5.1-.5-.1-.8-.5-1L19 17.3c-.4-.2-.8-.1-1.1.2l-1.3 1.3c-2.1-1-3.6-2.6-4.6-4.5l1.1-1.2c.3-.4.4-.7.2-1.1l-1.4-3.1" stroke="currentColor" stroke-width=".2"/></svg></span><strong data-i18n="hero.direct">تواصل مباشر</strong><small data-i18n="hero.directSub">عبر واتساب</small></div>
 </div>
 <button class="btn btn-primary hero-whatsapp" id="heroWhatsapp">
-<span class="wa-dot">◉</span> <span data-i18n="hero.order">اطلب الآن عبر WhatsApp</span> <span class="arrow-ltr">❯</span>
+<span class="wa-dot"><svg class="didg-whatsapp-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 3.4C9.1 3.4 3.5 8.9 3.5 15.8c0 2.2.6 4.3 1.6 6.1L3.6 28.6l6.7-1.7c1.7.9 3.7 1.4 5.7 1.4 6.9 0 12.5-5.6 12.5-12.5S22.9 3.4 16 3.4Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M11.2 10.1c-.5-.1-1 0-1.4.4-.8.8-1.2 1.8-1.1 2.9.2 2.5 3.1 6.5 7.6 8.4 1.6.7 3 .8 4.2.4.8-.3 2.1-1.5 2.3-2.5.1-.5-.1-.8-.5-1L19 17.3c-.4-.2-.8-.1-1.1.2l-1.3 1.3c-2.1-1-3.6-2.6-4.6-4.5l1.1-1.2c.3-.4.4-.7.2-1.1l-1.4-3.1" fill="currentColor"/><path d="M11.2 10.1c-.5-.1-1 0-1.4.4-.8.8-1.2 1.8-1.1 2.9.2 2.5 3.1 6.5 7.6 8.4 1.6.7 3 .8 4.2.4.8-.3 2.1-1.5 2.3-2.5.1-.5-.1-.8-.5-1L19 17.3c-.4-.2-.8-.1-1.1.2l-1.3 1.3c-2.1-1-3.6-2.6-4.6-4.5l1.1-1.2c.3-.4.4-.7.2-1.1l-1.4-3.1" stroke="currentColor" stroke-width=".2"/></svg></span> <span data-i18n="hero.order">اطلب الآن عبر WhatsApp</span> <span class="arrow-ltr">❯</span>
 </button>
 <div class="hero-caption"><span class="online-dot"></span><span data-i18n="hero.caption">اختر المنتج المناسب وراسِلنا لتأكيد التوفر والثمن</span></div>
 </div>
