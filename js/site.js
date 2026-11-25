@@ -62,28 +62,47 @@ function card(p){
     </div></article>`;
 }
 const featureLogo={netflix:'tile-netflix.webp',spotify:'tile-spotify.webp',canva:'tile-canva.webp',discord:'tile-discord.webp',iptv:'tile-iptv.webp',games:'tile-games.webp',ai:'tile-ai.webp'};
+// Exclusive Latest Offers look: accessible full-card link and independent CTA.
+const WA_OFFER_ICON = `<svg class="didg-wa-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.5c-5.25 0-9.5 4.23-9.5 9.47 0 1.73.47 3.39 1.34 4.84L2.5 21.5l4.84-1.29a9.5 9.5 0 1 0 4.66-17.71Z" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/><path d="M8.55 7.4c-.34-.42-.72-.35-1.06-.13-.9.6-1.26 1.55-1.04 2.72.53 2.88 3.35 5.83 6.29 6.78 1.38.45 2.54.14 3.5-.85.3-.3.35-.69.15-.89l-2.11-1.02a.8.8 0 0 0-.97.18l-.83.88c-1.24-.53-2.43-1.7-3.09-2.94l.82-.95a.9.9 0 0 0 .14-1.02L8.55 7.4Z" fill="currentColor"/></svg>`;
+const DURATION_OFFER_ICON = `<svg class="didg-wa-svg" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 6.8V12l3.6 2.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+function offerDiscount(p){const now=starting(p),before=baseOld(p);return before!=null&&before>now&&now>0?Math.round((1-now/before)*100):0}
 function featureCard(p){
-  const old=baseOld(p)!=null&&baseOld(p)>starting(p)&&starting(p)>0;
-  const discount=old?Math.round((1-starting(p)/baseOld(p))*100):0;
+  const old=offerDiscount(p)>0;
+  const discount=offerDiscount(p);
   const v=visualOf(p),file=featureLogo[p.visual],n=esc(nameOf(p));
   const icon=file?`<img src="./assets/${file}" alt="" loading="lazy"/>`:`<span class="fallback-logo">${esc(v.symbol)}</span>`;
-  return `<article class="deal-tile" style="${artStyle(p)}">
-   ${discount?`<span class="deal-badge">-${discount}%</span>`:''}<span class="deal-shine" aria-hidden="true">✦</span>
-   <div class="deal-icon" data-detail="${esc(p.id)}" role="button" tabindex="0" aria-label="${esc(t('products.details'))} ${n}">${p.image_url?`<img src="${esc(p.image_url)}" alt="${n}" loading="lazy"/>`:icon}</div>
+  const hasDuration=hasVariants(p);
+  const ctaLabel=hasDuration?(language()==='en'?'Choose duration':'اختار المدة'):
+    (language()==='en'?'Order on WhatsApp':'اطلب عبر واتساب');
+  const label=discount?`<span class="deal-badge" aria-label="${language()==='en'?'Discount':'تخفيض'} ${discount}%">-${discount}%</span>`:
+    `<span class="deal-badge didg-special-badge">✦ ${language()==='en'?'SPECIAL':'عرض خاص'}</span>`;
+  return `<article class="deal-tile didg-premium-offer" style="${artStyle(p)}">
+   <a class="didg-offer-hitarea" href="${esc(productPageUrl(p.id))}" aria-label="${esc(language()==='en'?'View details: ':'عرض التفاصيل: ')}${n}"></a>
+   ${label}<span class="deal-shine" aria-hidden="true">✦</span>
+   <div class="deal-icon" aria-hidden="true">${p.image_url?`<img src="${esc(p.image_url)}" alt="" loading="lazy"/>`:icon}</div>
    <h3 title="${n}">${n}</h3><div class="deal-duration">${esc(durationOf(p)||catName(p.category_id))}</div>
-   <div class="deal-price ${Number(p.price)>0?'':'ask'}">${esc(currency(p))}${old?`<span class="deal-old">${esc(money(baseOld(p)))}</span>`:''}</div>
-   <button class="deal-cta" data-buy="${esc(p.id)}">${esc(t('products.buyShort'))}</button>
+   <div class="deal-price ${starting(p)>0?'':'ask'}"><span>${esc(currency(p))}</span>${old?`<span class="deal-old">${esc(money(baseOld(p)))}</span>`:''}</div>
+   <button type="button" class="deal-cta" data-offer-buy="${esc(p.id)}" aria-label="${esc(ctaLabel)}: ${n}">${hasDuration?DURATION_OFFER_ICON:WA_OFFER_ICON}<span>${esc(ctaLabel)}</span></button>
   </article>`;
 }
 function renderOffers(){
   const grid=el('#featuredGrid');if(!grid)return;
-  const visibleItems=products.filter(p=>p.is_active);
-  const preferred=['netflix','canva','iptv','discord','spotify'];
-  visibleItems.sort((a,b)=>{
-    const ia=preferred.indexOf(a.visual),ib=preferred.indexOf(b.visual);
-    return (ia<0?99:ia)-(ib<0?99:ib);
-  });
-  grid.innerHTML=visibleItems.slice(0,5).map(featureCard).join('')||`<div class="empty-state">${esc(t('offers.empty'))}</div>`;
+  // Only featured or genuinely discounted active products go in Latest Offers.
+  const offers=products.filter(p=>p.is_active&&(p.featured||offerDiscount(p)>0));
+  const featuredFirst=(a,b)=>Number(!!b.featured)-Number(!!a.featured) ||
+    (Number(a.sort_order||0)-Number(b.sort_order||0));
+  grid.innerHTML=offers.sort(featuredFirst).slice(0,5).map(featureCard).join('') ||
+    `<div class="empty-state">${esc(t('offers.empty'))}</div>`;
+}
+function orderFeaturedOffer(id){
+  const p=product(id);if(!p || !p.is_active)return;
+  // A duration-based offer needs a selection before the price/order is known.
+  if(hasVariants(p)){goProduct(p.id);return}
+  const title=nameOf(p);
+  const amount=starting(p)>0?money(starting(p)):t('products.ask');
+  const length=p.duration?(language()==='en'?(p.duration_en||p.duration):p.duration):'';
+  const message=`${t('wa.productHello')}\n\n${title}${length?' ('+length+')':''}\n${language()==='en'?'Price':'الثمن'}: ${amount}\n${language()==='en'?'Quantity':'الكمية'}: 1\n\n${t('wa.cartFooter')}`;
+  openWhatsApp(message);
 }
 function filtered(){
   const term=el('#searchInput').value.trim().toLocaleLowerCase();
@@ -110,6 +129,7 @@ function renderHeroDescription(){
 }
 function bindEvents(){
   document.addEventListener('click',e=>{
+    const offerBuy=e.target.closest('[data-offer-buy]');if(offerBuy){e.preventDefault();orderFeaturedOffer(offerBuy.dataset.offerBuy);return}
     const cat=e.target.closest('[data-category]');if(cat)setCategory(cat.dataset.category);
     const detail=e.target.closest('[data-detail]');if(detail){goProduct(detail.dataset.detail);return}
     const buy=e.target.closest('[data-buy]');if(buy){goProduct(buy.dataset.buy);return}
