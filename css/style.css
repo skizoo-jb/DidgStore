@@ -20,3 +20,17 @@
 .steps article .step-number{position:absolute;top:16px;right:22px;left:auto;z-index:0;color:#baff7022}
 .steps article:hover .step-icon{transform:translateY(-3px);border-color:#b8ff68;box-shadow:inset 0 1px 0 #ffffff19,0 14px 28px #0006,0 0 18px #83ff2922}
 @media(prefers-reduced-motion:reduce){.steps article .step-icon{transition:none}.steps article:hover .step-icon{transform:none}}
+
+/* DidgStore trust strip: matching four custom SVG pictograms */
+.pro-v2 .trust-strip .trust-icon,
+.trust-strip .trust-icon{
+  flex:0 0 47px;width:47px;height:47px;display:grid;place-items:center;
+  border-radius:13px;background:linear-gradient(145deg,#153d22,#0a1d12);
+  border:1px solid rgba(153,255,65,.42);color:#a2ff39;
+  box-shadow:inset 0 1px rgba(240,255,230,.07),0 7px 19px rgba(0,0,0,.18);
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.trust-strip .trust-icon svg{width:25px;height:25px;display:block;filter:drop-shadow(0 0 5px rgba(149,255,61,.21))}
+.trust-strip > div:hover .trust-icon{transform:translateY(-2px);border-color:#b9ff77;box-shadow:0 6px 20px rgba(131,255,45,.14)}
+@media(max-width:700px){.trust-strip .trust-icon{flex-basis:42px;width:42px;height:42px}.trust-strip .trust-icon svg{width:23px;height:23px}}
+@media(prefers-reduced-motion:reduce){.trust-strip .trust-icon{transition:none}.trust-strip>div:hover .trust-icon{transform:none}}
