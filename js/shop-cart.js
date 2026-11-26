@@ -9,7 +9,14 @@ const SOCIAL_KIND_CODE={followers:1,likes:2,views:3,subscribers:4};
 export const isServiceProduct=p=>Array.isArray(p?.service_packages)&&p.service_packages.length>0;
 export const variantsOf=p=>{
  if(isServiceProduct(p)){
-  return p.service_packages.filter(x=>SOCIAL_KIND_CODE[x.kind]&&Number.isInteger(Number(x.count))&&Number(x.count)>0&&Number(x.count)<1000000&&Number(x.price)>0).map(x=>({months:SOCIAL_KIND_CODE[x.kind]*1000000+Number(x.count),price:Number(x.price),old_price:null,service_kind:x.kind,service_count:Number(x.count)})).sort((a,b)=>a.months-b.months);
+  // Support both stored schemas: {service,quantity,price} and {kind,count,price}.
+  // Product packages are a fixed list, not a free-form custom quantity.
+  return p.service_packages.map(x=>{
+    const kind=x.kind||x.service, count=Number(x.count??x.quantity), price=Number(x.price);
+    return {kind,count,price};
+  }).filter(x=>SOCIAL_KIND_CODE[x.kind]&&Number.isInteger(x.count)&&x.count>0&&x.count<1000000&&Number.isFinite(x.price)&&x.price>0)
+    .map(x=>({months:SOCIAL_KIND_CODE[x.kind]*1000000+x.count,price:x.price,old_price:null,service_kind:x.kind,service_count:x.count}))
+    .sort((a,b)=>a.months-b.months);
  }
  return Array.isArray(p?.variants)?p.variants.filter(v=>Number.isInteger(Number(v.months))&&Number(v.months)>0&&Number.isFinite(Number(v.price))&&Number(v.price)>=0).sort((a,b)=>Number(a.months)-Number(b.months)):[];
 };
@@ -19,7 +26,7 @@ const cheapestVariant=p=>variantsOf(p).reduce((best,v)=>!best||Number(v.price)<N
 export const priceOf=(p,months)=>hasVariants(p)?positiveNumber(((months!=null?variantOf(p,months):null)||cheapestVariant(p)).price):positiveNumber(p.price);
 export const oldPriceOf=(p,months)=>{const v=hasVariants(p)?((months!=null?variantOf(p,months):null)||cheapestVariant(p)):p;return v.old_price==null?null:positiveNumber(v.old_price)};
 export const money=value=>`${positiveNumber(value).toLocaleString(language()==='en'?'en-US':'fr-MA',{maximumFractionDigits:2})} DH`;
-export const priceText=(p,months)=>{const n=priceOf(p,months);return (hasVariants(p)&&months==null?(language()==='en'?'From ':'ابتداءً من '):'')+(n>0?money(n):t('products.ask'))};
+export const priceText=(p,months)=>{if(isServiceProduct(p)&&months==null)return language()==='en'?'Choose package':'اختار الباقة';const n=priceOf(p,months);return (hasVariants(p)&&months==null?(language()==='en'?'From ':'ابتداءً من '):'')+(n>0?money(n):t('products.ask'))};
 export const monthLabel=months=>{
  const n=Number(months);
  if(n>=1000000&&n<5000000){
@@ -45,7 +52,7 @@ export function createCart({getProducts,getSettings}){
   function count(){if(header)header.textContent=rows.reduce((n,r)=>n+r.qty,0)}
   function add(id,months=null,qty=1){
     const p=getActive(id);if(!p){toast(language()==='en'?'Product unavailable':'المنتج غير متوفر');return false}
-    if(hasVariants(p)&&!variantOf(p,months)){toast(language()==='en'?'Select a subscription duration first':'اختار مدة الاشتراك أولاً');return false}
+    if(hasVariants(p)&&!variantOf(p,months)){toast(isServiceProduct(p)?(language()==='en'?'Choose a service and package first':'اختار نوع الخدمة والباقة أولاً'):(language()==='en'?'Select a subscription duration first':'اختار مدة الاشتراك أولاً'));return false}
     const key=rowKey(id,hasVariants(p)?Number(months):null),match=rows.find(r=>rowKey(r.id,r.months)===key);
     if(match)match.qty=Math.min(25,match.qty+Math.max(1,Number(qty)||1));else rows.push({id:String(id),months:hasVariants(p)?Number(months):null,qty:Math.max(1,Math.min(25,Number(qty)||1))});
     save(rows);count();toast(t('cart.added'));return true;
