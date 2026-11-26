@@ -217,3 +217,105 @@ body.didg-product-page .didg-product-footer {color:#a6baa8;}
   body.didg-product-page .didg-detail-buttons button,
   body.didg-product-page .didg-full-description{transition:none!important;transform:none!important;}
 }
+
+
+/* ---------------------------------------------------------------
+   DidgStore special offers: SAME golden look as Latest Offers.
+   Toggle comes from product.js using the same featured / discount
+   rules as the homepage. Ordinary products stay black + neon green.
+   Scoped to the product page; no Discord or WhatsApp UI added.
+   --------------------------------------------------------------- */
+body.didg-product-page.didg-special-offer {
+  --didg-offer-gold: #ebc46c;
+  --didg-offer-gold-soft: #bc8d3b;
+  --didg-offer-gold-light: #ffdfa0;
+  background:
+    radial-gradient(ellipse at 78% 0%, rgba(215,160,56,.11), transparent 48%),
+    radial-gradient(ellipse at 10% 28%, rgba(108,255,37,.035), transparent 42%),
+    #050b07;
+}
+body.didg-product-page.didg-special-offer .didg-detail-visual,
+body.didg-product-page.didg-special-offer .didg-long-section,
+body.didg-product-page.didg-special-offer .didg-detail-content {
+  border-color: #b88b39;
+  background: linear-gradient(145deg, #18160f 0%, #10130e 48%, #0a110b 100%);
+  box-shadow: 0 15px 48px rgba(0,0,0,.35), 0 0 24px rgba(222,168,66,.105), inset 0 1px rgba(255,226,163,.08);
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+body.didg-product-page.didg-special-offer .didg-detail-visual:hover,
+body.didg-product-page.didg-special-offer .didg-detail-content:hover {
+  border-color: #e6be68;
+  box-shadow: 0 18px 54px rgba(0,0,0,.36), 0 0 32px rgba(235,196,108,.16), inset 0 1px rgba(255,226,163,.1);
+}
+body.didg-product-page.didg-special-offer .didg-detail-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 39%, rgba(255,218,138,.11) 48%, transparent 57%);
+  transform: translateX(-130%);
+  transition: transform .8s cubic-bezier(.2,.6,.3,1);
+}
+body.didg-product-page.didg-special-offer .didg-detail-visual:hover::before {
+  transform: translateX(130%);
+}
+body.didg-product-page.didg-special-offer .didg-image-category {
+  z-index: 2;
+  border-color: #c99c4b;
+  background: linear-gradient(135deg, #44311a, #292015);
+  color: #ffe0a2;
+}
+body.didg-product-page.didg-special-offer .didg-offer-brand {
+  border-color: #e9bf65;
+  background: linear-gradient(110deg, #3a2a16, #59411e, #302514);
+  color: #ffdfa0;
+  box-shadow: 0 0 24px rgba(235,196,108,.13), inset 0 1px rgba(255,236,190,.15);
+  letter-spacing: .5px;
+}
+body.didg-product-page.didg-special-offer .didg-detail-category,
+body.didg-product-page.didg-special-offer .didg-long-section h2,
+body.didg-product-page.didg-special-offer .didg-description-label {
+  color: #eacb8b;
+}
+body.didg-product-page.didg-special-offer .didg-price-row,
+body.didg-product-page.didg-special-offer .didg-duration-picker {
+  border-bottom-color: #54442a;
+}
+body.didg-product-page.didg-special-offer #detailPrice {
+  color: #a8ff35; /* Keep DidgStore's neon-green price identity */
+  text-shadow: 0 0 22px rgba(145,255,45,.18);
+}
+body.didg-product-page.didg-special-offer #detailDiscount {
+  border-color: #e9bd60;
+  background: linear-gradient(135deg, #443018, #68491e);
+  color: #ffe3a9;
+}
+body.didg-product-page.didg-special-offer .didg-full-description {
+  border-color: #c99c4b;
+  background: #382716;
+  color: #ffe0a2;
+}
+body.didg-product-page.didg-special-offer .didg-full-description:hover {
+  border-color: #ffe0a2;
+  background: #4a3419;
+}
+body.didg-product-page.didg-special-offer .didg-estimated-total {
+  border-color: #6f552c;
+  background: linear-gradient(105deg, #13180e, #1a1a12);
+}
+body.didg-product-page.didg-special-offer .didg-estimated-total strong {
+  color: #ffdda0;
+}
+body.didg-product-page.didg-special-offer .didg-duration-opt.active {
+  border-color: #e7bc67;
+  box-shadow: 0 0 18px rgba(235,196,108,.16);
+}
+/* The add-to-cart button remains the original bright green DidgStore CTA. */
+@media (prefers-reduced-motion: reduce) {
+  body.didg-product-page.didg-special-offer .didg-detail-visual::before,
+  body.didg-product-page.didg-special-offer .didg-detail-visual,
+  body.didg-product-page.didg-special-offer .didg-detail-content {
+    transition: none !important;
+  }
+}
