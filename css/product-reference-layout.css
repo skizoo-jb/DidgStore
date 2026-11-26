@@ -329,3 +329,19 @@ body.didg-product-page.didg-special-offer .didg-duration-opt.active {
 .didg-product-page .didg-service-grid .didg-duration-opt b {font-size:15px;}
 .didg-product-page .didg-service-grid .didg-duration-opt span {font-size:13px;}
 @media(max-width:520px){.didg-product-page .didg-service-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+/* DidgStore social service configuration v4 */
+.didg-product-page .didg-service-packs{display:flex!important;flex-direction:column!important;gap:16px!important}
+.didg-product-page .didg-service-step{padding:16px;border-radius:17px;background:linear-gradient(135deg,#0d2014,#060f0a);border:1px solid #315f37}
+.didg-product-page .didg-service-step h3{margin:0 0 13px;font-size:15px;font-weight:900;color:#f1ffe9}
+.didg-product-page .didg-service-types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.didg-product-page .didg-service-type{min-height:61px;display:flex;gap:7px;flex-direction:column;align-items:center;justify-content:center;padding:8px 5px;border-radius:11px;border:1px solid #497449;background:#122b1b;color:#dff5d8;font:800 13px 'Cairo',Arial,sans-serif;cursor:pointer;transition:transform .16s,border-color .16s,background .16s;white-space:normal}
+.didg-product-page .didg-service-type span{font-size:21px}
+.didg-product-page .didg-service-type:hover{border-color:#9aff3f;transform:translateY(-2px)}
+.didg-product-page .didg-service-type.selected{background:linear-gradient(140deg,#8cff2b,#b2ff54);color:#081605;border-color:#c4ff8b;box-shadow:0 0 18px #82ff2922}
+.didg-product-page .didg-service-step .didg-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.didg-product-page .didg-service-hint{color:#9ecca8;font-size:12px;text-align:center;padding:11px;margin:0}
+.didg-product-page .didg-service-grid .didg-duration-opt{min-height:75px;border-radius:12px}
+.didg-product-page .didg-service-grid .didg-duration-opt.active{background:linear-gradient(135deg,#407b2c,#204822);border-color:#b4ff63;box-shadow:0 0 16px #79ff3030}
+.didg-product-page .didg-reference-cart:disabled{cursor:not-allowed;opacity:.48;filter:saturate(.6);transform:none!important}
+@media(max-width:560px){.didg-product-page .didg-service-types{grid-template-columns:repeat(2,minmax(0,1fr))}.didg-product-page .didg-service-step{padding:12px}.didg-product-page .didg-service-step .didg-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
