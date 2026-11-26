@@ -5,7 +5,14 @@ import {CONFIG} from './config.js';
 import {esc,toast,visualOf,cleanPhone,whatsappUrl,openModal} from './shared.js';
 const CART_KEY='didgstore-cart-v1';
 const positiveNumber=value=>Number.isFinite(Number(value))&&Number(value)>=0?Number(value):0;
-export const variantsOf=p=>Array.isArray(p?.variants)?p.variants.filter(v=>Number.isInteger(Number(v.months))&&Number(v.months)>0&&Number.isFinite(Number(v.price))&&Number(v.price)>=0).sort((a,b)=>Number(a.months)-Number(b.months)):[];
+const SOCIAL_KIND_CODE={followers:1,likes:2,views:3,subscribers:4};
+export const isServiceProduct=p=>Array.isArray(p?.service_packages)&&p.service_packages.length>0;
+export const variantsOf=p=>{
+ if(isServiceProduct(p)){
+  return p.service_packages.filter(x=>SOCIAL_KIND_CODE[x.kind]&&Number.isInteger(Number(x.count))&&Number(x.count)>0&&Number(x.count)<1000000&&Number(x.price)>0).map(x=>({months:SOCIAL_KIND_CODE[x.kind]*1000000+Number(x.count),price:Number(x.price),old_price:null,service_kind:x.kind,service_count:Number(x.count)})).sort((a,b)=>a.months-b.months);
+ }
+ return Array.isArray(p?.variants)?p.variants.filter(v=>Number.isInteger(Number(v.months))&&Number(v.months)>0&&Number.isFinite(Number(v.price))&&Number(v.price)>=0).sort((a,b)=>Number(a.months)-Number(b.months)):[];
+};
 export const hasVariants=p=>variantsOf(p).length>0;
 export const variantOf=(p,months)=>variantsOf(p).find(v=>Number(v.months)===Number(months))||null;
 const cheapestVariant=p=>variantsOf(p).reduce((best,v)=>!best||Number(v.price)<Number(best.price)?v:best,null);
@@ -13,7 +20,15 @@ export const priceOf=(p,months)=>hasVariants(p)?positiveNumber(((months!=null?va
 export const oldPriceOf=(p,months)=>{const v=hasVariants(p)?((months!=null?variantOf(p,months):null)||cheapestVariant(p)):p;return v.old_price==null?null:positiveNumber(v.old_price)};
 export const money=value=>`${positiveNumber(value).toLocaleString(language()==='en'?'en-US':'fr-MA',{maximumFractionDigits:2})} DH`;
 export const priceText=(p,months)=>{const n=priceOf(p,months);return (hasVariants(p)&&months==null?(language()==='en'?'From ':'ابتداءً من '):'')+(n>0?money(n):t('products.ask'))};
-export const monthLabel=months=>{const n=Number(months);return language()==='en'?`${n} ${n===1?'month':'months'}`:n===1?'شهر واحد':n===2?'شهرين':`${n} شهور`};
+export const monthLabel=months=>{
+ const n=Number(months);
+ if(n>=1000000&&n<5000000){
+  const code=Math.floor(n/1000000),count=n%1000000;
+  const names=language()==='en'?{1:'Followers',2:'Likes',3:'Views',4:'Subscribers'}:{1:'متابعون',2:'إعجابات',3:'مشاهدات',4:'مشتركون'};
+  return (names[code]||'')+' · '+count.toLocaleString('en-US');
+ }
+ return language()==='en'?n+' '+(n===1?'month':'months'):n===1?'شهر واحد':n===2?'شهرين':n+' شهور';
+};
 export const nameOf=p=>language()==='en'?(p.name_en||p.name_ar):p.name_ar;
 export const productPageUrl=id=>`./product.html?id=${encodeURIComponent(String(id))}`;
 const rowKey=(id,months)=>`${id}::${months??'base'}`;
