@@ -7,8 +7,8 @@ const $=id=>document.getElementById(id);
 let products=[],categories=[],settings={},current=null,selectedMonths=null,qty=1;
 const cartWidget=createCart({getProducts:()=>products,getSettings:()=>settings});
 const local={
-  ar:{back:'← المنتجات',home:'الرئيسية',products:'المنتجات',loading:'جاري تحميل تفاصيل المنتج...',notFound:'هاد المنتج ما بقاش متوفر. رجع للمتجر وشوف المنتجات الأخرى.',failed:'ما قدرناش نحمّلو تفاصيل المنتج. راجع الاتصال أو إعدادات Supabase.',duration:'اختار مدة الاشتراك',hint:'اختار المدة باش يبان الثمن ديالها',quantity:'اختار الكمية',add:'أضف للسلة',description:'وصف المنتج',descriptionLabel:'تفاصيل المنتج',full:'عرض الوصف الكامل',less:'إخفاء الوصف الكامل',total:'المجموع التقريبي',related:'منتجات مشابهة',browse:'جميع المنتجات ←',footer:'العودة للمتجر',note:'يمكنك إضافة المنتج إلى السلة ومراجعة الطلب قبل تأكيده. تأكد من التوفر والثمن النهائي قبل الأداء.',ask:'اسأل عن الثمن',offers:'عروض DidgStore',discount:'خصم'},
-  en:{back:'← Products',home:'Home',products:'Products',loading:'Loading product details...',notFound:'This product is not currently available. Browse other products.',failed:'Unable to load product details. Check your connection or Supabase configuration.',duration:'Choose subscription duration',hint:'Select a duration to see its price',quantity:'Choose quantity',add:'Add to cart',description:'Product description',descriptionLabel:'Product Description',full:'View Full Product Description',less:'Hide Full Product Description',total:'Estimated total',related:'Related products',browse:'All products →',footer:'Back to store',note:'Add this product to your cart and review your order before confirming. Confirm availability and final pricing before payment.',ask:'Ask for price',offers:'DIDGSTORE OFFERS',discount:'off'}
+  ar:{back:'← المنتجات',home:'الرئيسية',products:'المنتجات',loading:'جاري تحميل تفاصيل المنتج...',notFound:'هاد المنتج ما بقاش متوفر. رجع للمتجر وشوف المنتجات الأخرى.',failed:'ما قدرناش نحمّلو تفاصيل المنتج. راجع الاتصال أو إعدادات Supabase.',duration:'اختار مدة الاشتراك',hint:'اختار المدة باش يبان الثمن ديالها',quantity:'اختار الكمية',add:'أضف للسلة',description:'وصف المنتج',descriptionLabel:'تفاصيل المنتج',full:'عرض الوصف الكامل',less:'إخفاء الوصف الكامل',total:'المجموع التقريبي',related:'منتجات مشابهة',browse:'جميع المنتجات ←',footer:'العودة للمتجر',note:'يمكنك إضافة المنتج إلى السلة ومراجعة الطلب قبل تأكيده. تأكد من التوفر والثمن النهائي قبل الأداء.',ask:'اسأل عن الثمن',offers:'عرض خاص من DidgStore',productBrand:'منتج من DidgStore',discount:'خصم'},
+  en:{back:'← Products',home:'Home',products:'Products',loading:'Loading product details...',notFound:'This product is not currently available. Browse other products.',failed:'Unable to load product details. Check your connection or Supabase configuration.',duration:'Choose subscription duration',hint:'Select a duration to see its price',quantity:'Choose quantity',add:'Add to cart',description:'Product description',descriptionLabel:'Product Description',full:'View Full Product Description',less:'Hide Full Product Description',total:'Estimated total',related:'Related products',browse:'All products →',footer:'Back to store',note:'Add this product to your cart and review your order before confirming. Confirm availability and final pricing before payment.',ask:'Ask for price',offers:'DIDGSTORE SPECIAL OFFER',productBrand:'DIDGSTORE PRODUCT',discount:'off'}
 };
 const txt=key=>local[language()][key];
 const desc=(p,full)=>{if(language()==='en')return (full?p.description_en:p.short_description_en)||(full?p.description:p.short_description)||t(full?'products.detailsFallback':'products.shortFallback');return (full?p.description:p.short_description)||t(full?'products.detailsFallback':'products.shortFallback')};
@@ -19,6 +19,14 @@ function updatePrice(){
   if(!current)return;
   const months=readMonths(),price=priceOf(current,months),old=oldPriceOf(current,months);
   const onSale=old!=null&&old>price&&price>0;
+  // Match Latest Offers on the homepage: featured products OR a real
+  // discount on the starting price. Also highlight a discounted duration.
+  const startingPrice=priceOf(current,null);
+  const startingOld=oldPriceOf(current,null);
+  const homepageOffer=current.featured===true || (startingOld!=null&&startingOld>startingPrice&&startingPrice>0);
+  const specialOffer=homepageOffer || onSale;
+  document.body.classList.toggle('didg-special-offer',specialOffer);
+  $('offerBrand').textContent=txt(specialOffer?'offers':'productBrand');
   $('detailPrice').textContent=price>0?money(price):txt('ask');
   $('detailOldPrice').textContent=onSale?money(old):'';
   $('detailOldPrice').hidden=!onSale;
@@ -36,7 +44,6 @@ function render(){
   if(!current)return;
   document.title=`${nameOf(current)} | DidgStore`;
   $('productState').hidden=true;$('detailShell').hidden=false;$('longSection').hidden=false;
-  $('offerBrand').textContent=txt('offers');
   $('detailCategory').textContent=categoryName(current);$('imageCategory').textContent=categoryName(current);
   $('detailName').textContent=nameOf(current);$('detailShort').textContent='';
   $('detailMedia').innerHTML=current.image_url?`<img class="didg-real-product-image" src="${esc(current.image_url)}" alt="${esc(nameOf(current))}"/>`:`<div class="didg-product-art" style="${artStyle(current)}">${artHTML(current,false)}</div>`;
