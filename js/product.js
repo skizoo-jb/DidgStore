@@ -2,7 +2,7 @@ import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings} from './db.js';
 import {language,initLanguage,t} from './i18n.js';
 import {esc,visualOf,artStyle,artHTML,initModals,toast} from './shared.js';
-import {createCart,hasVariants,variantsOf,priceOf,oldPriceOf,priceText,money,monthLabel,nameOf,productPageUrl} from './shop-cart.js';
+import {createCart,hasVariants,variantsOf,isServiceProduct,priceOf,oldPriceOf,priceText,money,monthLabel,nameOf,productPageUrl} from './shop-cart.js';
 const $=id=>document.getElementById(id);
 let products=[],categories=[],settings={},current=null,selectedMonths=null,qty=1;
 const cartWidget=createCart({getProducts:()=>products,getSettings:()=>settings});
@@ -50,7 +50,15 @@ function render(){
   $('detailNote').textContent=txt('note');$('qtyLabel').textContent=txt('quantity');
   $('addToCartText').textContent=txt('add');$('totalLabel').textContent=txt('total');
   $('durationPicker').hidden=!hasVariants(current);$('durationHeading').textContent=txt('duration');$('durationHint').textContent=txt('hint');
-  if(hasVariants(current))$('durationOptions').innerHTML=variantsOf(current).map(v=>`<button type="button" class="didg-duration-opt" data-select-months="${Number(v.months)}" aria-pressed="false"><b>${esc(monthLabel(v.months))}</b><span>${esc(v.price>0?money(v.price):txt('ask'))}</span></button>`).join('');
+  $('durationOptions').classList.toggle('didg-service-packs',isServiceProduct(current));
+  if(isServiceProduct(current)){
+    $('durationHeading').textContent=language()==='en'?'Choose service package':'اختار نوع الخدمة والباقة';
+    $('durationHint').textContent=language()==='en'?'Select the exact quantity and price':'اختار العدد باش يبان الثمن الصحيح';
+    const kinds=[['followers','متابعون','Followers'],['subscribers','مشتركون','Subscribers'],['likes','إعجابات','Likes'],['views','مشاهدات','Views']];
+    $('durationOptions').innerHTML=kinds.map(g=>{const options=variantsOf(current).filter(v=>v.service_kind===g[0]);if(!options.length)return '';const label=language()==='en'?g[2]:g[1];return '<section class="didg-service-group"><h3>'+esc(label)+'</h3><div class="didg-service-grid">'+options.map(v=>'<button type="button" class="didg-duration-opt" data-select-months="'+Number(v.months)+'" aria-pressed="false"><b>'+Number(v.service_count).toLocaleString('en-US')+'</b><span>'+esc(money(v.price))+'</span></button>').join('')+'</div></section>'}).join('');
+  } else if(hasVariants(current)) {
+    $('durationOptions').innerHTML=variantsOf(current).map(v=>'<button type="button" class="didg-duration-opt" data-select-months="'+Number(v.months)+'" aria-pressed="false"><b>'+esc(monthLabel(v.months))+'</b><span>'+esc(v.price>0?money(v.price):txt('ask'))+'</span></button>').join('');
+  }
   updatePrice();
   $('descriptionHeading').textContent=txt('description');$('descriptionLabel').textContent=txt('descriptionLabel');
   const preview=desc(current,false);const full=desc(current,true);
