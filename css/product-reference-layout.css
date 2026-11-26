@@ -319,3 +319,13 @@ body.didg-product-page.didg-special-offer .didg-duration-opt.active {
     transition: none !important;
   }
 }
+
+/* DidgStore — social services offer packages, black and neon green */
+.didg-product-page .didg-service-packs {display:flex!important;flex-direction:column!important;gap:20px!important;}
+.didg-product-page .didg-service-group {border:1px solid #315b35;border-radius:16px;padding:14px;background:linear-gradient(145deg,#092214,#050e0b);}
+.didg-product-page .didg-service-group h3 {margin:0 0 12px;color:#aaff50;font-size:15px;font-weight:900;}
+.didg-product-page .didg-service-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;}
+.didg-product-page .didg-service-grid .didg-duration-opt {min-height:74px;min-width:0;}
+.didg-product-page .didg-service-grid .didg-duration-opt b {font-size:15px;}
+.didg-product-page .didg-service-grid .didg-duration-opt span {font-size:13px;}
+@media(max-width:520px){.didg-product-page .didg-service-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
