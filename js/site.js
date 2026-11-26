@@ -2,7 +2,7 @@ import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings,isLive} from './db.js';
 import {el,all,esc,visualOf,artStyle,artHTML,toast,initModals,openModal,whatsappUrl} from './shared.js';
 import {language,t,initLanguage} from './i18n.js';
-import {createCart,hasVariants,priceOf,oldPriceOf,priceText,productPageUrl,monthLabel,variantsOf} from './shop-cart.js';
+import {createCart,hasVariants,isServiceProduct,priceOf,oldPriceOf,priceText,productPageUrl,monthLabel,variantsOf} from './shop-cart.js';
 
 let products=[],categories=[],settings={},activeCat='all',visible=8;
 const cartWidget=createCart({getProducts:()=>products,getSettings:()=>settings});
@@ -22,7 +22,7 @@ const simpleDurations={
   'مدى الحياة':'Lifetime','حسب العرض':'Depends on offer','حسب المنتج':'Depends on product',
   'حسب اللعبة':'Depends on the game','حسب الخدمة':'Depends on service','حسب تفاصيل العرض':'See offer details'
 };
-const durationOf=p=>hasVariants(p)?(language()==='en'?'Choose a duration':'اختار المدة'):language()==='en'?p.duration_en||simpleDurations[p.duration]||p.duration:p.duration;
+const durationOf=p=>hasVariants(p)?(isServiceProduct(p)?(language()==='en'?'Choose package':'اختار الباقة'):(language()==='en'?'Choose a duration':'اختار المدة')):language()==='en'?p.duration_en||simpleDurations[p.duration]||p.duration:p.duration;
 const descriptionOf=(p,full=false)=>{
   if(language()==='en')return (full?p.description_en:p.short_description_en)||(full?p.description:p.short_description)||t(full?'products.detailsFallback':'products.shortFallback');
   return (full?p.description:p.short_description)||t(full?'products.detailsFallback':'products.shortFallback');
