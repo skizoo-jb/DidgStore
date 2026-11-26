@@ -13,3 +13,10 @@
 @media(max-width:390px){.hero-art{min-height:280px}.laptop-screen{height:140px}.hero-buttons{flex-direction:column}.hero-copy h1{font-size:34px}.categories{grid-template-columns:repeat(2,1fr)}.product-grid{gap:7px}.card-media{height:115px}.card-body h3{font-size:12px}.card-body p{min-height:53px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 .full{width:100%}
+
+/* DidgStore checkout steps: consistent line-icons, branded not emoji */
+.steps article .step-icon{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;position:relative;z-index:2;margin-bottom:17px;color:#acff56;background:linear-gradient(145deg,#163a23,#07180e);border:1px solid rgba(172,255,86,.53);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 25px #0005,0 0 14px #81ff1611;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.steps article .step-icon svg{width:32px;height:32px;display:block;filter:drop-shadow(0 0 5px rgba(145,255,50,.2))}
+.steps article .step-number{position:absolute;top:16px;right:22px;left:auto;z-index:0;color:#baff7022}
+.steps article:hover .step-icon{transform:translateY(-3px);border-color:#b8ff68;box-shadow:inset 0 1px 0 #ffffff19,0 14px 28px #0006,0 0 18px #83ff2922}
+@media(prefers-reduced-motion:reduce){.steps article .step-icon{transition:none}.steps article:hover .step-icon{transform:none}}
