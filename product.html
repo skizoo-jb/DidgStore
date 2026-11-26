@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="./css/language.css"/>
 <link rel="stylesheet" href="./css/brand-fix.css?v=3"/>
 <link rel="stylesheet" href="./css/shop-experience.css?v=1"/>
+<link rel="stylesheet" href="./css/product-reference-layout.css?v=2"/>
 <!-- Official DidgStore original logo/favicon, no cropping -->
 <link rel="icon" type="image/png" sizes="32x32" href="./assets/didgstore-original-favicon-32.png?v=8"/>
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/didgstore-original-favicon-192.png?v=8"/>
@@ -33,23 +34,48 @@
   <div class="didg-crumb" id="breadcrumbs"><a href="./index.html">الرئيسية</a> / <span>المنتجات</span></div>
   <div id="productState" class="didg-detail-loading">جاري تحميل تفاصيل المنتج...</div>
   <section class="didg-detail-shell" id="detailShell" hidden>
-    <div class="didg-detail-visual"><div class="didg-detail-media" id="detailMedia"></div><div class="didg-visual-under">DIDGSTORE • DIGITAL PRODUCTS</div></div>
-    <div class="didg-detail-content">
+    <div class="didg-detail-left">
+      <section class="didg-detail-visual">
+        <span class="didg-image-category" id="imageCategory"></span>
+        <div class="didg-detail-media" id="detailMedia"></div>
+      </section>
+      <section class="didg-long-section" id="longSection" hidden>
+        <h2 id="descriptionHeading">وصف المنتج</h2>
+        <div class="didg-description-label" id="descriptionLabel">تفاصيل المنتج</div>
+        <p class="didg-description-preview" id="descriptionPreview"></p>
+        <div class="didg-long-text" id="longDescription" hidden></div>
+        <button class="didg-full-description" id="toggleDescription" type="button" aria-expanded="false">عرض الوصف الكامل</button>
+      </section>
+    </div>
+    <article class="didg-detail-content">
+      <div class="didg-offer-brand" id="offerBrand">DIDGSTORE OFFERS</div>
       <span class="didg-detail-category" id="detailCategory"></span>
       <h1 id="detailName"></h1>
       <p class="didg-detail-short" id="detailShort"></p>
-      <div id="durationPicker" class="didg-duration-picker" hidden><div class="didg-picker-heading"><strong id="durationHeading">اختار مدة الاشتراك</strong><small id="durationHint">الثمن كيتبدل حسب المدة</small></div><div class="didg-duration-options" id="durationOptions"></div></div>
-      <div class="didg-detail-price"><div><small id="priceLabel">الثمن</small><strong id="detailPrice"></strong></div><span id="detailOldPrice"></span></div>
-      <div class="didg-detail-quantity"><span id="qtyLabel">الكمية</span><div class="didg-qty-buttons"><button id="qtyMinus" aria-label="نقص الكمية">−</button><b id="qtyValue">1</b><button id="qtyPlus" aria-label="زد الكمية">+</button></div></div>
-      <div class="didg-detail-buttons"><button id="addToCart" class="btn btn-outline" type="button">+ أضف للسلة</button><button id="orderWhatsapp" class="btn btn-primary" type="button">اطلب الآن عبر WhatsApp ↗</button></div>
-      <div class="didg-detail-note" id="detailNote"></div>
-    </div>
+      <div class="didg-price-row">
+        <span id="detailOldPrice" hidden></span>
+        <strong id="detailPrice"></strong>
+        <span class="didg-discount-badge" id="detailDiscount" hidden></span>
+      </div>
+      <div id="durationPicker" class="didg-duration-picker" hidden>
+        <div class="didg-picker-heading"><strong id="durationHeading">اختار مدة الاشتراك</strong><small id="durationHint">الثمن كيتبدل حسب المدة</small></div>
+        <div class="didg-duration-options" id="durationOptions"></div>
+      </div>
+      <div class="didg-detail-quantity">
+        <span id="qtyLabel">اختار الكمية</span>
+        <div class="didg-qty-buttons"><button id="qtyMinus" type="button" aria-label="نقص الكمية">−</button><b id="qtyValue">1</b><button id="qtyPlus" type="button" aria-label="زد الكمية">+</button></div>
+      </div>
+      <div class="didg-estimated-total"><span id="totalLabel">المجموع التقريبي</span><strong id="detailTotal">0 DH</strong></div>
+      <div class="didg-detail-buttons didg-single-action">
+        <button id="addToCart" class="didg-reference-cart" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4h2l2 12h11l3-9H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><span id="addToCartText">أضف للسلة</span></button>
+      </div>
+      <p class="didg-detail-note" id="detailNote"></p>
+    </article>
   </section>
-  <section class="didg-long-section" id="longSection" hidden><h2 id="descriptionHeading">الوصف الكامل</h2><div class="didg-long-text" id="longDescription"></div></section>
   <section class="didg-related-section" id="relatedSection" hidden><div class="didg-section-heading"><h2 id="relatedHeading">منتجات مشابهة</h2><a id="moreProducts" href="./index.html#products">جميع المنتجات ←</a></div><div class="didg-related-grid" id="relatedGrid"></div></section>
 </main>
 <footer class="didg-product-footer">© <span id="year"></span> DidgStore <span>•</span> <a href="./index.html" id="footerBrowse">العودة للمتجر</a></footer>
 <div class="modal-backdrop" id="cartModal" hidden><div class="cart-modal dialog" role="dialog" aria-modal="true" aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading">سلة الطلبات</h2><button class="modal-close" data-close="cartModal" aria-label="إغلاق">×</button></div><div id="cartItems"></div><div id="cartFooter"></div></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script type="module" src="./js/product.js"></script>
+<script type="module" src="./js/product.js?v=2"></script>
 </body></html>
