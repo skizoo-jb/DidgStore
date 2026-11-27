@@ -1,4 +1,5 @@
 import {uiIcon,hydrateIcons} from './icons.js';
+import {mountCustomerReviews} from './reviews-ui.js?v=1';
 import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings,isLive} from './db.js';
 import {el,all,esc,visualOf,artStyle,artHTML,toast,initModals,openModal,whatsappUrl} from './shared.js?v=7';
@@ -198,6 +199,7 @@ async function boot(){
     [products,categories,settings]=await Promise.all([getProducts(),getCategories(),getSettings()]);
     products=products.filter(x=>x.is_active).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
     renderHeroDescription();renderCategories();renderProducts();renderOffers();hydrateIcons();cartWidget.count();
+    await mountCustomerReviews(()=>products);
     if(!isLive){/* Sample products only while Supabase is not configured. */}
   }catch(error){
     console.error(error);
