@@ -69,7 +69,7 @@ body.pro-v2 .didg-review-field select,
 body.pro-v2 .didg-review-field textarea{
   width:100%;min-width:0;box-sizing:border-box;padding:12px 13px;
   background:#07160d;color:#f0ffe7;border:1px solid #34663d;border-radius:11px;
-  font:500 14px inherit;font-family:inherit;outline:none;resize:vertical;min-height:46px;
+  font-size:14px;font-weight:500;font-family:inherit;outline:none;resize:vertical;min-height:46px;
   transition:border-color .18s,box-shadow .18s
 }
 body.pro-v2 .didg-review-field textarea{min-height:105px;line-height:1.8}
