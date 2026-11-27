@@ -1,6 +1,6 @@
 import {language} from './i18n.js';
 import {uiIcon} from './icons.js';
-import {getPublishedReviews,submitCustomerReview,isLive} from './db.js?v=reviews2';
+import {getPublishedReviews,submitCustomerReview,isLive} from './db.js?v=reviews3';
 import {esc} from './shared.js?v=7';
 
 const copy={
