@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="DidgStore Canva Pro lifetime 20 DH activate with customer Gmail, try then pay">
+<defs>
+<radialGradient id="bg" cx=".3" cy=".5" r=".95"><stop stop-color="#0b3018"/><stop offset=".56" stop-color="#04110b"/><stop offset="1" stop-color="#020804"/></radialGradient>
+<linearGradient id="lime"><stop stop-color="#aaff00"/><stop offset=".45" stop-color="#62fa28"/><stop offset="1" stop-color="#b0ff43"/></linearGradient>
+<linearGradient id="canva" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#01daed"/><stop offset=".43" stop-color="#0082e6"/><stop offset=".76" stop-color="#7649ff"/><stop offset="1" stop-color="#d01ed6"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#143d29"/><stop offset="1" stop-color="#06150f"/></linearGradient>
+<filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="13"/></filter>
+<filter id="shadow" x="-70%" y="-70%" width="240%" height="240%"><feDropShadow dx="0" dy="20" stdDeviation="13" flood-color="#000" flood-opacity=".8"/></filter>
+<pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" stroke="#3b8a46" stroke-opacity=".13" fill="none"/></pattern>
+</defs>
+<rect width="1200" height="675" fill="url(#bg)"/><rect width="1200" height="675" fill="url(#grid)"/>
+<path d="M-20 127Q360-44 725 76T1250 30" stroke="#7aff24" stroke-width="16" opacity=".48" filter="url(#glow)" fill="none"/>
+<path d="M-20 127Q360-44 725 76T1250 30" stroke="url(#lime)" stroke-width="5" opacity=".8" fill="none"/>
+<path d="M-20 600Q400 720 850 590T1220 610" stroke="#83ff29" stroke-width="16" opacity=".3" filter="url(#glow)" fill="none"/>
+<path d="M-20 600Q400 720 850 590T1220 610" stroke="url(#lime)" stroke-width="3" opacity=".8" fill="none"/>
+<g font-family="Arial,'Noto Sans Arabic',sans-serif" font-weight="800">
+<text x="70" y="83" font-size="48" fill="#f8fff5">Didg<tspan fill="#9fff21">Store</tspan></text>
+<text x="70" y="109" font-size="15" letter-spacing="4" fill="#b9eda5">DIGITAL PRODUCTS STORE</text>
+</g>
+<g filter="url(#shadow)">
+<ellipse cx="339" cy="533" rx="263" ry="68" fill="#91ff24" opacity=".24" filter="url(#glow)"/>
+<ellipse cx="336" cy="528" rx="262" ry="58" fill="#092816" stroke="#a2ff2d" stroke-width="6"/>
+<ellipse cx="336" cy="524" rx="220" ry="42" fill="#04130f" stroke="#55f42a" stroke-width="2"/>
+<rect x="139" y="165" width="393" height="360" rx="84" fill="url(#canva)" stroke="#dcfff7" stroke-width="5"/>
+<rect x="156" y="183" width="360" height="321" rx="71" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="4"/>
+<text x="336" y="377" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="102" font-weight="bold" fill="#ffffff">Canva</text>
+<rect x="239" y="396" width="200" height="82" rx="39" fill="#e7ff37" stroke="#ffffaa" stroke-width="3"/>
+<text x="338" y="457" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="55" fill="#091109">Pro</text>
+</g>
+<ellipse cx="334" cy="339" rx="294" ry="158" stroke="#8aff25" stroke-width="7" fill="none" opacity=".85" transform="rotate(-22 334 339)"/>
+<path d="M99 186 112 143 130 186 171 199 130 210 115 245 99 210 60 198Z" fill="#a2ff31" opacity=".78" filter="url(#glow)"/>
+<g font-family="Arial,'Noto Sans Arabic',sans-serif">
+<text x="880" y="165" font-size="74" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-style="italic" fill="#fff">Canva <tspan fill="#aaff28">Pro</tspan></text>
+<rect x="666" y="187" width="441" height="75" rx="36" fill="#a5ff2e" stroke="#e6ff76" stroke-width="4"/>
+<text x="885" y="242" font-size="48" font-weight="900" text-anchor="middle" direction="rtl" fill="#071309">مدى الحياة  ∞</text>
+<rect x="715" y="283" width="342" height="113" rx="26" fill="#0d2315" stroke="#92ff28" stroke-width="4"/>
+<text x="886" y="367" text-anchor="middle" font-weight="900" font-size="84" fill="#afff2b">20 DH</text>
+<g font-size="29" text-anchor="middle" font-weight="800">
+<rect x="645" y="418" width="479" height="64" rx="20" fill="url(#glass)" stroke="#57ca51" stroke-width="2"/>
+<text x="883" y="460" direction="rtl" fill="#f5fff0">التفعيل على Gmail ديالك</text>
+<rect x="645" y="496" width="479" height="76" rx="24" fill="#a6ff2d" stroke="#efff9a" stroke-width="3"/>
+<text x="883" y="551" direction="rtl" fill="#061607" font-size="38" font-weight="900">جرّب أولاً، ثم ادفع!</text>
+</g>
+</g>
+<rect x="34" y="32" width="1132" height="612" rx="26" fill="none" stroke="#7efa3a" stroke-opacity=".5" stroke-width="2"/>
+<g font-family="Arial,sans-serif" font-weight="700" font-size="20"><text x="72" y="622" fill="#d5ffbf">WhatsApp 0698743423</text><text x="1108" y="622" text-anchor="end" fill="#d5ffbf">Canva Pro • LIFETIME OFFER</text></g>
+</svg>
