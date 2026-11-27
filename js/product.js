@@ -1,4 +1,5 @@
 import {uiIcon,hydrateIcons} from './icons.js';
+import {smartFormHtml,readSmartInputs,validateSmartInfo,smartInfoLines} from './smart-order.js?v=1';
 import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings} from './db.js';
 import {language,initLanguage,t} from './i18n.js';
@@ -23,6 +24,7 @@ function readMonths(){
 function updatePrice(){
   if(!current)return;
   const months=readMonths(),needsChoice=isServiceProduct(current)&&months==null;
+  renderProductSmartForm();
   const price=needsChoice?0:priceOf(current,months),old=needsChoice?null:oldPriceOf(current,months);
   const onSale=old!=null&&old>price&&price>0;
   // Match Latest Offers on the homepage: featured products OR a real
@@ -46,12 +48,36 @@ function updatePrice(){
   $('qtyValue').textContent=qty;
   document.querySelectorAll('[data-select-months]').forEach(b=>{const active=Number(b.dataset.selectMonths)===months;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
 }
+function renderProductSmartForm(){
+  if(!current)return;
+  const holder=$('productSmartOrder');
+  if(!holder)return;
+  const signature=[String(current.id),language(),selectedKind||'base'].join(':');
+  if(holder.dataset.smartSignature===signature)return;
+  const preserved=readSmartInputs(holder);
+  holder.innerHTML=smartFormHtml(current,readMonths(),preserved,'product');
+  holder.dataset.smartSignature=signature;
+}
+function checkedProductInfo(){
+  const holder=$('productSmartOrder');
+  const result=validateSmartInfo(current,readMonths(),readSmartInputs(holder));
+  holder?.querySelectorAll('[aria-invalid="true"]').forEach(el=>el.removeAttribute('aria-invalid'));
+  if(!result.ok){
+    const field=holder?.querySelector('[data-smart-field="'+result.key+'"]');
+    field?.setAttribute('aria-invalid','true');
+    field?.focus();
+    toast(result.error);
+    return null;
+  }
+  return result.info;
+}
 function orderProductDirectly(){
   if(!current||current.is_active===false)return;
   const months=readMonths();
   if(isServiceProduct(current)&&months==null){
     toast(language()==='en'?'Choose a service and package first':'اختار نوع الخدمة والباقة أولاً');return;
   }
+  const info=checkedProductInfo();if(info===null)return;
   const phone=cleanPhone(settings.whatsapp||CONFIG.fallbackWhatsApp||'');
   if(!phone){toast(t('errors.noWhatsapp'));return;}
   const en=language()==='en';
@@ -66,6 +92,7 @@ function orderProductDirectly(){
     (en?'Quantity: ':'الكمية: ')+qty,
     (en?'Unit price: ':'ثمن الوحدة: ')+unitText,
     (en?'Estimated total: ':'المجموع التقريبي: ')+totalText,
+    ...smartInfoLines(current,months,info),
     '',t('wa.cartFooter')
   ].filter(line=>line!==null);
   const url=whatsappUrl(phone,lines.join('\n'));
@@ -114,6 +141,7 @@ function render(){
   } else if(hasVariants(current)) {
     $('durationOptions').innerHTML=variantsOf(current).map(v=>'<button type="button" class="didg-duration-opt" data-select-months="'+Number(v.months)+'" aria-pressed="false"><b>'+esc(monthLabel(v.months))+'</b><span>'+esc(v.price>0?money(v.price):txt('ask'))+'</span></button>').join('');
   }
+  renderProductSmartForm();
   updatePrice();
   $('descriptionHeading').textContent=txt('description');$('descriptionLabel').textContent=txt('descriptionLabel');
   const preview=desc(current,false);const full=desc(current,true);
@@ -140,9 +168,11 @@ async function init(){
   $('qtyMinus').addEventListener('click',()=>{qty=Math.max(1,qty-1);updatePrice()});
   $('qtyPlus').addEventListener('click',()=>{qty=Math.min(25,qty+1);updatePrice()});
   $('orderWhatsApp').addEventListener('click',orderProductDirectly);
+  $('productSmartOrder').addEventListener('input',e=>{e.target.closest('[data-smart-field]')?.removeAttribute('aria-invalid')});
   $('addToCart').addEventListener('click',()=>{
     if(isServiceProduct(current)&&readMonths()==null){toast(language()==='en'?'Choose a service and a package':'اختار نوع الخدمة والباقة أولاً');return;}
-    if(cartWidget.add(current.id,readMonths(),qty))cartWidget.open();
+    const info=checkedProductInfo();if(info===null)return;
+    if(cartWidget.add(current.id,readMonths(),qty,info))cartWidget.open();
   });
   $('toggleDescription').addEventListener('click',()=>{
     const expanded=$('toggleDescription').getAttribute('aria-expanded')==='true';
