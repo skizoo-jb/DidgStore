@@ -40,7 +40,7 @@ export function adminReviewsPanel({reviews=[],products=[],filter='pending'}={}){
  }).join('');
  return '<div class="page-title-row"><div><span class="section-kicker">DIDGSTORE / ADMIN PANEL</span>'+
   '<h1>تقييمات الزبناء</h1><p>راجع التقييمات الحقيقية قبل النشر. النص الأصلي ما كيتبدلش، وما كنعرضوش تقييمات وهمية.</p></div>'+
-  '<div class="page-actions"><a class="btn btn-outline" href="./index.html#reviews" target="_blank" rel="noopener noreferrer">'+uiIcon('external')+' معاينة التقييمات</a></div></div>'+
+  '<div class="page-actions"><button type="button" class="btn btn-outline" data-review-refresh>'+uiIcon('clock')+' تحديث التقييمات</button><a class="btn btn-outline" href="./index.html#reviews" target="_blank" rel="noopener noreferrer">'+uiIcon('external')+' معاينة التقييمات</a></div></div>'+
   '<div class="didg-admin-review-stats">'+
    '<div><span>في انتظار المراجعة</span><strong>'+pending+'</strong></div>'+
    '<div><span>منشورة</span><strong>'+approved+'</strong></div>'+
