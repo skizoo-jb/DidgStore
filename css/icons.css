@@ -1,0 +1,31 @@
+/* DidgStore / Universal SVG icon style.  Deliberate, consistent line art. */
+.didg-ui-icon{width:1.1em;height:1.1em;display:inline-block;vertical-align:-.13em;flex:0 0 auto;color:currentColor;stroke:currentColor;overflow:visible}
+[data-ui-icon]{display:inline-flex;align-items:center;justify-content:center;line-height:1}
+[data-ui-icon] .didg-ui-icon{width:100%;height:100%}
+#mainNav a .didg-ui-icon{width:16px;height:16px}
+#mainNav a:has([data-ui-icon]){display:inline-flex;align-items:center;gap:7px}
+#mobileMenu .didg-ui-icon{width:23px;height:23px}
+.deals-heading [data-ui-icon]{width:28px;height:28px;color:#91ff32}
+.promo-pill [data-ui-icon]{width:12px;height:12px;margin-inline-end:4px}
+.promo-link .didg-ui-icon{width:14px;height:14px;margin-inline-start:5px}
+.deal-shine .didg-ui-icon{width:18px;height:18px}
+.didg-premium-offer .didg-special-badge .didg-ui-icon{width:12px;height:12px;margin-inline-end:3px}
+.card-tag .didg-ui-icon{width:12px;height:12px}
+.card-meta .didg-ui-icon{width:14px;height:14px}
+.add-cart .didg-ui-icon{width:17px;height:17px}
+.didg-cart-empty .didg-ui-icon{width:48px;height:48px;color:var(--green,#a3ff3a);stroke-width:1.4}
+.didg-cart-actions .didg-ui-icon{width:16px;height:16px}
+.didg-service-types .didg-ui-icon{width:28px;height:28px;filter:drop-shadow(0 0 6px #9fff2d3b)}
+.didg-product-page .didg-service-type .didg-ui-icon{width:25px;height:25px}
+.didg-cart-image .didg-ui-icon,.didg-related-picture .didg-ui-icon{width:38px;height:38px}
+.final-cta button .didg-ui-icon{width:18px;height:18px;margin-inline-start:6px}
+.footer-bottom .didg-ui-icon{width:13px;height:13px;color:#93f948}
+.category-icon .didg-ui-icon{width:25px;height:25px}
+.step-icon .didg-ui-icon,.trust-icon .didg-ui-icon{width:28px;height:28px}
+.admin-body .side-nav button .didg-ui-icon{width:19px;height:19px;color:inherit}
+.admin-body .stat-icon .didg-ui-icon{width:27px;height:27px}
+.admin-body .quick-actions button .didg-ui-icon{width:25px;height:25px}
+.admin-body .action-mini .didg-ui-icon{width:14px;height:14px}
+.admin-body .page-title-row .didg-ui-icon{width:17px;height:17px}
+.admin-body [data-ui-icon] .didg-ui-icon{width:100%;height:100%}
+@media(prefers-reduced-motion:reduce){.didg-ui-icon{transition:none!important}}
