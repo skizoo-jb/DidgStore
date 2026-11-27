@@ -19,6 +19,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico?v=8"/>
 <link rel="stylesheet" href="./css/didgstore-original-logo.css?v=8"/>
 <link rel="stylesheet" href="./css/icons.css?v=8"/>
+<link rel="stylesheet" href="./css/smart-order.css?v=1"/>
 </head>
 <body class="shop-body pro-v2 didg-product-page">
 <header class="site-header">
@@ -67,6 +68,7 @@
         <div class="didg-qty-buttons"><button id="qtyMinus" type="button" aria-label="نقص الكمية">−</button><b id="qtyValue">1</b><button id="qtyPlus" type="button" aria-label="زد الكمية">+</button></div>
       </div>
       <div class="didg-estimated-total"><span id="totalLabel">المجموع التقريبي</span><strong id="detailTotal">0 DH</strong></div>
+      <div id="productSmartOrder" class="didg-product-smart-order" aria-label="معلومات الطلب"></div>
       <div class="didg-detail-buttons didg-two-actions">
         <button id="orderWhatsApp" class="didg-reference-whatsapp" type="button"><span data-ui-icon="whatsapp" aria-hidden="true"></span><span id="orderWhatsAppText">اطلب مباشرة عبر واتساب</span></button>
         <button id="addToCart" class="didg-reference-cart" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 4h2l2 12h11l3-9H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><span id="addToCartText">أضف للسلة</span></button>
@@ -79,5 +81,5 @@
 <footer class="didg-product-footer">© <span id="year"></span> DidgStore <span>•</span> <a href="./index.html" id="footerBrowse">العودة للمتجر</a></footer>
 <div class="modal-backdrop" id="cartModal" hidden><div class="cart-modal dialog" role="dialog" aria-modal="true" aria-labelledby="cartHeading"><div class="modal-head"><h2 id="cartHeading">سلة الطلبات</h2><button class="modal-close" data-close="cartModal" aria-label="إغلاق">×</button></div><div id="cartItems"></div><div id="cartFooter"></div></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script type="module" src="./js/product.js?v=9"></script>
+<script type="module" src="./js/product.js?v=15"></script>
 </body></html>
