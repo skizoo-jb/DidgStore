@@ -29,3 +29,25 @@
 .admin-body .page-title-row .didg-ui-icon{width:17px;height:17px}
 .admin-body [data-ui-icon] .didg-ui-icon{width:100%;height:100%}
 @media(prefers-reduced-motion:reduce){.didg-ui-icon{transition:none!important}}
+
+/* Polished component sizing */
+.product-art .art-symbol .didg-ui-icon{width:55px;height:55px;color:var(--product-accent,#a3ff36);stroke-width:1.7}
+.product-art .art-symbol{display:grid;place-items:center}
+.product-card .card-actions .btn .didg-ui-icon,.didg-premium-offer .deal-cta .didg-ui-icon{width:15px;height:15px}
+.product-card .card-actions .btn{display:flex;align-items:center;justify-content:center;gap:6px}
+.product-card .card-actions .add-cart{display:grid;place-items:center}
+.didg-duration-picker .didg-service-type .didg-kind-icon{display:flex;align-items:center;justify-content:center;width:28px;height:28px;font-size:inherit;margin:0 auto 5px}
+.didg-duration-picker .didg-service-type .didg-kind-icon .didg-ui-icon{width:25px;height:25px}
+.didg-cart-image span .didg-ui-icon{width:39px;height:39px}
+.admin-body .mini-art .didg-ui-icon{width:25px;height:25px}
+.admin-body .category-tiny b .didg-ui-icon{width:19px;height:19px}
+.admin-body .stat-icon{display:inline-flex}
+.admin-body .action-mini{display:inline-flex;gap:5px;align-items:center;justify-content:center}
+.admin-body .quick-actions button span{display:grid;place-items:center;margin:0 auto 7px;width:28px;height:28px}
+.admin-body .side-nav button>[data-ui-icon]{flex:0 0 24px;width:24px;height:24px}
+.admin-body #sidebarToggle [data-ui-icon]{width:22px;height:22px}
+.promo-pill{display:inline-flex!important;gap:4px;align-items:center}
+.promo-pill [data-ui-icon] {width:12px;height:12px}
+.footer-bottom>span:last-child{display:inline-flex;gap:5px;align-items:center}
+.deals-heading .didg-section-icon{display:inline-flex;align-items:center;justify-content:center}
+@media(max-width:750px){.product-art .art-symbol .didg-ui-icon{width:38px;height:38px}}
