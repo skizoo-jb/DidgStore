@@ -1,5 +1,5 @@
 import {uiIcon,hydrateIcons} from './icons.js';
-import {mountCustomerReviews} from './reviews-ui.js?v=2';
+import {mountCustomerReviews} from './reviews-ui.js?v=3';
 import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings,isLive} from './db.js?v=reviews1';
 import {el,all,esc,visualOf,artStyle,artHTML,toast,initModals,openModal,whatsappUrl} from './shared.js?v=7';
