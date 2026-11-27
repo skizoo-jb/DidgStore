@@ -345,3 +345,34 @@ body.didg-product-page.didg-special-offer .didg-duration-opt.active {
 .didg-product-page .didg-service-grid .didg-duration-opt.active{background:linear-gradient(135deg,#407b2c,#204822);border-color:#b4ff63;box-shadow:0 0 16px #79ff3030}
 .didg-product-page .didg-reference-cart:disabled{cursor:not-allowed;opacity:.48;filter:saturate(.6);transform:none!important}
 @media(max-width:560px){.didg-product-page .didg-service-types{grid-template-columns:repeat(2,minmax(0,1fr))}.didg-product-page .didg-service-step{padding:12px}.didg-product-page .didg-service-step .didg-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* DidgStore: direct WhatsApp checkout above separate add-to-cart action */
+body.didg-product-page .didg-detail-buttons.didg-two-actions{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:13px;
+  margin-top:3px;
+}
+body.didg-product-page .didg-reference-whatsapp{
+  background:linear-gradient(110deg,#116d43,#139951);
+  border:1px solid #45e383!important;
+  color:#fff!important;
+  box-shadow:0 8px 22px rgba(20,157,87,.19), inset 0 1px rgba(255,255,255,.13);
+  letter-spacing:0;
+}
+body.didg-product-page .didg-reference-whatsapp [data-ui-icon]{
+  width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;
+}
+body.didg-product-page .didg-reference-whatsapp [data-ui-icon] svg{
+  width:25px;height:25px;
+}
+body.didg-product-page .didg-detail-buttons button:disabled{
+  opacity:.48;cursor:not-allowed;filter:saturate(.45);
+  box-shadow:none;transform:none!important;
+}
+body.didg-product-page .didg-detail-buttons button:disabled:hover{
+  transform:none;filter:saturate(.45);box-shadow:none;
+}
+@media(max-width:480px){
+ body.didg-product-page .didg-two-actions button{min-height:56px;font-size:14px;padding-inline:10px;}
+}
