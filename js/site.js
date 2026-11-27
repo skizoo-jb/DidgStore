@@ -128,7 +128,39 @@ function renderHeroDescription(){
   const custom=language()==='en'?settings.hero_description_en:settings.hero_description;
   el('#heroSub').textContent=custom||t('hero.subtitle');
 }
+function setupFaq(){
+  const root=document.getElementById('faq');
+  const search=document.getElementById('faqSearch');
+  const counter=document.getElementById('faqCount');
+  const empty=document.getElementById('faqEmpty');
+  if(!root||!search||!counter||!empty)return;
+  const cards=[...root.querySelectorAll('.didg-faq-card')];
+  const filter=()=>{
+    const query=search.value.trim().toLocaleLowerCase().normalize('NFKC');
+    let visible=0;
+    for(const card of cards){
+      const question=card.querySelector('summary')?.textContent||'';
+      const answer=card.querySelector('.didg-faq-answer')?.textContent||'';
+      const match=!query||(question+' '+answer).toLocaleLowerCase().normalize('NFKC').includes(query);
+      card.hidden=!match;
+      if(!match)card.open=false;
+      if(match)visible++;
+    }
+    counter.textContent=visible+' '+t('faq.results');
+    empty.hidden=visible!==0;
+  };
+  search.addEventListener('input',filter);
+  cards.forEach(card=>card.addEventListener('toggle',()=>{
+    if(card.open)cards.forEach(other=>{if(other!==card)other.open=false});
+  }));
+  document.addEventListener('didgstore:languagechange',()=>{
+    search.value='';
+    filter();
+  });
+  filter();
+}
 function bindEvents(){
+  setupFaq();
   document.addEventListener('click',e=>{
     const offerBuy=e.target.closest('[data-offer-buy]');if(offerBuy){e.preventDefault();orderFeaturedOffer(offerBuy.dataset.offerBuy);return}
     const cat=e.target.closest('[data-category]');if(cat)setCategory(cat.dataset.category);
