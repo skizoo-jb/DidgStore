@@ -1,0 +1,71 @@
+/* DidgStore Smart Order — same neon/black identity, responsive and accessible */
+.didg-product-smart-order{margin:4px 0 18px}
+.didg-smart-form{
+  padding:19px;border:1px solid rgba(114,194,84,.44);border-radius:17px;
+  background:linear-gradient(150deg,#0b1f13,#07110b);
+  box-shadow:inset 0 1px 0 rgba(228,255,211,.04);
+  min-width:0;
+}
+.didg-smart-form-head{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:15px;color:#f0ffe5;font-size:16px;font-weight:900;
+}
+.didg-smart-check{
+  width:36px;height:36px;border-radius:11px;flex:0 0 36px;
+  display:grid;place-items:center;background:#173923;
+  color:#9cfe4a;border:1px solid #477c3d;
+}
+.didg-smart-check .didg-ui-icon{width:20px;height:20px}
+.didg-smart-fields{display:grid;gap:13px;min-width:0}
+.didg-smart-field{
+  display:flex;flex-direction:column;gap:7px;min-width:0;
+  color:#e6f5e0;font-size:13px;font-weight:760;
+}
+.didg-smart-field-label{display:inline-flex;align-items:center;gap:5px;line-height:1.5}
+.didg-smart-required{color:#a6ff41;font-size:16px;line-height:1}
+.didg-smart-field input,.didg-smart-field select,.didg-smart-field textarea{
+  display:block;box-sizing:border-box;width:100%;min-width:0;min-height:46px;
+  border-radius:11px;border:1px solid #386744;background:#06120b;
+  outline:none;padding:12px 13px;font-family:inherit;font-size:14px;font-weight:500;
+  color:#f4fff0;direction:auto;transition:border-color .18s,box-shadow .18s;
+}
+.didg-smart-field textarea{resize:vertical;min-height:68px;line-height:1.7}
+.didg-smart-field input::placeholder,.didg-smart-field textarea::placeholder{color:#7e9b81}
+.didg-smart-field input:focus,.didg-smart-field select:focus,.didg-smart-field textarea:focus{
+  border-color:#a3fa4a;box-shadow:0 0 0 3px rgba(153,255,62,.13);
+}
+.didg-smart-field [aria-invalid="true"]{border-color:#ff746e!important;box-shadow:0 0 0 2px rgba(255,100,100,.15)}
+.didg-smart-field select option{background:#092012;color:#eaffde}
+.didg-smart-hint{font-size:11px;font-weight:500;color:#a8cbb0;line-height:1.7}
+.didg-smart-privacy{
+  margin:15px 0 0;padding-top:11px;border-top:1px solid rgba(142,198,105,.15);
+  color:#a9c2a5;font-size:11px;line-height:1.8;
+}
+.didg-cart-smart-wrap{grid-column:1/-1;min-width:0;width:100%}
+#cartModal .didg-cart-smart-wrap .didg-smart-form{
+  padding:13px;margin-top:4px;border-radius:12px;border-color:#315e38;
+  background:#07170d;
+}
+#cartModal .didg-cart-smart-wrap .didg-smart-form-head{
+  font-size:13px;margin-bottom:11px;
+}
+#cartModal .didg-cart-smart-wrap .didg-smart-check{
+  width:28px;height:28px;flex-basis:28px;border-radius:8px;
+}
+#cartModal .didg-cart-smart-wrap .didg-smart-check .didg-ui-icon{width:16px;height:16px}
+#cartModal .didg-cart-smart-wrap .didg-smart-field{font-size:12px}
+#cartModal .didg-cart-smart-wrap .didg-smart-field input,
+#cartModal .didg-cart-smart-wrap .didg-smart-field select,
+#cartModal .didg-cart-smart-wrap .didg-smart-field textarea{
+  min-height:40px;padding:9px 10px;font-size:13px;
+}
+#cartModal .didg-cart-smart-wrap .didg-smart-privacy{font-size:10px;margin-top:10px}
+@media(max-width:600px){
+  .didg-smart-form{padding:15px;border-radius:14px}
+  .didg-smart-form-head{font-size:14px}
+  .didg-smart-field input,.didg-smart-field textarea{font-size:16px}
+  #cartModal .didg-cart-smart-wrap .didg-smart-field input{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .didg-smart-field input,.didg-smart-field select,.didg-smart-field textarea{transition:none}
+}
