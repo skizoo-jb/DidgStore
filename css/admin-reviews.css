@@ -1,0 +1,54 @@
+/* DidgStore admin review moderation */
+.didg-admin-review-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:17px 0 20px}
+.didg-admin-review-stats>div{
+ display:flex;flex-direction:column;gap:7px;padding:17px;
+ border:1px solid #31593a;border-radius:15px;
+ background:linear-gradient(145deg,#152d1c,#0b1a11);
+}
+.didg-admin-review-stats span{color:#a7c8ac;font-size:12px}
+.didg-admin-review-stats strong{color:#b4ff71;font-size:26px}
+.didg-admin-review-tabs{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:17px}
+.didg-admin-review-tab{
+ padding:10px 13px;border-radius:11px;border:1px solid #3b6240;
+ background:#112719;color:#d7efd3;display:inline-flex;gap:8px;
+ font:750 12px inherit;font-family:inherit;align-items:center;cursor:pointer;
+}
+.didg-admin-review-tab:hover{border-color:#87e55d}
+.didg-admin-review-tab.selected{background:#326a26;border-color:#a7f870;color:#fff}
+.didg-admin-review-tab b{
+ display:inline-grid;place-items:center;min-width:25px;min-height:22px;padding:0 5px;
+ border-radius:8px;background:#08170f;color:#b5ff78
+}
+.didg-admin-review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.didg-admin-review-item{
+ padding:20px;background:linear-gradient(145deg,#112417,#081710);
+ border:1px solid #37553b;border-radius:16px;min-width:0;
+}
+.didg-admin-review-item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.didg-admin-review-item-top>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.didg-admin-review-item-top strong{font-size:15px;color:#f0ffe9}
+.didg-admin-review-item-top small{font-size:11px;color:#b0c7b0;overflow-wrap:anywhere}
+.didg-admin-review-state{
+ font-size:10px;font-weight:900;padding:6px 10px;border-radius:30px;white-space:nowrap;
+ border:1px solid #8a7241;color:#ffe3a4;background:#3a2b15;
+}
+.didg-admin-review-state.is-approved{color:#affc89;background:#17391e;border-color:#3e7842}
+.didg-admin-review-state.is-rejected{color:#ffb3b1;background:#351a1c;border-color:#773d40}
+.didg-admin-review-stars{display:flex;gap:3px;margin:14px 0 7px;direction:ltr;justify-content:flex-end}
+.didg-admin-review-stars .didg-ui-icon{width:18px;height:18px;color:#537552}
+.didg-admin-review-stars .lit .didg-ui-icon{color:#acff4e;fill:#acff4e}
+.didg-admin-review-text{white-space:pre-wrap;line-height:1.9;color:#d7ead2;overflow-wrap:anywhere;font-size:13px;margin:10px 0 17px}
+.didg-admin-review-actions{display:flex;gap:8px;flex-wrap:wrap}
+.didg-admin-review-actions button{
+ min-height:37px;padding:8px 12px;border-radius:9px;display:inline-flex;gap:6px;
+ align-items:center;justify-content:center;font-size:11px;white-space:normal;
+}
+.didg-admin-review-actions button .didg-ui-icon{width:15px;height:15px}
+.didg-admin-review-actions .danger{color:#ffb1ae;border:1px solid #80434a;background:#37171b}
+.didg-admin-review-actions .danger:hover{background:#532027}
+.didg-admin-review-noitems{
+ grid-column:1/-1;text-align:center;padding:48px 20px;color:#bcd8b9;
+ border:1px dashed #46664a;border-radius:17px;background:#0d2112
+}
+@media(max-width:1050px){.didg-admin-review-list{grid-template-columns:1fr}}
+@media(max-width:650px){.didg-admin-review-stats{grid-template-columns:repeat(2,1fr)}.didg-admin-review-item{padding:15px}}
