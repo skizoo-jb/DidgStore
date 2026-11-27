@@ -1,7 +1,8 @@
+import {uiIcon,hydrateIcons} from './icons.js';
 import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings} from './db.js';
 import {language,initLanguage,t} from './i18n.js';
-import {esc,visualOf,artStyle,artHTML,initModals,toast} from './shared.js';
+import {esc,visualOf,artStyle,artHTML,initModals,toast} from './shared.js?v=7';
 import {createCart,hasVariants,variantsOf,isServiceProduct,priceOf,oldPriceOf,priceText,money,monthLabel,nameOf,productPageUrl} from './shop-cart.js?v=4';
 const $=id=>document.getElementById(id);
 let products=[],categories=[],settings={},current=null,selectedMonths=null,selectedKind=null,qty=1;
@@ -47,10 +48,10 @@ function selectMonths(months){selectedMonths=Number(months);updatePrice()}
 function renderServiceOptions(){
  const box=$('durationOptions');
  const kinds=[
-  ['followers','👥','متابعين','Followers'],
-  ['subscribers','👥','مشتركين','Subscribers'],
-  ['likes','❤️','إعجابات','Likes'],
-  ['views','▶','مشاهدات','Views']
+  ['followers','users','متابعين','Followers'],
+  ['subscribers','users','مشتركين','Subscribers'],
+  ['likes','heart','إعجابات','Likes'],
+  ['views','eye','مشاهدات','Views']
  ];
  const allPacks=variantsOf(current);
  const available=kinds.filter(k=>allPacks.some(v=>v.service_kind===k[0]));
@@ -58,7 +59,7 @@ function renderServiceOptions(){
  const pick=language()==='en'?'Step 1 · Choose a service':'المرحلة 1 · اختار نوع الخدمة';
  const quantity=language()==='en'?'Step 2 · Choose a package':'المرحلة 2 · اختار العدد';
  box.innerHTML='<div class="didg-service-step"><h3>'+esc(pick)+'</h3><div class="didg-service-types">'+
-   available.map(k=>'<button type="button" class="didg-service-type'+(k[0]===selectedKind?' selected':'')+'" data-select-kind="'+esc(k[0])+'" aria-pressed="'+String(k[0]===selectedKind)+'"><span aria-hidden="true">'+k[1]+'</span>'+esc(tr(k))+'</button>').join('')+
+   available.map(k=>'<button type="button" class="didg-service-type'+(k[0]===selectedKind?' selected':'')+'" data-select-kind="'+esc(k[0])+'" aria-pressed="'+String(k[0]===selectedKind)+'"><span class="didg-kind-icon" aria-hidden="true">'+uiIcon(k[1])+'</span>'+esc(tr(k))+'</button>').join('')+
   '</div></div>'+
   '<div class="didg-service-step"><h3>'+esc(quantity)+'</h3>'+
   (!selectedKind?'<p class="didg-service-hint">'+esc(language()==='en'?'Choose your service type first':'أولاً اختار نوع الخدمة من الفوق')+'</p>':
@@ -99,11 +100,11 @@ function render(){
   $('relatedHeading').textContent=txt('related');$('moreProducts').textContent=txt('browse');
   const related=products.filter(p=>p.is_active!==false&&p.id!==current.id&&p.category_id===current.category_id).slice(0,4);
   $('relatedSection').hidden=related.length===0;
-  $('relatedGrid').innerHTML=related.map(p=>`<a class="didg-related-card" href="${esc(productPageUrl(p.id))}" style="${artStyle(p)}"><div class="didg-related-picture">${p.image_url?`<img src="${esc(p.image_url)}" alt="" loading="lazy"/>`:`<span>${esc(visualOf(p).symbol)}</span>`}</div><b>${esc(nameOf(p))}</b><small>${esc(priceText(p))}</small></a>`).join('');
+  $('relatedGrid').innerHTML=related.map(p=>`<a class="didg-related-card" href="${esc(productPageUrl(p.id))}" style="${artStyle(p)}"><div class="didg-related-picture">${p.image_url?`<img src="${esc(p.image_url)}" alt="" loading="lazy"/>`:`<span>${uiIcon(p.visual==='games'?'gamepad':p.visual==='ai'?'cpu':p.visual==='social'?'users':'package')}</span>`}</div><b>${esc(nameOf(p))}</b><small>${esc(priceText(p))}</small></a>`).join('');
 }
 async function init(){
-  initModals();initLanguage();
-  document.addEventListener('didgstore:languagechange',render);
+  initModals();initLanguage();hydrateIcons();
+  document.addEventListener('didgstore:languagechange',()=>{render();hydrateIcons()});
   $('durationOptions').addEventListener('click',e=>{
     const kind=e.target.closest('[data-select-kind]');
     if(kind&&isServiceProduct(current)){selectedKind=kind.dataset.selectKind;selectedMonths=null;renderServiceOptions();updatePrice();return;}
@@ -128,7 +129,7 @@ async function init(){
     if(!current){$('productState').textContent=txt('notFound');return}
     selectedMonths=hasVariants(current)&&!isServiceProduct(current)?variantsOf(current)[0].months:null;
     selectedKind=null;
-    cartWidget.count();render();
+    cartWidget.count();render();hydrateIcons();
   }catch(error){console.error(error);$('productState').textContent=txt('failed')}
 }
 init();
