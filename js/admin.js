@@ -1,5 +1,5 @@
 import {uiIcon,hydrateIcons} from './icons.js';
-import {adminReviewsPanel} from './admin-reviews.js?v=1';
+import {adminReviewsPanel} from './admin-reviews.js?v=2';
 import {initDb,isLive,getProducts,getCategories,getSettings,saveSettings,saveProduct,deleteProduct,saveCategory,deleteCategory,getOrders,saveOrder,deleteOrder,uploadPhoto,login,signOut,session,isAdmin,getAdminReviews,changeReviewStatus,deleteCustomerReview} from './db.js?v=reviews1';
 import {el,all,esc,cash,visualOf,artStyle,toast,initModals,openModal,closeModal,cleanPhone,whatsappUrl} from './shared.js?v=7';
 let products=[],categories=[],orders=[],reviews=[],settings={},page='dashboard',user=null,tableFilter='',reviewFilter='pending';
@@ -67,6 +67,13 @@ function openEditor(id){
 }
 async function submitProduct(e){e.preventDefault();const form=e.currentTarget,save=el('#saveProduct'),err=el('#formError');save.disabled=true;save.textContent='جاري الحفظ...';err.textContent='';try{const f=new FormData(form);let id=String(f.get('id')||'');const old=products.find(x=>String(x.id)===id);const file=form.elements.photo.files[0];let image_url=old?.image_url||'';if(file)image_url=await uploadPhoto(file);const record={id:id||undefined,name_ar:String(f.get('name_ar')||'').trim(),name_en:String(f.get('name_en')||'').trim(),category_id:String(f.get('category_id')||''),price:Number(f.get('price')||0),old_price:f.get('old_price')!==''?Number(f.get('old_price')):null,duration:String(f.get('duration')||'').trim(),short_description:String(f.get('short_description')||'').trim(),description:String(f.get('description')||'').trim(),short_description_en:String(f.get('short_description_en')||'').trim(),description_en:String(f.get('description_en')||'').trim(),variants:collectVariants(),visual:String(f.get('visual')||'generic'),sort_order:Number(f.get('sort_order')||0),is_active:f.get('is_active')==='on',featured:f.get('featured')==='on',image_url};if(!record.name_ar||!record.name_en||!record.category_id)throw Error('كمل الخانات الإلزامية');if(record.variants.length){const cheapest=record.variants.reduce((a,b)=>a.price<=b.price?a:b);record.price=cheapest.price;record.old_price=cheapest.old_price}if(record.old_price!==null&&record.old_price<=record.price)throw Error('الثمن القديم خاص يكون أكبر من الثمن الحالي، أو خليه فارغ');await saveProduct(record);closeModal('editModal');await refresh();toast(id?'تبدل المنتج بنجاح ✓':'تزاد المنتج بنجاح ✓')}catch(error){err.textContent=error.message||'وقع خطأ فالحفظ'}finally{save.disabled=false;save.textContent='حفظ المنتج ✓'}}
 async function onClick(e){
+  const refreshBtn=e.target.closest('[data-review-refresh]');
+  if(refreshBtn){
+    refreshBtn.disabled=true;
+    try{await refresh();toast('تحدثات التقييمات بنجاح')}
+    catch(err){console.error(err);toast('تعذر تحديث التقييمات');refreshBtn.disabled=false}
+    return;
+  }
   const filterBtn=e.target.closest('[data-review-filter]');
   if(filterBtn){reviewFilter=filterBtn.dataset.reviewFilter;render();return;}
   const reviewBtn=e.target.closest('[data-review-decision]');
