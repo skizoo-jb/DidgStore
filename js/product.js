@@ -4,7 +4,7 @@ import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings} from './db.js';
 import {language,initLanguage,t} from './i18n.js';
 import {esc,visualOf,artStyle,artHTML,initModals,toast,cleanPhone,whatsappUrl} from './shared.js?v=7';
-import {createCart,hasVariants,variantsOf,isServiceProduct,priceOf,oldPriceOf,priceText,money,monthLabel,nameOf,productPageUrl} from './shop-cart.js?v=8';
+import {createCart,hasVariants,variantsOf,isServiceProduct,priceOf,oldPriceOf,priceText,money,monthLabel,nameOf,productPageUrl} from './shop-cart.js?v=15';
 const $=id=>document.getElementById(id);
 let products=[],categories=[],settings={},current=null,selectedMonths=null,selectedKind=null,qty=1;
 const cartWidget=createCart({getProducts:()=>products,getSettings:()=>settings});
