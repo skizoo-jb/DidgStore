@@ -1,3 +1,4 @@
+import {uiIcon} from './icons.js';
 export const VISUALS = {
   canva:{symbol:'C',tag:'CANVA',accent:'#55d9ff',weak:'rgba(21,159,245,.25)'},
   discord:{symbol:'◕',tag:'NITRO',accent:'#ad93ff',weak:'rgba(138,99,255,.25)'},
@@ -15,7 +16,7 @@ export const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<
 export const cash=value=>Number(value)>0?`${Number(value).toLocaleString('fr-MA',{maximumFractionDigits:2})} DH`:'اسأل عن الثمن';
 export function visualOf(p){return VISUALS[p?.visual]||VISUALS.generic}
 export function artStyle(p){const v=visualOf(p);return `--product-accent:${v.accent};--product-accent-weak:${v.weak}`}
-export function artHTML(p,withImage=true){const v=visualOf(p);return withImage&&p.image_url?`<img class="actual-image" src="${esc(p.image_url)}" alt="${esc(p.name_ar)}" loading="lazy" onerror="this.style.display='none'"/>`:`<div class="product-art"><span class="art-symbol">${v.symbol}</span><small>${v.tag}</small></div>`}
+export function artHTML(p,withImage=true){const v=visualOf(p);return withImage&&p.image_url?`<img class="actual-image" src="${esc(p.image_url)}" alt="${esc(p.name_ar)}" loading="lazy" onerror="this.style.display='none'"/>`:`<div class="product-art"><span class="art-symbol">${uiIcon(p.visual==="games"?"gamepad":p.visual==="ai"?"cpu":p.visual==="social"?"users":p.visual==="iptv"?"monitor":"package")}</span><small>${v.tag}</small></div>`}
 export const cleanPhone=number=>String(number||'').replace(/\D/g,'');
 export const whatsappUrl=(number,message)=>number?`https://wa.me/${cleanPhone(number)}?text=${encodeURIComponent(message)}`:null;
 let toastTimer;
