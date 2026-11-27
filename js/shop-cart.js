@@ -1,4 +1,5 @@
 import {uiIcon} from './icons.js';
+import {smartFormHtml,validateSmartInfo,smartInfoLines,getCartOrderDetails,saveCartOrderDetails,clearCartOrderDetails} from './smart-order.js?v=1';
 /* DidgStore — shared cart with independent product duration selections.
    Local browser cart only; no hidden tracking, payment, or direct order writing. */
 import {language,t} from './i18n.js';
@@ -51,35 +52,64 @@ export function createCart({getProducts,getSettings}){
   const getActive=id=>(getProducts()||[]).find(p=>String(p.id)===String(id)&&p.is_active!==false);
   const entries=()=>rows.map(r=>{const p=getActive(r.id);if(!p)return null;const v=hasVariants(p)?variantOf(p,r.months)||variantsOf(p)[0]:null;return {p,v,qty:r.qty,id:r.id,months:v?Number(v.months):null,key:rowKey(r.id,r.months)};}).filter(Boolean);
   function count(){if(header)header.textContent=rows.reduce((n,r)=>n+r.qty,0)}
-  function add(id,months=null,qty=1){
+  function add(id,months=null,qty=1,details=null){
     const p=getActive(id);if(!p){toast(language()==='en'?'Product unavailable':'المنتج غير متوفر');return false}
     if(hasVariants(p)&&!variantOf(p,months)){toast(isServiceProduct(p)?(language()==='en'?'Choose a service and package first':'اختار نوع الخدمة والباقة أولاً'):(language()==='en'?'Select a subscription duration first':'اختار مدة الاشتراك أولاً'));return false}
     const key=rowKey(id,hasVariants(p)?Number(months):null),match=rows.find(r=>rowKey(r.id,r.months)===key);
     if(match)match.qty=Math.min(25,match.qty+Math.max(1,Number(qty)||1));else rows.push({id:String(id),months:hasVariants(p)?Number(months):null,qty:Math.max(1,Math.min(25,Number(qty)||1))});
+    if(details&&typeof details==='object'&&Object.keys(details).length)saveCartOrderDetails(key,details);
     save(rows);count();toast(t('cart.added'));return true;
   }
-  function setQty(key,delta){const row=rows.find(r=>rowKey(r.id,r.months)===key);if(!row)return;row.qty+=delta;if(row.qty<=0)rows=rows.filter(r=>r!==row);else row.qty=Math.min(25,row.qty);save(rows);render();count()}
-  function remove(key){rows=rows.filter(r=>rowKey(r.id,r.months)!==key);save(rows);render();count()}
+  function setQty(key,delta){const row=rows.find(r=>rowKey(r.id,r.months)===key);if(!row)return;row.qty+=delta;if(row.qty<=0){rows=rows.filter(r=>r!==row);clearCartOrderDetails(key)}else row.qty=Math.min(25,row.qty);save(rows);render();count()}
+  function remove(key){rows=rows.filter(r=>rowKey(r.id,r.months)!==key);clearCartOrderDetails(key);save(rows);render();count()}
   function buildWhatsapp(){
     const list=entries();if(!list.length)return;
+    const validated=new Map();
+    for(const {p,months,key} of list){
+      const result=validateSmartInfo(p,months,getCartOrderDetails(key));
+      if(!result.ok){
+        toast(result.error);
+        const row=[...(items?.querySelectorAll('[data-cart-item-key]')||[])].find(el=>el.dataset.cartItemKey===key);
+        const field=row?.querySelector('[data-smart-field="'+result.key+'"]');
+        field?.setAttribute('aria-invalid','true');
+        field?.focus();
+        field?.scrollIntoView({behavior:'smooth',block:'center'});
+        return;
+      }
+      validated.set(key,result.info);
+    }
     const total=list.reduce((sum,{p,months,qty})=>sum+priceOf(p,months)*qty,0);
     const unknown=list.some(({p,months})=>priceOf(p,months)===0);
-    const lines=list.map(({p,months,qty})=>`• ${nameOf(p)}${months?` (${monthLabel(months)})`:p.duration?` (${p.duration})`:''} ×${qty} — ${priceOf(p,months)>0?money(priceOf(p,months)):t('products.ask')}`);
+    const lines=list.map(({p,months,qty,key})=>{
+      const first='• '+nameOf(p)+(months?' ('+monthLabel(months)+')':p.duration?' ('+p.duration+')':'')+' ×'+qty+
+        ' — '+(priceOf(p,months)>0?money(priceOf(p,months)):t('products.ask'));
+      const orderLines=smartInfoLines(p,months,validated.get(key)).map(line=>'   '+line);
+      return [first,...orderLines].join('\n');
+    });
     const amount=unknown?`${money(total)} (${language()==='en'?'partial total':'مجموع جزئي'})`:money(total);
     const customer=buyerName.trim()?`${language()==='en'?'Customer name':'اسم الزبون'}: ${buyerName.trim().slice(0,80)}\n`:'';
-    const message=`${t('wa.productHello')}\n\n${customer}${lines.join('\n')}\n\n${t('cart.total')}: ${amount}\n${t('wa.cartFooter')}`;
+    const message=`${t('wa.productHello')}\n\n${customer}${lines.join('\n\n')}\n\n${t('cart.total')}: ${amount}\n${t('wa.cartFooter')}`;
     const number=cleanPhone((getSettings()||{}).whatsapp||CONFIG.fallbackWhatsApp||'');const url=whatsappUrl(number,message);
     if(!url){toast(t('errors.noWhatsapp'));return}window.open(url,'_blank','noopener,noreferrer');
   }
   function render(){
     if(!items||!footer)return;
     const list=entries();
-    items.innerHTML=list.length?list.map(({p,months,qty,key})=>`<article class="didg-cart-row"><a class="didg-cart-image" href="${esc(productPageUrl(p.id))}">${p.image_url?`<img src="${esc(p.image_url)}" alt="" loading="lazy"/>`:`<span>${uiIcon(p.visual==='games'?'gamepad':p.visual==='ai'?'cpu':p.visual==='social'?'users':'package')}</span>`}</a><div class="didg-cart-info"><a href="${esc(productPageUrl(p.id))}" class="didg-cart-name">${esc(nameOf(p))}</a>${months?`<small class="didg-duration-tag">${esc(monthLabel(months))}</small>`:p.duration?`<small>${esc(p.duration)}</small>`:''}<strong>${esc(priceOf(p,months)>0?money(priceOf(p,months)):t('products.ask'))}</strong><div class="didg-cart-actions"><button data-cart-step="-1" data-cart-key="${esc(key)}" aria-label="${esc(t('cart.minus'))}">−</button><b>${qty}</b><button data-cart-step="1" data-cart-key="${esc(key)}" aria-label="${esc(t('cart.plus'))}">${uiIcon("plus")}</button><button class="didg-remove" data-cart-remove="${esc(key)}" aria-label="${language()==='en'?'Remove':'حذف'}">${uiIcon("trash")}</button></div></div></article>`).join(''):`<div class="didg-cart-empty"><span class="didg-cart-empty-icon" aria-hidden="true">${uiIcon('bag')}</span><p>${esc(t('cart.empty'))}</p><a href="./index.html#products">${language()==='en'?'Browse products':'تصفح المنتجات'}</a></div>`;
+    items.innerHTML=list.length?list.map(({p,months,qty,key})=>`<article class="didg-cart-row" data-cart-item-key="${esc(key)}"><a class="didg-cart-image" href="${esc(productPageUrl(p.id))}">${p.image_url?`<img src="${esc(p.image_url)}" alt="" loading="lazy"/>`:`<span>${uiIcon(p.visual==='games'?'gamepad':p.visual==='ai'?'cpu':p.visual==='social'?'users':'package')}</span>`}</a><div class="didg-cart-info"><a href="${esc(productPageUrl(p.id))}" class="didg-cart-name">${esc(nameOf(p))}</a>${months?`<small class="didg-duration-tag">${esc(monthLabel(months))}</small>`:p.duration?`<small>${esc(p.duration)}</small>`:''}<strong>${esc(priceOf(p,months)>0?money(priceOf(p,months)):t('products.ask'))}</strong><div class="didg-cart-actions"><button data-cart-step="-1" data-cart-key="${esc(key)}" aria-label="${esc(t('cart.minus'))}">−</button><b>${qty}</b><button data-cart-step="1" data-cart-key="${esc(key)}" aria-label="${esc(t('cart.plus'))}">${uiIcon("plus")}</button><button class="didg-remove" data-cart-remove="${esc(key)}" aria-label="${language()==='en'?'Remove':'حذف'}">${uiIcon("trash")}</button></div></div><div class="didg-cart-smart-wrap">${smartFormHtml(p,months,getCartOrderDetails(key),'cart')}</div></article>`).join(''):`<div class="didg-cart-empty"><span class="didg-cart-empty-icon" aria-hidden="true">${uiIcon('bag')}</span><p>${esc(t('cart.empty'))}</p><a href="./index.html#products">${language()==='en'?'Browse products':'تصفح المنتجات'}</a></div>`;
     const total=list.reduce((n,{p,months,qty})=>n+priceOf(p,months)*qty,0);
     footer.innerHTML=list.length?`<label class="didg-cart-customer">${language()==='en'?'Your name (optional)':'الاسم ديالك (اختياري)'}<input id="didgCheckoutName" type="text" maxlength="80" placeholder="${language()==='en'?'For the WhatsApp order':'باش يبان فالطلب'}" value="${esc(buyerName)}"/></label><div class="cart-total"><span>${esc(t('cart.total'))}</span><strong>${esc(money(total))}</strong></div><p class="cart-note">${esc(t('cart.note'))}</p><button class="btn btn-primary full" id="sendCart">${uiIcon('message')} ${esc(t('cart.send'))}</button>`:'';
     footer.querySelector('#didgCheckoutName')?.addEventListener('input',e=>{buyerName=e.target.value});
     footer.querySelector('#sendCart')?.addEventListener('click',buildWhatsapp);
   }
+  function rememberCartInput(e){
+    const input=e.target.closest('[data-smart-field]');
+    const row=input?.closest('[data-cart-item-key]');
+    if(!row)return;
+    saveCartOrderDetails(row.dataset.cartItemKey,{[input.dataset.smartField]:input.value});
+    input.removeAttribute('aria-invalid');
+  }
+  items?.addEventListener('input',rememberCartInput);
+  items?.addEventListener('change',rememberCartInput);
   items?.addEventListener('click',e=>{const btn=e.target.closest('[data-cart-step],[data-cart-remove]');if(!btn)return;if('cartStep'in btn.dataset)setQty(btn.dataset.cartKey,Number(btn.dataset.cartStep));else remove(btn.dataset.cartRemove)});
   document.getElementById('openCart')?.addEventListener('click',()=>{render();openModal('cartModal')});
   document.addEventListener('didgstore:languagechange',()=>{if(modal&&!modal.hidden)render()});
