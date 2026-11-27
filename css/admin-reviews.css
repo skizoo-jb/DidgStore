@@ -11,7 +11,7 @@
 .didg-admin-review-tab{
  padding:10px 13px;border-radius:11px;border:1px solid #3b6240;
  background:#112719;color:#d7efd3;display:inline-flex;gap:8px;
- font:750 12px inherit;font-family:inherit;align-items:center;cursor:pointer;
+ font-weight:750;font-size:12px;font-family:inherit;align-items:center;cursor:pointer;
 }
 .didg-admin-review-tab:hover{border-color:#87e55d}
 .didg-admin-review-tab.selected{background:#326a26;border-color:#a7f870;color:#fff}
