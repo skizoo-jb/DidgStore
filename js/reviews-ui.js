@@ -17,6 +17,11 @@ const copy={
  confirm:'كنأكد أن هاد رأيي الحقيقي، وموافق يتنشر اسمي الظاهر والتعليق من بعد المراجعة.',submit:'صيفط التقييم للمراجعة',
  policy:'التقييمات المنشورة خاضعة للمراجعة، وماشي بالضرورة مشتريات موثقة. ما تشاركش كلمات السر أو معلومات شخصية.',
  thanks:'شكراً! توصلنا بالتقييم ديالك، وغادي يتراجع قبل ما يبان للزوار.',
+ successTitle:'تم إرسال تقييمك بنجاح!',
+ successText:'شكراً على رأيك! توصّلنا بالتقييم ديالك، وهو الآن في انتظار المراجعة قبل ما يبان فالمتجر. ما محتاجش تصيفطو مرة أخرى.',
+ successOkay:'حسناً، فهمت',
+ sentTitle:'التقييم ديالك توصّلنا به بنجاح',
+ sentText:'التقييم راه فانتظار المراجعة. ما تحتاجش تعاود تصيفط نفس التقييم.',
  badName:'الاسم خاصو يكون من حرف واحد حتى 60 حرف.',badRating:'اختار التقييم من نجمة حتى 5 نجوم.',
  badComment:'كتب تعليقك كيفما بغيتي، غير ما تخليهش خاوي.',badConfirm:'أكد أن التقييم من تجربتك الحقيقية.',
  cooldown:'صيفطتي تقييم مؤخراً. عاود جرّب من بعد شوية.',submitError:'وقع مشكل فإرسال التقييم. عاود جرّب.',
@@ -35,6 +40,11 @@ const copy={
  confirm:'I confirm this is my genuine experience and agree to publication of my display name and review after moderation.',submit:'Submit for moderation',
  policy:'Published submissions are moderated and not necessarily verified purchases. Never include passwords or personal details.',
  thanks:'Thank you! Your review was submitted and awaits moderation before appearing publicly.',
+ successTitle:'Your review was sent successfully!',
+ successText:'Thanks for sharing your experience. We received your review and it is awaiting moderation before appearing on the store. You do not need to submit it again.',
+ successOkay:'OK, got it',
+ sentTitle:'Your review was received successfully',
+ sentText:'Your review is awaiting moderation. There is no need to submit the same review again.',
  badName:'Please enter a name of 1 to 60 characters.',badRating:'Please select a rating from 1 to 5 stars.',
  badComment:'Write your review in as much detail as you like; it cannot be empty.',badConfirm:'Please confirm this is your genuine experience.',
  cooldown:'You submitted a review recently. Please try again later.',submitError:'Could not submit the review. Please try again.',
@@ -150,7 +160,17 @@ function buildSection(){
      '<button class="btn btn-primary didg-review-send" type="submit" id="reviewSend">'+uiIcon('arrowRight')+'<span data-review-text="submit"></span></button>'+
      '<p id="reviewFeedback" class="didg-review-feedback" role="status" aria-live="polite"></p>'+
      '<p class="didg-review-disclaimer" data-review-text="policy"></p>'+
-    '</form></aside></div>';
+    '</form>'+
+    '<div class="didg-review-sent-panel" id="reviewSubmittedPanel" role="status" hidden>'+
+      '<div class="didg-review-success-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg></div>'+
+      '<h3 data-review-text="sentTitle"></h3><p data-review-text="sentText"></p>'+
+    '</div></aside></div>'+
+    '<dialog id="reviewSuccessDialog" class="didg-review-success-dialog" aria-labelledby="reviewSuccessTitle" aria-describedby="reviewSuccessText">'+
+      '<div class="didg-review-success-mark is-large" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg></div>'+
+      '<h3 id="reviewSuccessTitle" data-review-text="successTitle"></h3>'+
+      '<p id="reviewSuccessText" data-review-text="successText"></p>'+
+      '<button id="reviewSuccessDismiss" type="button" class="didg-review-success-confirm" data-review-text="successOkay"></button>'+
+    '</dialog>';
  const section=document.createElement('section');
  section.className='section container didg-customer-reviews';
  section.id='reviews';
@@ -158,14 +178,34 @@ function buildSection(){
  section.innerHTML=html;
  return section;
 }
+function showReviewSuccess(showPopup=false){
+ const form=document.getElementById('customerReviewForm');
+ const panel=document.getElementById('reviewSubmittedPanel');
+ if(!form||!panel)return;
+ form.hidden=true;
+ panel.hidden=false;
+ if(showPopup){
+   const dialog=document.getElementById('reviewSuccessDialog');
+   if(dialog&&typeof dialog.showModal==='function'&&!dialog.open)dialog.showModal();
+ }
+}
 function bindSubmission(){
  const form=document.getElementById('customerReviewForm');
+ let submitting=false;
+ const dialog=document.getElementById('reviewSuccessDialog');
+ const dismiss=document.getElementById('reviewSuccessDismiss');
+ dismiss?.addEventListener('click',()=>dialog?.close());
+ try{
+   const last=Number(localStorage.getItem('didgstore-review-last-send')||0);
+   if(last>0&&Date.now()-last<600000)showReviewSuccess(false);
+ }catch{/* browser storage may be unavailable */}
  form.querySelector('#reviewStarButtons').addEventListener('click',e=>{
   const button=e.target.closest('[data-review-star]');if(!button)return;
   currentRating=Number(button.dataset.reviewStar);renderStars();statusMessage('');
  });
  form.addEventListener('submit',async e=>{
   e.preventDefault();
+  if(submitting||form.hidden)return;
   if(form.querySelector('#reviewWebsite').value.trim())return;
   const name=form.elements.reviewer_name.value.trim();
   const comment=form.elements.comment.value.trim();
@@ -174,21 +214,22 @@ function bindSubmission(){
   if(comment.length<1){statusMessage(tx('badComment'),true);form.elements.comment.focus();return;}
   if(!document.getElementById('reviewConfirm').checked){statusMessage(tx('badConfirm'),true);document.getElementById('reviewConfirm').focus();return;}
   const key='didgstore-review-last-send';
-  try{const last=Number(localStorage.getItem(key)||0);if(last>0&&Date.now()-last<600000){statusMessage(tx('cooldown'),true);return}}catch{/* storage disabled */}
+  try{const last=Number(localStorage.getItem(key)||0);if(last>0&&Date.now()-last<600000){showReviewSuccess(false);return}}catch{/* storage disabled */}
   if(!isLive){statusMessage(tx('unavailable'),true);return;}
   const send=form.querySelector('#reviewSend');
-  send.disabled=true;statusMessage(tx('sending'));
+  submitting=true;send.disabled=true;statusMessage(tx('sending'));
   try{
    const chosen=form.elements.product_id.value;
    const validProduct=(getProductRows()||[]).find(p=>String(p.id)===chosen&&p.is_active!==false);
    await submitCustomerReview({reviewer_name:name,rating:currentRating,comment,product_id:validProduct?.id||null});
    try{localStorage.setItem(key,String(Date.now()))}catch{/* privacy mode */}
    form.reset();currentRating=0;renderStars();
-   statusMessage(tx('thanks'));
+   statusMessage('');
+   showReviewSuccess(true);
   }catch(err){
    console.error('Could not submit customer review:',err);
    statusMessage(tx('submitError'),true);
-  }finally{send.disabled=false}
+  }finally{submitting=false;if(!form.hidden)send.disabled=false}
  });
 }
 export async function mountCustomerReviews(productsGetter){
