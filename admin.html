@@ -81,6 +81,63 @@ body .auth-brand, body .sidebar-brand {
 <link rel="stylesheet" href="./css/didgstore-original-logo.css?v=8"/>
 <link rel="stylesheet" href="./css/icons.css?v=8"/>
 <link rel="stylesheet" href="./css/admin-reviews.css?v=1"/>
+
+<style id="didgstore-admin-icon-size-fix">
+/* Admin icons in utility links must have fixed dimensions, not intrinsic SVG sizes. */
+body.admin-body .admin-header .admin-link {
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center;
+  gap:8px;
+  width:auto !important;
+  height:auto !important;
+  min-height:38px;
+  max-width:100%;
+  flex:0 0 auto;
+  box-sizing:border-box;
+  white-space:nowrap;
+  vertical-align:middle;
+}
+body.admin-body .admin-header [data-ui-icon],
+body.admin-body .sidebar-footer [data-ui-icon],
+body.admin-body .auth-screen .btn [data-ui-icon],
+body.admin-body .admin-form .btn [data-ui-icon] {
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex:0 0 18px !important;
+  width:18px !important;
+  height:18px !important;
+  min-width:18px !important;
+  min-height:18px !important;
+  max-width:18px !important;
+  max-height:18px !important;
+  overflow:hidden;
+  line-height:1;
+}
+body.admin-body .admin-header [data-ui-icon] > svg,
+body.admin-body .sidebar-footer [data-ui-icon] > svg,
+body.admin-body .auth-screen .btn [data-ui-icon] > svg,
+body.admin-body .admin-form .btn [data-ui-icon] > svg {
+  display:block !important;
+  flex:0 0 18px !important;
+  width:18px !important;
+  height:18px !important;
+  min-width:18px !important;
+  min-height:18px !important;
+  max-width:18px !important;
+  max-height:18px !important;
+  transform:none !important;
+}
+body.admin-body .admin-content .page-actions .btn > svg.didg-ui-icon{
+  display:inline-block !important;
+  flex:0 0 17px !important;
+  width:17px !important;
+  height:17px !important;
+  max-width:17px !important;
+  max-height:17px !important;
+}
+</style>
 </head>
 <body class="admin-body"><div id="adminLoading" class="auth-screen"><div class="loading-orb"></div><span>جاري تجهيز لوحة التحكم...</span></div>
   <div id="adminAuth" class="auth-screen" hidden><div class="auth-card"><a href="./index.html" class="auth-brand"><img class="didg-full-logo" src="./assets/didgstore-original-full.webp?v=8" alt="DidgStore"/></a><span class="eyebrow">SECURE ADMIN ACCESS</span><h1>تسجيل دخول الإدارة</h1><p>هاد الصفحة خاصة بإدارة DidgStore.</p><form id="loginForm"><label>البريد الإلكتروني<input id="loginEmail" type="email" required placeholder="admin@example.com" autocomplete="username"/></label><label>كلمة المرور<input id="loginPassword" type="password" required placeholder="••••••••" autocomplete="current-password"/></label><button type="submit" class="btn btn-primary full">تسجيل الدخول <span data-ui-icon="arrowRight" aria-hidden="true"></span></button><p id="loginError" class="error-text" role="alert"></p></form><a class="back-link" href="./index.html">الرجوع للمتجر</a></div></div>
