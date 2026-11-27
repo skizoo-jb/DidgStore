@@ -124,3 +124,66 @@ body.pro-v2 .didg-review-disclaimer{font-size:11px;color:#a1b9a2;line-height:1.7
  body.pro-v2 .didg-review-card,body.pro-v2 .didg-review-star-buttons button{transition:none}
  body.pro-v2 .didg-review-card:hover,body.pro-v2 .didg-review-star-buttons button:hover{transform:none}
 }
+
+/* Prominent, accessible confirmation after a verified review submission. */
+body.pro-v2 #customerReviewForm[hidden],
+body.pro-v2 #reviewSubmittedPanel[hidden]{display:none!important}
+body.pro-v2 .didg-review-sent-panel{
+  padding:25px 18px;text-align:center;
+  border:1px solid #69c956;border-radius:17px;
+  background:linear-gradient(155deg,#163b20,#0a2112 68%,#09180e);
+  box-shadow:0 8px 25px rgba(0,0,0,.2),0 0 22px rgba(129,255,64,.09);
+}
+body.pro-v2 .didg-review-success-mark{
+  width:57px;height:57px;margin:0 auto 16px;
+  border-radius:50%;display:grid;place-items:center;
+  background:#a1ff41;color:#0b270b;border:3px solid #d4ffa0;
+  box-shadow:0 0 0 7px rgba(144,255,57,.12),0 0 34px rgba(127,255,47,.32);
+}
+body.pro-v2 .didg-review-success-mark svg{display:block;width:31px;height:31px}
+body.pro-v2 .didg-review-success-mark.is-large{
+  width:80px;height:80px;margin-bottom:22px;
+}
+body.pro-v2 .didg-review-success-mark.is-large svg{width:43px;height:43px}
+body.pro-v2 .didg-review-sent-panel h3{
+  margin:0 0 10px;color:#eaffdf;font-size:19px;line-height:1.5;font-weight:900;
+}
+body.pro-v2 .didg-review-sent-panel p{
+  margin:0;color:#bfe5b5;font-size:13px;line-height:1.95;
+}
+body.pro-v2 dialog.didg-review-success-dialog{
+  width:min(440px,calc(100vw - 30px));max-width:100%;
+  position:fixed;inset:0;margin:auto;box-sizing:border-box;
+  border:1px solid #7bce4a;border-radius:24px;
+  padding:34px 28px 28px;
+  background:linear-gradient(155deg,#153821,#071910 77%,#08170d);
+  color:#fff;box-shadow:0 28px 90px rgba(0,0,0,.75),0 0 36px rgba(121,255,47,.18);
+  text-align:center;z-index:99999;
+  max-height:calc(100dvh - 32px);overflow-y:auto;
+}
+body.pro-v2 dialog.didg-review-success-dialog:not([open]){display:none}
+body.pro-v2 dialog.didg-review-success-dialog::backdrop{
+  background:rgba(1,12,5,.85);backdrop-filter:blur(7px);
+}
+body.pro-v2 dialog.didg-review-success-dialog h3{
+  margin:0 0 13px;font-size:clamp(22px,4vw,28px);
+  line-height:1.5;font-weight:950;color:#f3ffe7;
+}
+body.pro-v2 dialog.didg-review-success-dialog p{
+  font-size:14px;line-height:2;color:#c9e8c0;margin:0 auto 23px;max-width:360px;
+}
+body.pro-v2 .didg-review-success-confirm{
+  width:100%;min-height:53px;padding:12px 20px;
+  background:linear-gradient(135deg,#b4ff65,#8af332);
+  color:#061b08;border:1px solid #d2ff9e;border-radius:13px;
+  font-weight:900;font-size:15px;font-family:inherit;cursor:pointer;
+  box-shadow:0 9px 24px rgba(105,239,39,.16);
+}
+body.pro-v2 .didg-review-success-confirm:hover{filter:brightness(1.07)}
+body.pro-v2 .didg-review-success-confirm:focus-visible{
+  outline:3px solid white;outline-offset:3px;
+}
+@media(max-width:480px){
+  body.pro-v2 dialog.didg-review-success-dialog{padding:29px 18px 20px;border-radius:18px}
+  body.pro-v2 .didg-review-success-mark.is-large{width:70px;height:70px}
+}
