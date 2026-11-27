@@ -1,6 +1,6 @@
 import {uiIcon,hydrateIcons} from './icons.js';
 import {adminReviewsPanel} from './admin-reviews.js?v=2';
-import {initDb,isLive,getProducts,getCategories,getSettings,saveSettings,saveProduct,deleteProduct,saveCategory,deleteCategory,getOrders,saveOrder,deleteOrder,uploadPhoto,login,signOut,session,isAdmin,getAdminReviews,changeReviewStatus,deleteCustomerReview} from './db.js?v=reviews1';
+import {initDb,isLive,getProducts,getCategories,getSettings,saveSettings,saveProduct,deleteProduct,saveCategory,deleteCategory,getOrders,saveOrder,deleteOrder,uploadPhoto,login,signOut,session,isAdmin,getAdminReviews,changeReviewStatus,deleteCustomerReview} from './db.js?v=reviews2';
 import {el,all,esc,cash,visualOf,artStyle,toast,initModals,openModal,closeModal,cleanPhone,whatsappUrl} from './shared.js?v=7';
 let products=[],categories=[],orders=[],reviews=[],settings={},page='dashboard',user=null,tableFilter='',reviewFilter='pending';
 const content=el('#adminContent');
