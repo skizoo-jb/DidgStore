@@ -13,12 +13,12 @@ const copy={
  form:'شارك تجربتك مع DidgStore',note:'رأيك كيعاون الزبناء الآخرين. التقييم كيخضع للمراجعة قبل النشر.',
  name:'الاسم اللي غادي يبان',namePh:'الاسم ديالك',stars:'التقييم ديالك',
  starsHelp:'اختار من نجمة حتى 5 نجوم.',product:'المنتج (اختياري)',general:'تقييم عام للمتجر',
- comment:'التعليق',commentPh:'حكي لينا على تجربتك بصدق...',min:'حرف واحد كافي',
+ comment:'التعليق',commentPh:'حكي لينا على تجربتك بصدق...',min:'كتب التعليق بالطول اللي بغيتي',
  confirm:'كنأكد أن هاد رأيي الحقيقي، وموافق يتنشر اسمي الظاهر والتعليق من بعد المراجعة.',submit:'صيفط التقييم للمراجعة',
  policy:'التقييمات المنشورة خاضعة للمراجعة، وماشي بالضرورة مشتريات موثقة. ما تشاركش كلمات السر أو معلومات شخصية.',
  thanks:'شكراً! توصلنا بالتقييم ديالك، وغادي يتراجع قبل ما يبان للزوار.',
  badName:'الاسم خاصو يكون من حرف واحد حتى 60 حرف.',badRating:'اختار التقييم من نجمة حتى 5 نجوم.',
- badComment:'كتب تعليق من حرف واحد حتى 500 حرف.',badConfirm:'أكد أن التقييم من تجربتك الحقيقية.',
+ badComment:'كتب تعليقك كيفما بغيتي، غير ما تخليهش خاوي.',badConfirm:'أكد أن التقييم من تجربتك الحقيقية.',
  cooldown:'صيفطتي تقييم مؤخراً. عاود جرّب من بعد شوية.',submitError:'وقع مشكل فإرسال التقييم. عاود جرّب.',
  sending:'كنصيفط التقييم...',starLabel:'نجوم من أصل 5'
  },
@@ -31,12 +31,12 @@ const copy={
  form:'Share your DidgStore experience',note:'Your feedback helps other customers. Reviews are moderated before publication.',
  name:'Display name',namePh:'Your name',stars:'Your rating',
  starsHelp:'Select 1 to 5 stars.',product:'Product (optional)',general:'General store review',
- comment:'Your review',commentPh:'Describe your real experience...',min:'At least 1 character',
+ comment:'Your review',commentPh:'Describe your real experience...',min:'Write as much as you like',
  confirm:'I confirm this is my genuine experience and agree to publication of my display name and review after moderation.',submit:'Submit for moderation',
  policy:'Published submissions are moderated and not necessarily verified purchases. Never include passwords or personal details.',
  thanks:'Thank you! Your review was submitted and awaits moderation before appearing publicly.',
  badName:'Please enter a name of 1 to 60 characters.',badRating:'Please select a rating from 1 to 5 stars.',
- badComment:'Please write 1 to 500 characters.',badConfirm:'Please confirm this is your genuine experience.',
+ badComment:'Write your review in as much detail as you like; it cannot be empty.',badConfirm:'Please confirm this is your genuine experience.',
  cooldown:'You submitted a review recently. Please try again later.',submitError:'Could not submit the review. Please try again.',
  sending:'Submitting your review...',starLabel:'stars out of 5'
  }
@@ -143,8 +143,8 @@ function buildSection(){
       '<div id="reviewStarButtons" class="didg-review-star-buttons" role="group">'+starButtons+'</div>'+
       '<small data-review-text="starsHelp"></small></fieldset>'+
      '<label class="didg-review-field"><span data-review-text="product"></span><select name="product_id" id="reviewProduct"></select></label>'+
-     '<label class="didg-review-field"><span data-review-text="comment"></span><textarea name="comment" id="reviewComment" rows="4" minlength="1" maxlength="500" required data-review-placeholder="commentPh"></textarea></label>'+
-     '<div class="didg-review-charrow"><span data-review-text="min"></span><small id="reviewCharCount">0 / 500</small></div>'+
+     '<label class="didg-review-field"><span data-review-text="comment"></span><textarea name="comment" id="reviewComment" rows="4" required data-review-placeholder="commentPh"></textarea></label>'+
+     
      '<label class="didg-review-confirm"><input id="reviewConfirm" type="checkbox" required/><span data-review-text="confirm"></span></label>'+
      '<div class="didg-review-honey" aria-hidden="true"><label>Website<input type="text" id="reviewWebsite" tabindex="-1" autocomplete="off"/></label></div>'+
      '<button class="btn btn-primary didg-review-send" type="submit" id="reviewSend">'+uiIcon('arrowRight')+'<span data-review-text="submit"></span></button>'+
@@ -164,9 +164,6 @@ function bindSubmission(){
   const button=e.target.closest('[data-review-star]');if(!button)return;
   currentRating=Number(button.dataset.reviewStar);renderStars();statusMessage('');
  });
- form.querySelector('#reviewComment').addEventListener('input',e=>{
-  document.getElementById('reviewCharCount').textContent=e.target.value.length+' / 500';
- });
  form.addEventListener('submit',async e=>{
   e.preventDefault();
   if(form.querySelector('#reviewWebsite').value.trim())return;
@@ -174,7 +171,7 @@ function bindSubmission(){
   const comment=form.elements.comment.value.trim();
   if(name.length<1||name.length>60){statusMessage(tx('badName'),true);form.elements.reviewer_name.focus();return;}
   if(!Number.isInteger(currentRating)||currentRating<1||currentRating>5){statusMessage(tx('badRating'),true);form.querySelector('[data-review-star]').focus();return;}
-  if(comment.length<1||comment.length>500){statusMessage(tx('badComment'),true);form.elements.comment.focus();return;}
+  if(comment.length<1){statusMessage(tx('badComment'),true);form.elements.comment.focus();return;}
   if(!document.getElementById('reviewConfirm').checked){statusMessage(tx('badConfirm'),true);document.getElementById('reviewConfirm').focus();return;}
   const key='didgstore-review-last-send';
   try{const last=Number(localStorage.getItem(key)||0);if(last>0&&Date.now()-last<600000){statusMessage(tx('cooldown'),true);return}}catch{/* storage disabled */}
@@ -186,7 +183,7 @@ function bindSubmission(){
    const validProduct=(getProductRows()||[]).find(p=>String(p.id)===chosen&&p.is_active!==false);
    await submitCustomerReview({reviewer_name:name,rating:currentRating,comment,product_id:validProduct?.id||null});
    try{localStorage.setItem(key,String(Date.now()))}catch{/* privacy mode */}
-   form.reset();currentRating=0;renderStars();document.getElementById('reviewCharCount').textContent='0 / 500';
+   form.reset();currentRating=0;renderStars();
    statusMessage(tx('thanks'));
   }catch(err){
    console.error('Could not submit customer review:',err);
