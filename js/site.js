@@ -3,7 +3,7 @@ import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings,isLive} from './db.js';
 import {el,all,esc,visualOf,artStyle,artHTML,toast,initModals,openModal,whatsappUrl} from './shared.js?v=7';
 import {language,t,initLanguage} from './i18n.js';
-import {createCart,hasVariants,isServiceProduct,priceOf,oldPriceOf,priceText,productPageUrl,monthLabel,variantsOf} from './shop-cart.js?v=4';
+import {createCart,hasVariants,isServiceProduct,priceOf,oldPriceOf,priceText,productPageUrl,monthLabel,variantsOf} from './shop-cart.js?v=8';
 
 let products=[],categories=[],settings={},activeCat='all',visible=8;
 const cartWidget=createCart({getProducts:()=>products,getSettings:()=>settings});
