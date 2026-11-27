@@ -29,6 +29,41 @@ const table=name=>{if(!sb)throw Error('Supabase غير متصل');return sb.from
 const unwrap=({data,error})=>{if(error)throw error;return data};
 export async function getProducts(admin=false){if(!isLive)return localGet('products',seedProducts);let q=table('products').select('*').order('sort_order',{ascending:true}).order('created_at',{ascending:false});if(!admin)q=q.eq('is_active',true);return unwrap(await q)}
 export async function getCategories(){if(!isLive)return localGet('categories',seedCategories);return [{...seedCategories[0]},...unwrap(await table('categories').select('*').order('sort_order',{ascending:true}))]}
+// Customer reviews — public submissions remain pending until an authorized admin approves.
+export async function getPublishedReviews(limit=100){
+  if(!isLive)return [];
+  return unwrap(await table('customer_reviews')
+    .select('id,reviewer_name,rating,comment,product_id,created_at')
+    .eq('status','approved').order('created_at',{ascending:false})
+    .limit(Math.max(1,Math.min(100,Number(limit)||100))));
+}
+export async function submitCustomerReview({reviewer_name,rating,comment,product_id=null}){
+  if(!isLive)throw new Error('التقييمات محتاجة ربط Supabase');
+  const cleanName=String(reviewer_name||'').trim();
+  const cleanComment=String(comment||'').trim();
+  const stars=Number(rating);
+  if(cleanName.length<2||cleanName.length>60||cleanComment.length<20||cleanComment.length>500||
+    !Number.isInteger(stars)||stars<1||stars>5)throw new Error('راجع الاسم والتقييم والتعليق');
+  // Do not use .select() after insert: submitted rows are hidden from public SELECT by RLS.
+  return unwrap(await table('customer_reviews').insert({
+    reviewer_name:cleanName,rating:stars,comment:cleanComment,product_id:product_id||null
+  }));
+}
+export async function getAdminReviews(){
+  if(!isLive)return [];
+  return unwrap(await table('customer_reviews')
+    .select('id,reviewer_name,rating,comment,product_id,status,created_at')
+    .order('created_at',{ascending:false}).limit(250));
+}
+export async function changeReviewStatus(id,status){
+  if(!isLive)throw new Error('تعديل التقييمات محتاج Supabase');
+  if(!['approved','rejected','pending'].includes(status))throw new Error('حالة تقييم غير صالحة');
+  return unwrap(await table('customer_reviews').update({status}).eq('id',id).select('id,status').single());
+}
+export async function deleteCustomerReview(id){
+  if(!isLive)throw new Error('حذف التقييمات محتاج Supabase');
+  return unwrap(await table('customer_reviews').delete().eq('id',id));
+}
 export async function getSettings(){if(!isLive)return localGet('settings',seedSettings);return unwrap(await table('store_settings').select('*').eq('id',1).single())}
 export async function saveSettings(s){if(!isLive){localSet('settings',s);return s}return unwrap(await table('store_settings').upsert({...s,id:1}).select().single())}
 export async function saveProduct(record){const input={...record};if(!isLive){let rows=localGet('products',seedProducts);if(input.id){rows=rows.map(x=>x.id===input.id?{...x,...input}:x)}else{input.id='demo-'+Math.random().toString(36).slice(2,10);rows.unshift(input)}localSet('products',rows);return input}if(!input.id)delete input.id;return unwrap(await table('products').upsert(input).select().single())}
