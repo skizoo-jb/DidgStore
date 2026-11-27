@@ -42,7 +42,7 @@ export async function submitCustomerReview({reviewer_name,rating,comment,product
   const cleanName=String(reviewer_name||'').trim();
   const cleanComment=String(comment||'').trim();
   const stars=Number(rating);
-  if(cleanName.length<2||cleanName.length>60||cleanComment.length<20||cleanComment.length>500||
+  if(cleanName.length<1||cleanName.length>60||cleanComment.length<1||cleanComment.length>500||
     !Number.isInteger(stars)||stars<1||stars>5)throw new Error('راجع الاسم والتقييم والتعليق');
   // Do not use .select() after insert: submitted rows are hidden from public SELECT by RLS.
   return unwrap(await table('customer_reviews').insert({
