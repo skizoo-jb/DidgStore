@@ -1,6 +1,7 @@
+import {uiIcon,hydrateIcons} from './icons.js';
 import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings,isLive} from './db.js';
-import {el,all,esc,visualOf,artStyle,artHTML,toast,initModals,openModal,whatsappUrl} from './shared.js';
+import {el,all,esc,visualOf,artStyle,artHTML,toast,initModals,openModal,whatsappUrl} from './shared.js?v=7';
 import {language,t,initLanguage} from './i18n.js';
 import {createCart,hasVariants,isServiceProduct,priceOf,oldPriceOf,priceText,productPageUrl,monthLabel,variantsOf} from './shop-cart.js?v=4';
 
@@ -28,9 +29,9 @@ const descriptionOf=(p,full=false)=>{
   return (full?p.description:p.short_description)||t(full?'products.detailsFallback':'products.shortFallback');
 };
 function categoryIcon(c){
-  const icons={all:'▦',subscriptions:'◉',design:'✦',gaming:'✣',ai:'✧',social:'↗',iptv:'▣'};
+  const icons={all:'grid',subscriptions:'package',design:'layout',gaming:'gamepad',ai:'cpu',social:'users',iptv:'monitor'};
   const imgs={all:'all-products',design:'canva',gaming:'games',ai:'ai',subscriptions:'spotify',iptv:'iptv',social:'social-media'};
-  return imgs[c.slug]?`<img src="./assets/tile-${imgs[c.slug]}.webp" alt=""/>`:esc(c.icon||icons[c.slug]||'▦');
+  return imgs[c.slug]?`<img src="./assets/tile-${imgs[c.slug]}.webp" alt=""/>`:uiIcon(icons[c.slug]||'package');
 }
 function categoryBtn(c,tile=false){
   const count=products.filter(p=>p.is_active&&(c.slug==='all'||p.category_id===c.slug)).length;
@@ -50,15 +51,15 @@ function card(p){
   return `<article class="product-card" style="${artStyle(p)}">
     <div class="card-media" data-detail="${esc(p.id)}" role="button" tabindex="0" aria-label="${esc(t('products.details'))} ${n}">
       ${artHTML(p)}
-      ${p.featured?`<span class="card-tag">✦ ${esc(t('products.featured'))}</span>`:''}
+      ${p.featured?`<span class="card-tag">${uiIcon("sparkles")} ${esc(t('products.featured'))}</span>`:''}
       ${discount?`<span class="card-discount">-${discount}%</span>`:''}
     </div>
     <div class="card-body"><span class="card-category">${esc(catName(p.category_id))}</span><h3>${n}</h3>
       <p>${esc(descriptionOf(p))}</p>
-      ${p.duration?`<span class="card-meta">◷ ${esc(durationOf(p))}</span>`:''}
+      ${p.duration?`<span class="card-meta">${uiIcon("clock")} ${esc(durationOf(p))}</span>`:''}
       <div class="price-row"><strong class="price-current">${esc(currency(p))}</strong>${old?`<span class="price-old">${esc(money(baseOld(p)))}</span>`:''}</div>
-      <div class="card-actions"><button class="btn btn-primary" data-buy="${esc(p.id)}">${esc(t('products.buy'))}</button>
-        <button class="add-cart" data-add="${esc(p.id)}" aria-label="${esc(t('products.addCart'))} ${n}" title="${esc(t('products.addCart'))}">+</button></div>
+      <div class="card-actions"><button class="btn btn-primary" data-buy="${esc(p.id)}">${uiIcon("arrowRight")} ${esc(t('products.buy'))}</button>
+        <button class="add-cart" data-add="${esc(p.id)}" aria-label="${esc(t('products.addCart'))} ${n}" title="${esc(t('products.addCart'))}">${uiIcon("plus")}</button></div>
     </div></article>`;
 }
 const featureLogo={netflix:'tile-netflix.webp',spotify:'tile-spotify.webp',canva:'tile-canva.webp',discord:'tile-discord.webp',iptv:'tile-iptv.webp',games:'tile-games.webp',ai:'tile-ai.webp'};
@@ -70,15 +71,15 @@ function featureCard(p){
   const old=offerDiscount(p)>0;
   const discount=offerDiscount(p);
   const v=visualOf(p),file=featureLogo[p.visual],n=esc(nameOf(p));
-  const icon=file?`<img src="./assets/${file}" alt="" loading="lazy"/>`:`<span class="fallback-logo">${esc(v.symbol)}</span>`;
+  const icon=file?`<img src="./assets/${file}" alt="" loading="lazy"/>`:`<span class="fallback-logo">${uiIcon("package")}</span>`;
   const hasDuration=hasVariants(p);
-  const ctaLabel=hasDuration?(language()==='en'?'Choose duration':'اختار المدة'):
+  const ctaLabel=hasDuration?(isServiceProduct(p)?(language()==='en'?'Choose package':'اختار الباقة'):(language()==='en'?'Choose duration':'اختار المدة')):
     (language()==='en'?'Order on WhatsApp':'اطلب عبر واتساب');
   const label=discount?`<span class="deal-badge" aria-label="${language()==='en'?'Discount':'تخفيض'} ${discount}%">-${discount}%</span>`:
-    `<span class="deal-badge didg-special-badge">✦ ${language()==='en'?'SPECIAL':'عرض خاص'}</span>`;
+    `<span class="deal-badge didg-special-badge">${uiIcon("sparkles")} ${language()==='en'?'SPECIAL':'عرض خاص'}</span>`;
   return `<article class="deal-tile didg-premium-offer" style="${artStyle(p)}">
    <a class="didg-offer-hitarea" href="${esc(productPageUrl(p.id))}" aria-label="${esc(language()==='en'?'View details: ':'عرض التفاصيل: ')}${n}"></a>
-   ${label}<span class="deal-shine" aria-hidden="true">✦</span>
+   ${label}<span class="deal-shine" aria-hidden="true">${uiIcon("sparkles")}</span>
    <div class="deal-icon" aria-hidden="true">${p.image_url?`<img src="${esc(p.image_url)}" alt="" loading="lazy"/>`:icon}</div>
    <h3 title="${n}">${n}</h3><div class="deal-duration">${esc(durationOf(p)||catName(p.category_id))}</div>
    <div class="deal-price ${starting(p)>0?'':'ask'}"><span>${esc(currency(p))}</span>${old?`<span class="deal-old">${esc(money(baseOld(p)))}</span>`:''}</div>
@@ -154,17 +155,17 @@ function bindEvents(){
   el('#footerContact').onclick=()=>openWhatsApp(t('wa.contact'));
   initModals();
   document.addEventListener('didgstore:languagechange',()=>{
-    renderHeroDescription();renderCategories();renderProducts();renderOffers();cartWidget.count();
+    renderHeroDescription();renderCategories();renderProducts();renderOffers();hydrateIcons();cartWidget.count();
   });
 }
 async function boot(){
   el('#year').textContent=new Date().getFullYear();
-  initLanguage();bindEvents();
+  initLanguage();hydrateIcons();bindEvents();
   try{
     await initDb();
     [products,categories,settings]=await Promise.all([getProducts(),getCategories(),getSettings()]);
     products=products.filter(x=>x.is_active).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
-    renderHeroDescription();renderCategories();renderProducts();renderOffers();cartWidget.count();
+    renderHeroDescription();renderCategories();renderProducts();renderOffers();hydrateIcons();cartWidget.count();
     if(!isLive){/* Sample products only while Supabase is not configured. */}
   }catch(error){
     console.error(error);
