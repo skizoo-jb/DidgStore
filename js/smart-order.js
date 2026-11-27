@@ -1,6 +1,7 @@
 /* DidgStore Smart Order: product-sensitive fields, no account passwords or database writes.
    Checkout details are kept in sessionStorage for the active tab only. */
 import {language} from './i18n.js';
+import {uiIcon} from './icons.js';
 
 const en=()=>language()==='en';
 const clean=value=>String(value??'').trim().replace(/[\u0000-\u001f\u007f]/g,' ').slice(0,400);
@@ -67,7 +68,7 @@ export function smartFormHtml(p,months=null,values={},context='product'){
   const title=word('معلومات الطلب','Order details');
   const privacy=word('ما كتحتاج حتى كلمة سر. هاد المعلومات كتدخل غير فرسالة WhatsApp ديال الطلب.','Never provide a password. These details are included only in your WhatsApp order message.');
   return '<div class="didg-smart-form" data-smart-context="'+escapeSmart(context)+'">'+
-    '<div class="didg-smart-form-head"><span class="didg-smart-check" aria-hidden="true">✓</span><strong>'+escapeSmart(title)+'</strong></div>'+
+    '<div class="didg-smart-form-head"><span class="didg-smart-check" aria-hidden="true">'+uiIcon("clipboard")+'</span><strong>'+escapeSmart(title)+'</strong></div>'+
     '<div class="didg-smart-fields">'+list+'</div>'+
     '<p class="didg-smart-privacy">'+escapeSmart(privacy)+'</p></div>';
 }
