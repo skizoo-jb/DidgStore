@@ -5,7 +5,7 @@ import {esc} from './shared.js?v=7';
 
 const copy={
  ar:{
- nav:'تقييمات الزبناء',start:'آراء',end:'الزبناء',
+ nav:'التقييمات',start:'آراء',end:'الزبناء',
  intro:'تقييمات منشورة بعد مراجعتها، بلا شهادات وهمية أو أرقام مصطنعة.',
  published:'التقييمات المنشورة',empty:'ما كاين حتى تقييم منشور دابا. كون أول واحد يشارك تجربتو!',
  loading:'جاري تحميل التقييمات...',unavailable:'تعذر تحميل التقييمات دابا. تقدر تعاود من بعد.',
@@ -14,7 +14,7 @@ const copy={
  name:'الاسم اللي غادي يبان',namePh:'الاسم ديالك',stars:'التقييم ديالك',
  starsHelp:'اختار من نجمة حتى 5 نجوم.',product:'المنتج (اختياري)',general:'تقييم عام للمتجر',
  comment:'التعليق',commentPh:'حكي لينا على تجربتك بصدق...',min:'20 حرف على الأقل',
- confirm:'كنأكد أن هاد رأيي الحقيقي المبني على تجربتي.',submit:'صيفط التقييم للمراجعة',
+ confirm:'كنأكد أن هاد رأيي الحقيقي، وموافق يتنشر اسمي الظاهر والتعليق من بعد المراجعة.',submit:'صيفط التقييم للمراجعة',
  policy:'التقييمات المنشورة خاضعة للمراجعة، وماشي بالضرورة مشتريات موثقة. ما تشاركش كلمات السر أو معلومات شخصية.',
  thanks:'شكراً! توصلنا بالتقييم ديالك، وغادي يتراجع قبل ما يبان للزوار.',
  badName:'الاسم خاصو يكون من جوج حتى 60 حرف.',badRating:'اختار التقييم من نجمة حتى 5 نجوم.',
@@ -23,7 +23,7 @@ const copy={
  sending:'كنصيفط التقييم...',starLabel:'نجوم من أصل 5'
  },
  en:{
- nav:'Customer reviews',start:'Customer',end:'reviews',
+ nav:'Reviews',start:'Customer',end:'reviews',
  intro:'Moderated customer feedback, without fake testimonials or invented numbers.',
  published:'Published reviews',empty:'No reviews have been published yet. Be the first to share your experience!',
  loading:'Loading customer reviews...',unavailable:'Reviews are temporarily unavailable. Please try again later.',
@@ -32,7 +32,7 @@ const copy={
  name:'Display name',namePh:'Your name',stars:'Your rating',
  starsHelp:'Select 1 to 5 stars.',product:'Product (optional)',general:'General store review',
  comment:'Your review',commentPh:'Describe your real experience...',min:'At least 20 characters',
- confirm:'I confirm this feedback reflects my own genuine experience.',submit:'Submit for moderation',
+ confirm:'I confirm this is my genuine experience and agree to publication of my display name and review after moderation.',submit:'Submit for moderation',
  policy:'Published submissions are moderated and not necessarily verified purchases. Never include passwords or personal details.',
  thanks:'Thank you! Your review was submitted and awaits moderation before appearing publicly.',
  badName:'Please enter a name of 2 to 60 characters.',badRating:'Please select a rating from 1 to 5 stars.',
@@ -68,6 +68,7 @@ function statusMessage(message,isError=false){
 function renderTranslations(){
  const root=document.getElementById('reviews');
  if(!root)return;
+ document.querySelectorAll('[data-review-nav]').forEach(node=>{node.textContent=tx('nav')});
  root.querySelectorAll('[data-review-text]').forEach(node=>{
   node.textContent=tx(node.dataset.reviewText);
  });
