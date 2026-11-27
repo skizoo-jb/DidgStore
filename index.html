@@ -218,6 +218,7 @@ body.pro-v2 .hero-whatsapp .wa-dot .didg-whatsapp-svg {
 </style>
 <link href="./css/icons.css?v=8" rel="stylesheet"/>
 <link href="./css/smart-order.css?v=1" rel="stylesheet"/>
+<link href="./css/faq-premium.css?v=1" rel="stylesheet"/>
 </head>
 <body class="shop-body pro-v2">
 <div aria-hidden="true" class="ambient ambient-one"></div><div aria-hidden="true" class="ambient ambient-two"></div>
@@ -311,13 +312,92 @@ body.pro-v2 .hero-whatsapp .wa-dot .didg-whatsapp-svg {
 <div class="section-heading centered"><div><span class="section-kicker">HOW IT WORKS</span><h2><span data-i18n="steps.titleStart">الطلب عندنا</span> <span data-i18n="steps.titleEnd">بسيط</span></h2></div></div>
 <div class="steps"><article><span class="step-number">01</span><div class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8.5h14l1 12H4l1-12Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg></div><h3 data-i18n="steps.one">اختار المنتج</h3><p data-i18n="steps.oneDesc">تصفح الكتالوج وشوف المدة والتفاصيل والثمن.</p></article><article><span class="step-number">02</span><div class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="17" rx="2"/><path d="M9 4V3h6v1.5"/><path d="m8.2 13.1 2.5 2.5 5-5"/></svg></div><h3 data-i18n="steps.two">ضغط طلب</h3><p data-i18n="steps.twoDesc">غادي تتحضر ليك رسالة فيها معلومات المنتج.</p></article><article><span class="step-number">03</span><div class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 11.7a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 20.8l1.6-4.8a8.4 8.4 0 1 1 15.8-4.3Z"/><path d="M8.8 8.5c-.35-.3-.75-.25-1.06.12-.45.58-.55 1.22-.3 1.94.74 2.18 3.13 4.55 5.25 5.15.74.2 1.5.12 2.02-.45.31-.34.36-.7.04-.92l-1.76-.94c-.22-.1-.37-.07-.53.11l-.79.83c-1.14-.55-2.02-1.4-2.66-2.55l.67-.93c.13-.19.13-.37.02-.55L8.8 8.5Z" stroke-width="1.35"/></svg></div><h3 data-i18n="steps.three">كمل على WhatsApp</h3><p data-i18n="steps.threeDesc">كتأكد مع المتجر التوفر وطريقة الأداء والتسليم.</p></article></div>
 </section>
-<section class="section container" id="faq"><div class="section-heading"><div><span class="section-kicker">SUPPORT &amp; FAQ</span><h2><span data-i18n="faq.titleStart">الأسئلة</span> <span data-i18n="faq.titleEnd">الشائعة</span></h2></div></div><div class="faq-list"><details><summary data-i18n="faq.q1">كيفاش نطلب منتج؟</summary><p data-i18n="faq.a1">اختار المنتج واضغط «اطلب الآن». غادي يتحل WhatsApp برسالة فيها اسم المنتج والثمن.</p></details><details><summary data-i18n="faq.q2">واش نقدر نخلص فالموقع؟</summary><p data-i18n="faq.a2">لا. DidgStore حالياً كتالوج، والتنسيق على الأداء كيكون عبر WhatsApp.</p></details><details><summary data-i18n="faq.q3">واش الأثمنة والتوفر نهائيين؟</summary><p data-i18n="faq.a3">المنتجات التجريبية والثمن والتوفر النهائيين خاصك تأكدهم مع المتجر قبل الأداء.</p></details><details><summary data-i18n="faq.q4">واش نقدر نطلب أكثر من منتج؟</summary><p data-i18n="faq.a4">نعم. استعمل سلة الطلبات لإرسال رسالة واحدة فيها المنتجات والكمية.</p></details></div></section>
+<section class="section container didg-faq-section" id="faq" aria-labelledby="faqTitle">
+  <div class="section-heading didg-faq-heading">
+    <div>
+      <span class="section-kicker">DIDGSTORE • SUPPORT &amp; FAQ</span>
+      <h2 id="faqTitle"><span data-i18n="faq.titleStart">الأسئلة</span> <span data-i18n="faq.titleEnd">الشائعة</span></h2>
+      <p class="didg-faq-subtitle" data-i18n="faq.subtitle">أجوبة واضحة على الطلب، الأداء، التفعيل والضمان قبل ما تشري.</p>
+    </div>
+    <div class="didg-faq-count" id="faqCount" role="status" aria-live="polite">13 أسئلة</div>
+  </div>
+  <div class="didg-faq-search-wrap">
+    <label for="faqSearch" class="didg-faq-search-label" data-i18n="faq.searchLabel">قلّب على سؤال</label>
+    <div class="didg-faq-search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg>
+      <input id="faqSearch" type="search" maxlength="90" autocomplete="off" data-i18n-placeholder="faq.searchPlaceholder" data-i18n-aria="faq.searchLabel" placeholder="مثلاً: Canva Pro، طرق الدفع، الضمان..."/>
+    </div>
+  </div>
+  <div class="faq-list didg-faq-list" id="faqList">
+<details class="didg-faq-card" open>
+  <summary><span data-i18n="faq.q1">كيفاش نقدر نطلب شي منتج؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a1">اختار المنتج والباقة والكمية، وعمّر المعلومات المطلوبة إذا بانَت ليك. من بعد اضغط «اطلب عبر WhatsApp» أو زيد المنتج للسلة، وراجع الطلب قبل الإرسال.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q2">واش نقدر نخلص مباشرة فالموقع؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a2">لا، الموقع كيسهّل اختيار المنتجات وتجهيز الطلب، ولكن ما فيهش أداء إلكتروني مباشر حالياً. كنأكدّو تفاصيل الأداء معاك عبر WhatsApp.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q3">شنو طرق الدفع المتوفرة؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a3">يمكن تنسيق الأداء عبر Cash Plus أو CIH Bank أو Al Barid Bank. تواصل مع المتجر قبل التحويل باش تتأكد من معلومات الأداء والمبلغ النهائي.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q4">واش خاصني نخلص قبل التفعيل ولا من بعد؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a4">الأمر كيتبدّل حسب المنتج. فالعرض الحالي ديال Canva Pro مكتوب «جرّب أولاً، ثم ادفع»: كتتأكد من التفعيل قبل الأداء. المنتجات الأخرى كتتفق على طريقة الأداء ديالها مع المتجر قبل الطلب.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q5">كيفاش كيتم تفعيل Canva Pro على Gmail ديالي؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a5">كتدخل عنوان Gmail ديالك فمعلومات الطلب، ومن بعد كتنسّق مع المتجر باش توصلك دعوة أو رابط التفعيل. ما تشاركش كلمة السر ديال Gmail ديالك مع حتى واحد.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q6">شحال كتحتاج الخدمة باش تتفعّل أو تتسلّم؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a6">المدة كتختلف حسب المنتج، التوفر، وطريقة التفعيل. سَوّل على المدة المتوقعة عبر WhatsApp قبل الأداء، وما تعتبرش أي مدة تقديرية وعداً مؤكداً حتى يتأكد الطلب.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q7">واش كاين ضمان على المنتجات؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a7">الضمان كيتحدد حسب نوع المنتج وشروط العرض ديالو، وماشي واحد لجميع الخدمات. قبل الأداء، طلب تأكيد مدة الضمان وشنو كيغطي بالضبط.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q8">واش نقدر نطلب أكثر من منتج فمرة وحدة؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a8">نعم. زيد المنتجات والباقات اللي بغيتي للسلة، وعمّر معلومات كل منتج بوحدو. من بعد كتخرج رسالة WhatsApp منظمة فيها المنتجات والكميات والمجموع التقريبي.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q9">شنو المعلومات المطلوبة لخدمات Instagram وTikTok وغيرها؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a9">غالباً كتحتاج الرابط العمومي ديال الحساب أو المنشور أو الفيديو، حسب نوع الخدمة المختارة. ما تحتاجش تعطي كلمة السر أو رمز التحقق ديال حسابك.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q10">واش الثمن اللي باين فالموقع نهائي؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a10">الثمن اللي كيبان كيتحسب حسب المنتج والباقة والعدد، ولكن التوفر والمبلغ النهائي وطرق الأداء كيتأكدّو مع المتجر عبر WhatsApp قبل الأداء.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q11">شنو المقصود بـ «مدى الحياة» فشي العروض؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a11">هاد التسمية كتخص العرض المعلن، وماشي ضمان بأن الخدمة الأصلية غادي تبقى متاحة للأبد. الاستمرار كيتأثر بنوع التفعيل وشروط مزود الخدمة؛ تأكد من التفاصيل والضمان قبل الشراء.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q12">إلا وقع مشكل من بعد الشراء، شنو ندير؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a12">تواصل مع DidgStore عبر WhatsApp وذكر اسم المنتج ومعلومات الطلب والمشكل اللي وقع، بلا كلمات سر. غادي تتم مراجعة الحالة حسب شروط الخدمة والضمان اللي توافقتو عليها.</p></div>
+</details>
+<details class="didg-faq-card">
+  <summary><span data-i18n="faq.q13">واش يمكن نلغي الطلب أو نسترجع الفلوس؟</span><span class="didg-faq-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+  <div class="didg-faq-answer"><p data-i18n="faq.a13">الإلغاء أو الاسترجاع كيعتمد على نوع المنتج وواش تم التفعيل أو التسليم، وعلى الشروط المتفق عليها. سَوّل على السياسة الخاصة بالمنتج قبل ما تخلّص.</p></div>
+</details>
+  </div>
+  <p id="faqEmpty" class="didg-faq-empty" data-i18n="faq.empty" hidden>ما لقيناش جواب بهاد الكلمة. جرّب كلمة أخرى أو تواصل معنا.</p>
+  <div class="didg-faq-help">
+    <div class="didg-faq-help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.85L3 20.8l1.6-4.8A8.5 8.5 0 1 1 21 11.5Z"/><path d="M9 9h7M9 13h5"/></svg></div>
+    <div class="didg-faq-help-copy">
+      <strong data-i18n="faq.help">باقي عندك شي سؤال؟</strong>
+      <p data-i18n="faq.helpDesc">فريق DidgStore يقدر يوضح ليك شروط المنتج قبل تأكيد الطلب.</p>
+    </div>
+    <a class="didg-faq-help-action" href="#contact"><span data-i18n="faq.helpAction">سولنا على WhatsApp</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
 <section class="container final-cta" id="contact"><div><span class="section-kicker">DIDGSTORE • CONTACT</span><h2 data-i18n="contact.title">بغيتي تستفسر على شي منتج؟</h2><p data-i18n="contact.desc">تواصل مع المتجر مباشرة عبر WhatsApp.</p></div><button class="btn btn-primary" id="footerContact"><span data-ui-icon="message" aria-hidden="true"></span><span data-i18n="contact.button">تواصل عبر WhatsApp</span></button></section>
 </main>
 <footer class="site-footer"><div class="container footer-grid"><div><div class="brand footer-brand"><img class="didg-full-logo" src="./assets/didgstore-original-full.webp?v=8" alt="DidgStore"/></div><p data-i18n="footer.desc">كتالوج لعرض وطلب المنتجات الرقمية عبر WhatsApp.</p></div><div><h4 data-i18n="footer.links">الروابط</h4><a data-i18n="nav.homePlain" href="#home">الرئيسية</a><a data-i18n="nav.products" href="#products">المنتجات</a><a data-i18n="nav.offers" href="#offers">العروض</a></div><div><h4 data-i18n="footer.help">المساعدة</h4><a data-i18n="nav.faq" href="#faq">الأسئلة الشائعة</a></div><div><h4 data-i18n="footer.brand">DidgStore</h4><span>Premium Digital Experience</span><span data-i18n="footer.country">المغرب • MAD</span></div></div><div class="container footer-bottom"><span>© <span id="year"></span> DidgStore. <span data-i18n="footer.rights">جميع الحقوق محفوظة.</span></span><span>BUILT FOR DIGITAL COMMERCE <span data-ui-icon="sparkles" aria-hidden="true"></span></span></div></footer>
 <div class="modal-backdrop" hidden="" id="productModal"><div aria-labelledby="detailTitle" aria-modal="true" class="product-modal dialog" role="dialog"><button aria-label="إغلاق" class="modal-close" data-close="productModal" data-i18n-aria="common.close">×</button><div id="productDetail"></div></div></div>
 <div class="modal-backdrop" hidden="" id="cartModal"><div aria-labelledby="cartHeading" aria-modal="true" class="cart-modal dialog" role="dialog"><div class="modal-head"><h2 data-i18n="cart.title" id="cartHeading">سلة الطلبات</h2><button aria-label="إغلاق" class="modal-close" data-close="cartModal" data-i18n-aria="common.close">×</button></div><div id="cartItems"></div><div id="cartFooter"></div></div></div>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
-<script src="./js/site.js?v=15" type="module"></script>
+<script src="./js/site.js?v=22" type="module"></script>
 </body>
 </html>
