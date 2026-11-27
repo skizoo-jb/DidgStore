@@ -2,14 +2,14 @@ import {uiIcon,hydrateIcons} from './icons.js';
 import {CONFIG} from './config.js';
 import {initDb,getProducts,getCategories,getSettings} from './db.js';
 import {language,initLanguage,t} from './i18n.js';
-import {esc,visualOf,artStyle,artHTML,initModals,toast} from './shared.js?v=7';
+import {esc,visualOf,artStyle,artHTML,initModals,toast,cleanPhone,whatsappUrl} from './shared.js?v=7';
 import {createCart,hasVariants,variantsOf,isServiceProduct,priceOf,oldPriceOf,priceText,money,monthLabel,nameOf,productPageUrl} from './shop-cart.js?v=8';
 const $=id=>document.getElementById(id);
 let products=[],categories=[],settings={},current=null,selectedMonths=null,selectedKind=null,qty=1;
 const cartWidget=createCart({getProducts:()=>products,getSettings:()=>settings});
 const local={
-  ar:{back:'← المنتجات',home:'الرئيسية',products:'المنتجات',loading:'جاري تحميل تفاصيل المنتج...',notFound:'هاد المنتج ما بقاش متوفر. رجع للمتجر وشوف المنتجات الأخرى.',failed:'ما قدرناش نحمّلو تفاصيل المنتج. راجع الاتصال أو إعدادات Supabase.',duration:'اختار مدة الاشتراك',hint:'اختار المدة باش يبان الثمن ديالها',quantity:'اختار الكمية',add:'أضف للسلة',description:'وصف المنتج',descriptionLabel:'تفاصيل المنتج',full:'عرض الوصف الكامل',less:'إخفاء الوصف الكامل',total:'المجموع التقريبي',related:'منتجات مشابهة',browse:'جميع المنتجات ←',footer:'العودة للمتجر',note:'يمكنك إضافة المنتج إلى السلة ومراجعة الطلب قبل تأكيده. تأكد من التوفر والثمن النهائي قبل الأداء.',ask:'اسأل عن الثمن',offers:'عرض خاص من DidgStore',productBrand:'منتج من DidgStore',discount:'خصم'},
-  en:{back:'← Products',home:'Home',products:'Products',loading:'Loading product details...',notFound:'This product is not currently available. Browse other products.',failed:'Unable to load product details. Check your connection or Supabase configuration.',duration:'Choose subscription duration',hint:'Select a duration to see its price',quantity:'Choose quantity',add:'Add to cart',description:'Product description',descriptionLabel:'Product Description',full:'View Full Product Description',less:'Hide Full Product Description',total:'Estimated total',related:'Related products',browse:'All products →',footer:'Back to store',note:'Add this product to your cart and review your order before confirming. Confirm availability and final pricing before payment.',ask:'Ask for price',offers:'DIDGSTORE SPECIAL OFFER',productBrand:'DIDGSTORE PRODUCT',discount:'off'}
+  ar:{back:'← المنتجات',home:'الرئيسية',products:'المنتجات',loading:'جاري تحميل تفاصيل المنتج...',notFound:'هاد المنتج ما بقاش متوفر. رجع للمتجر وشوف المنتجات الأخرى.',failed:'ما قدرناش نحمّلو تفاصيل المنتج. راجع الاتصال أو إعدادات Supabase.',duration:'اختار مدة الاشتراك',hint:'اختار المدة باش يبان الثمن ديالها',quantity:'اختار الكمية',add:'أضف للسلة',directWhatsApp:'اطلب مباشرة عبر واتساب',description:'وصف المنتج',descriptionLabel:'تفاصيل المنتج',full:'عرض الوصف الكامل',less:'إخفاء الوصف الكامل',total:'المجموع التقريبي',related:'منتجات مشابهة',browse:'جميع المنتجات ←',footer:'العودة للمتجر',note:'يمكنك إضافة المنتج إلى السلة ومراجعة الطلب قبل تأكيده. تأكد من التوفر والثمن النهائي قبل الأداء.',ask:'اسأل عن الثمن',offers:'عرض خاص من DidgStore',productBrand:'منتج من DidgStore',discount:'خصم'},
+  en:{back:'← Products',home:'Home',products:'Products',loading:'Loading product details...',notFound:'This product is not currently available. Browse other products.',failed:'Unable to load product details. Check your connection or Supabase configuration.',duration:'Choose subscription duration',hint:'Select a duration to see its price',quantity:'Choose quantity',add:'Add to cart',directWhatsApp:'Order directly on WhatsApp',description:'Product description',descriptionLabel:'Product Description',full:'View Full Product Description',less:'Hide Full Product Description',total:'Estimated total',related:'Related products',browse:'All products →',footer:'Back to store',note:'Add this product to your cart and review your order before confirming. Confirm availability and final pricing before payment.',ask:'Ask for price',offers:'DIDGSTORE SPECIAL OFFER',productBrand:'DIDGSTORE PRODUCT',discount:'off'}
 };
 const txt=key=>local[language()][key];
 const desc=(p,full)=>{if(language()==='en')return (full?p.description_en:p.short_description_en)||(full?p.description:p.short_description)||t(full?'products.detailsFallback':'products.shortFallback');return (full?p.description:p.short_description)||t(full?'products.detailsFallback':'products.shortFallback')};
@@ -41,8 +41,35 @@ function updatePrice(){
   $('detailTotal').textContent=needsChoice?'—':price>0?money(price*qty):txt('ask');
   $('addToCart').disabled=needsChoice;
   $('addToCart').setAttribute('aria-disabled',String(needsChoice));
+  $('orderWhatsApp').disabled=needsChoice;
+  $('orderWhatsApp').setAttribute('aria-disabled',String(needsChoice));
   $('qtyValue').textContent=qty;
   document.querySelectorAll('[data-select-months]').forEach(b=>{const active=Number(b.dataset.selectMonths)===months;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
+}
+function orderProductDirectly(){
+  if(!current||current.is_active===false)return;
+  const months=readMonths();
+  if(isServiceProduct(current)&&months==null){
+    toast(language()==='en'?'Choose a service and package first':'اختار نوع الخدمة والباقة أولاً');return;
+  }
+  const phone=cleanPhone(settings.whatsapp||CONFIG.fallbackWhatsApp||'');
+  if(!phone){toast(t('errors.noWhatsapp'));return;}
+  const en=language()==='en';
+  const unit=priceOf(current,months);
+  const option=months!=null?monthLabel(months):durationText(current);
+  const unitText=unit>0?money(unit):txt('ask');
+  const totalText=unit>0?money(unit*qty):txt('ask');
+  const lines=[
+    t('wa.productHello'),'',
+    (en?'Product: ':'المنتج: ')+nameOf(current),
+    option?(isServiceProduct(current)?(en?'Service package: ':'الباقة: '):(en?'Duration: ':'المدة: '))+option:null,
+    (en?'Quantity: ':'الكمية: ')+qty,
+    (en?'Unit price: ':'ثمن الوحدة: ')+unitText,
+    (en?'Estimated total: ':'المجموع التقريبي: ')+totalText,
+    '',t('wa.cartFooter')
+  ].filter(line=>line!==null);
+  const url=whatsappUrl(phone,lines.join('\n'));
+  if(url)window.open(url,'_blank','noopener,noreferrer');
 }
 function selectMonths(months){selectedMonths=Number(months);updatePrice()}
 function renderServiceOptions(){
@@ -77,7 +104,7 @@ function render(){
   $('detailName').textContent=nameOf(current);$('detailShort').textContent='';
   $('detailMedia').innerHTML=current.image_url?`<img class="didg-real-product-image" src="${esc(current.image_url)}" alt="${esc(nameOf(current))}"/>`:`<div class="didg-product-art" style="${artStyle(current)}">${artHTML(current,false)}</div>`;
   $('detailNote').textContent=txt('note');$('qtyLabel').textContent=txt('quantity');
-  $('addToCartText').textContent=txt('add');$('totalLabel').textContent=txt('total');
+  $('addToCartText').textContent=txt('add');$('orderWhatsAppText').textContent=txt('directWhatsApp');$('totalLabel').textContent=txt('total');
   $('durationPicker').hidden=!hasVariants(current);$('durationHeading').textContent=txt('duration');$('durationHint').textContent=txt('hint');
   $('durationOptions').classList.toggle('didg-service-packs',isServiceProduct(current));
   if(isServiceProduct(current)){
@@ -112,6 +139,7 @@ async function init(){
   });
   $('qtyMinus').addEventListener('click',()=>{qty=Math.max(1,qty-1);updatePrice()});
   $('qtyPlus').addEventListener('click',()=>{qty=Math.min(25,qty+1);updatePrice()});
+  $('orderWhatsApp').addEventListener('click',orderProductDirectly);
   $('addToCart').addEventListener('click',()=>{
     if(isServiceProduct(current)&&readMonths()==null){toast(language()==='en'?'Choose a service and a package':'اختار نوع الخدمة والباقة أولاً');return;}
     if(cartWidget.add(current.id,readMonths(),qty))cartWidget.open();
