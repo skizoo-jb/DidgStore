@@ -1,0 +1,126 @@
+/* DidgStore / Real customer reviews. Consistent neon-green aesthetic. */
+body.pro-v2 .didg-customer-reviews{
+  position:relative;isolation:isolate;margin-block:78px 55px;
+}
+body.pro-v2 .didg-reviews-heading{
+  display:flex;justify-content:space-between;align-items:center;gap:22px;
+  margin-bottom:24px;
+}
+body.pro-v2 .didg-reviews-intro{color:#aac8b0;font-size:14px;line-height:1.85;max-width:650px;margin:9px 0 0}
+body.pro-v2 .didg-review-rating-summary{
+  flex:0 0 auto;min-width:140px;padding:13px 20px;border-radius:16px;
+  background:linear-gradient(130deg,#18381f,#0a1e10);
+  border:1px solid #5b9c4c;box-shadow:0 0 25px #77df3117;
+  display:flex;flex-direction:column;align-items:center;gap:4px;color:#c4fbb2;
+}
+body.pro-v2 .didg-review-rating-summary[hidden]{display:none!important}
+body.pro-v2 .didg-review-avg{display:flex;align-items:center;gap:7px;font-size:28px}
+body.pro-v2 .didg-review-avg b{color:#f1ffdd}
+body.pro-v2 .didg-review-avg .didg-ui-icon{width:28px;height:28px;fill:#acff4d;color:#acff4d}
+body.pro-v2 .didg-review-rating-summary small{font-size:11px;text-align:center}
+body.pro-v2 .didg-reviews-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.85fr);gap:20px;align-items:start}
+body.pro-v2 .didg-review-subheading{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:13px}
+body.pro-v2 .didg-review-subheading strong{font-size:17px;color:#f1fff0}
+body.pro-v2 .didg-review-subheading small{color:#b7df9b}
+body.pro-v2 .didg-reviews-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;align-items:stretch}
+body.pro-v2 .didg-review-card{
+  border:1px solid #335c39;border-radius:16px;
+  background:linear-gradient(155deg,#11291a,#08170f 65%,#07120c);
+  padding:20px;min-width:0;box-shadow:0 8px 24px #0003;
+  transition:transform .18s,border-color .18s,box-shadow .18s;
+}
+body.pro-v2 .didg-review-card:hover{transform:translateY(-3px);border-color:#78b451;box-shadow:0 12px 28px #0005,0 0 18px #87fc2020}
+body.pro-v2 .didg-review-author{display:flex;align-items:center;gap:10px}
+body.pro-v2 .didg-review-avatar{
+  flex:0 0 44px;width:44px;height:44px;border-radius:13px;
+  display:grid;place-items:center;background:#234e2b;border:1px solid #6bad4a;
+  color:#b9ff7b;font-size:19px;font-weight:900
+}
+body.pro-v2 .didg-review-author-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
+body.pro-v2 .didg-review-author-meta strong{color:#efffed;font-size:13px;overflow-wrap:anywhere}
+body.pro-v2 .didg-review-author-meta small{color:#9fb8a1;font-size:11px}
+body.pro-v2 .didg-review-stars{display:flex;gap:4px;margin:17px 0 10px;direction:ltr;justify-content:flex-end}
+body.pro-v2 .didg-review-stars span .didg-ui-icon{width:19px;height:19px;color:#526a50}
+body.pro-v2 .didg-review-stars span.lit .didg-ui-icon{fill:#adfb46;color:#adfb46;filter:drop-shadow(0 0 4px #9fff2850)}
+body.pro-v2 .didg-review-comment{font-size:13px;line-height:1.95;color:#d5e7d6;white-space:pre-wrap;overflow-wrap:anywhere;margin:9px 0 10px}
+body.pro-v2 .didg-review-product{
+  display:inline-block;color:#bdf28e;border:1px solid #467444;background:#17341e;
+  border-radius:50px;padding:4px 9px;font-size:10px;margin-top:4px;max-width:100%;overflow-wrap:anywhere
+}
+body.pro-v2 .didg-review-empty{
+  grid-column:1/-1;text-align:center;border:1px dashed #416941;
+  border-radius:16px;padding:40px 18px;color:#b9d9b4;background:#0e2014;font-size:14px;line-height:2
+}
+body.pro-v2 .didg-review-form-box{
+  background:linear-gradient(145deg,#112917,#07140c);border:1px solid #4b7845;
+  border-radius:19px;padding:22px;box-shadow:0 15px 34px #0004;min-width:0
+}
+body.pro-v2 .didg-review-form-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:21px}
+body.pro-v2 .didg-review-form-icon{
+  display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;
+  color:#9dff4b;background:#173d22;border:1px solid #599444;border-radius:12px
+}
+body.pro-v2 .didg-review-form-icon svg{width:24px;height:24px}
+body.pro-v2 .didg-review-form-head h3{font-size:18px;font-weight:900;margin:0 0 5px;color:#f2fff0}
+body.pro-v2 .didg-review-form-head p{font-size:12px;color:#a3c4a3;margin:0;line-height:1.75}
+body.pro-v2 .didg-review-field{display:flex;flex-direction:column;gap:8px;margin:0 0 15px;color:#e2f7e1;font-size:13px;font-weight:750;min-width:0}
+body.pro-v2 .didg-review-field input,
+body.pro-v2 .didg-review-field select,
+body.pro-v2 .didg-review-field textarea{
+  width:100%;min-width:0;box-sizing:border-box;padding:12px 13px;
+  background:#07160d;color:#f0ffe7;border:1px solid #34663d;border-radius:11px;
+  font:500 14px inherit;font-family:inherit;outline:none;resize:vertical;min-height:46px;
+  transition:border-color .18s,box-shadow .18s
+}
+body.pro-v2 .didg-review-field textarea{min-height:105px;line-height:1.8}
+body.pro-v2 .didg-review-field input:focus,
+body.pro-v2 .didg-review-field select:focus,
+body.pro-v2 .didg-review-field textarea:focus{
+  border-color:#9cf74e;box-shadow:0 0 0 3px #94ff2730
+}
+body.pro-v2 .didg-review-field input::placeholder,
+body.pro-v2 .didg-review-field textarea::placeholder{color:#739177}
+body.pro-v2 .didg-review-field select option{background:#0a1b11;color:#f5fff0}
+body.pro-v2 .didg-review-rating-field{
+  border:0;padding:0;margin:0 0 17px;min-width:0
+}
+body.pro-v2 .didg-review-rating-field legend{font-size:13px;font-weight:750;color:#e4f5df;margin-bottom:9px}
+body.pro-v2 .didg-review-star-buttons{display:flex;gap:8px;direction:ltr;justify-content:flex-start}
+body.pro-v2 .didg-review-star-buttons button{
+  width:47px;height:47px;display:grid;place-items:center;
+  background:#122d1a;border:1px solid #426c3c;border-radius:12px;
+  color:#84a776;cursor:pointer;transition:transform .18s,border-color .18s,background .18s;
+}
+body.pro-v2 .didg-review-star-buttons button .didg-ui-icon{width:24px;height:24px}
+body.pro-v2 .didg-review-star-buttons button.is-lit{
+  background:#284a1d;border-color:#adfa47;color:#adfa47;
+}
+body.pro-v2 .didg-review-star-buttons button.is-lit .didg-ui-icon{fill:#adfa47}
+body.pro-v2 .didg-review-star-buttons button:hover{transform:translateY(-2px);border-color:#affc62}
+body.pro-v2 .didg-review-star-buttons button:focus-visible{outline:2px solid #c7ff7c;outline-offset:2px}
+body.pro-v2 .didg-review-rating-field small{display:block;font-size:11px;color:#a4c3a8;margin-top:8px}
+body.pro-v2 .didg-review-charrow{display:flex;align-items:center;justify-content:space-between;color:#8fb69a;font-size:11px;margin:-8px 0 15px}
+body.pro-v2 .didg-review-confirm{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:#d1e6d0;line-height:1.75;margin:0 0 16px;cursor:pointer}
+body.pro-v2 .didg-review-confirm input{width:17px;height:17px;accent-color:#9eff45;flex:0 0 17px;margin-top:2px}
+body.pro-v2 .didg-review-honey{position:absolute!important;width:1px!important;height:1px!important;clip-path:inset(50%)!important;overflow:hidden!important}
+body.pro-v2 .didg-review-send{width:100%;display:flex;justify-content:center;align-items:center;gap:10px;min-height:51px}
+body.pro-v2 .didg-review-send .didg-ui-icon{width:17px;height:17px}
+body.pro-v2 .didg-review-send:disabled{opacity:.55;cursor:progress}
+body.pro-v2 .didg-review-feedback{font-size:12px;line-height:1.8;color:#bcf78c;min-height:0;margin:9px 0}
+body.pro-v2 .didg-review-feedback:empty{display:none}
+body.pro-v2 .didg-review-feedback.is-error{color:#ffaaa2}
+body.pro-v2 .didg-review-disclaimer{font-size:11px;color:#a1b9a2;line-height:1.75;margin:13px 0 0}
+@media(max-width:1120px){body.pro-v2 .didg-reviews-layout{grid-template-columns:minmax(0,1fr) minmax(300px,.8fr)}body.pro-v2 .didg-reviews-grid{grid-template-columns:1fr}}
+@media(max-width:860px){body.pro-v2 .didg-reviews-layout{grid-template-columns:1fr}body.pro-v2 .didg-reviews-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+ body.pro-v2 .didg-customer-reviews{margin-block:55px 35px}
+ body.pro-v2 .didg-reviews-heading{align-items:flex-start;flex-direction:column}
+ body.pro-v2 .didg-reviews-grid{grid-template-columns:1fr}
+ body.pro-v2 .didg-review-form-box{padding:16px}
+ body.pro-v2 .didg-review-star-buttons button{width:44px;height:44px}
+ body.pro-v2 .didg-review-field input,body.pro-v2 .didg-review-field textarea{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.pro-v2 .didg-review-card,body.pro-v2 .didg-review-star-buttons button{transition:none}
+ body.pro-v2 .didg-review-card:hover,body.pro-v2 .didg-review-star-buttons button:hover{transform:none}
+}
